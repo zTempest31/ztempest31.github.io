@@ -2528,6 +2528,101 @@ body.low-power-mode .sky-wrath-overload{
  display:none!important;
 }
 
+
+/* === V0.7.1: 12 QOL & UI-BEREINIGUNGEN (#3, #4, #7, #10, #23–#30) === */
+.unified-special-banner{
+ margin:6px auto 2px;
+ max-width:360px;
+ min-height:42px;
+ display:none;
+}
+.unified-special-banner.has-active{
+ display:block;
+}
+.expedition-ready-battle-banner{
+ margin:6px auto 2px;
+ max-width:360px;
+ padding:7px 11px;
+ border-radius:12px;
+ border:1.5px solid #ffd166;
+ background:linear-gradient(90deg, rgba(16, 38, 62, 0.94), rgba(34, 16, 56, 0.95));
+ box-shadow:0 0 16px rgba(255, 209, 102, 0.35);
+ display:none;
+ align-items:center;
+ justify-content:space-between;
+ gap:8px;
+ font-size:10px;
+ color:#f7f0ff;
+}
+.expedition-ready-battle-banner.active{
+ display:flex;
+}
+.exp-claim-restart-btn{
+ border:1px solid #ffd166;
+ background:linear-gradient(90deg, var(--btn-bg1), var(--bar-bg1));
+ color:#ffffff;
+ border-radius:8px;
+ padding:5px 9px;
+ font-size:9.5px;
+ font-weight:800;
+ white-space:nowrap;
+ cursor:pointer;
+ box-shadow:0 0 10px rgba(255, 209, 102, 0.3);
+}
+.oc-info-tooltip-icon{
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ width:15px;
+ height:15px;
+ border-radius:50%;
+ border:1px solid var(--cyan);
+ color:var(--cyan);
+ font-size:9px;
+ font-weight:800;
+ margin-left:5px;
+ cursor:help;
+ vertical-align:middle;
+}
+.hall-of-fame-grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:7px;
+ margin-top:8px;
+}
+.hof-stat-box{
+ padding:8px 9px;
+ border-radius:10px;
+ border:1px solid var(--line);
+ background:rgba(8, 5, 15, 0.65);
+}
+.hof-stat-label{
+ font-size:9px;
+ color:var(--muted);
+ text-transform:uppercase;
+ letter-spacing:.04em;
+}
+.hof-stat-val{
+ font-size:13px;
+ font-weight:800;
+ color:var(--cyan);
+ margin-top:3px;
+ font-variant-numeric:tabular-nums;
+}
+.backup-warn-dot{
+ display:none;
+ width:7px;
+ height:7px;
+ border-radius:50%;
+ background:#ff4d6d;
+ box-shadow:0 0 8px #ff2a55;
+ margin-left:3px;
+ vertical-align:middle;
+}
+.backup-warn-dot.show{
+ display:inline-block;
+}
+
 </style>
 </head>
 <body>
@@ -2724,18 +2819,16 @@ body.low-power-mode .sky-wrath-overload{
        <ellipse cx="84.3" cy="63.4" rx="1.45" ry="1.0" fill="#ffffff" opacity="0.86"/>
        <ellipse cx="84.3" cy="63.4" rx="0.58" ry="1.25" style="fill:var(--fx-core,#ffffff)" opacity="0.98"/>
       </g>
-      <!-- Breites Runenschwert exakt innerhalb der Klinge: Oberkante (159,28)->(58,133), Unterkante (159,64)->(89,149), mit Aussparung für den goldenen Mittel-Dorn bei (80,114) -->
-      <polygon points="159,28 160,64 89,149 85,147 80,114 65,131 58,133" fill="url(#vSwordBevelGlowRight)" opacity="0.76"/>
-      <!-- Obere linke Klingenschneide (exakt auf dem leuchtenden rosa/weißen Rand) -->
-      <path d="M159 29 L142 48 L120 70 L98 92 L76 115 L59 132" fill="none" stroke="url(#vSwordEdgeGradRight)" stroke-width="3.6" stroke-linecap="round" opacity="0.82"/>
-      <path class="vaelith-sword-edge-core" d="M159 29 L142 48 L120 70 L98 92 L76 115 L59 132" fill="none" stroke="#ffffff" stroke-width="1.35" stroke-linecap="round" opacity="0.96"/>
-      <!-- Untere rechte Klingenschneide (exakt auf dem unteren Klingenrand) -->
+      <!-- Breites Runenschwert exakt innerhalb der beiden äußeren Klingenkanten: Oberkante (150,28)->(64,127), Unterkante (159,64)->(88,148) -->
+      <polygon points="150,28 160,64 88,148 85,147 80,114 65,131 64,127" fill="url(#vSwordBevelGlowRight)" opacity="0.72"/>
+      <!-- Obere linke Klingenschneide (strikt außen am Klingenrand von 150,28 bis 66,125 und etwas kürzer) -->
+      <path d="M150 28 L135 46 L119 64 L104 82 L88 100 L66 125" fill="none" stroke="url(#vSwordEdgeGradRight)" stroke-width="3.2" stroke-linecap="round" opacity="0.82"/>
+      <path class="vaelith-sword-edge-core" d="M150 28 L135 46 L119 64 L104 82 L88 100 L66 125" fill="none" stroke="#ffffff" stroke-width="1.25" stroke-linecap="round" opacity="0.96"/>
+      <!-- Untere rechte Klingenschneide (exakt auf dem unteren Klingenrand - unverändert) -->
       <path d="M159 64 L144 81 L128 100 L111 120 L95 138 L88 148" fill="none" stroke="url(#vSwordEdgeGradRight)" stroke-width="3.2" stroke-linecap="round" opacity="0.74"/>
       <path class="vaelith-sword-edge-core" d="M159 64 L144 81 L128 100 L111 120 L95 138 L88 148" fill="none" stroke="#ffffff" stroke-width="1.15" stroke-linecap="round" opacity="0.90"/>
-      <!-- Leuchtende Runen-Raute & Mittelader exakt auf der Gravur im dunklen Schwertkern -->
-      <path d="M159 46 L135 71 M122 84 L99 108 L81 126" fill="none" stroke="url(#vSwordEdgeGradRight)" stroke-width="2.0" stroke-linecap="round" opacity="0.76"/>
-      <polygon points="135,71 133,81 122,84 125,74" fill="none" stroke="#ffffff" stroke-width="1.15" stroke-linejoin="round" opacity="0.92"/>
-      <path class="vaelith-sword-sparks" d="M148 41 L142 46 L144 53 L137 58 M112 78 L106 83 L108 90 L101 96 M86 105 L80 110 L82 117 L75 123" fill="none" style="stroke:var(--fx-core,#ffffff)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.88"/>
+      <!--Dezente Funken strikt an den Außenkanten (ohne Linie mitten im Schwert) -->
+      <path class="vaelith-sword-sparks" d="M135 46 L130 50 L132 56 M104 82 L99 86 L101 92 M144 81 L139 87 L141 93 M111 120 L106 126 L108 132" fill="none" style="stroke:var(--fx-core,#ffffff)" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
      </g>
      <!-- E) PIXELGENAUER AUGEN- & SCHWERT-LEUCHTEFFEKT FÜR VAELITHALT3 (152885.png -> ARTS/VaelithAlt3.png) -->
      <g id="fxGroupAlt3" style="display:none">
@@ -2856,21 +2949,27 @@ body.low-power-mode .sky-wrath-overload{
     <div class="lore-buff-pill" id="companionActivePill" title="Aktives Echo an Vaeliths Seite (Chroniken)"></div>
    </div>
    <div style="display:flex;justify-content:center"><div class="aureon-eye-pill" id="aureonEyePill" title="Aureons Auge: Füllt sich im Vorstoß-Modus. Bei 100 % schickt Aureon eine Elite-Exekutionswelle. Überstehst du sie, erhältst du für 10 Min. den Segen Gebrochenes Auge (+100 % Ressourcen & +1 garantiertes Ewigkeitsecho)!"><span id="aureonEyeIcon">👁</span><span id="aureonEyeText">Aureons Auge: 0%</span><span class="aureon-eye-mini-bar" id="aureonEyeBarWrap"><span class="aureon-eye-mini-fill" id="aureonEyeBarFill"></span></span></div></div>
-   <div class="invasion-active-banner" id="invasionActiveBanner">
-    <div><strong style="color:#ff708d" id="invasionBannerTitle">🩸 AUREONS RACHE · LIVE-INVASION!</strong><div style="font-size:9px;color:#ffd166" id="invasionSubText">Ein Vorbote von Aureon, dem Ewigen ist erschienen!</div></div>
-    <span style="font-size:10px;font-weight:800;color:#ffffff;white-space:nowrap" id="invasionBannerBadge">LIVE-EVENT</span>
+   <div class="expedition-ready-battle-banner" id="expeditionBattleBanner">
+    <div style="text-align:left"><strong style="color:#ffd166" id="expBattleBannerTitle">🌌 ZEITRISS-EXPEDITION ZURÜCK!</strong><div style="font-size:9px;color:var(--cyan)" id="expBattleBannerSub">Deine Gefährtin wartet mit Schätzen aus der Ersten Ära.</div></div>
+    <button type="button" class="exp-claim-restart-btn" id="claimAndRestartExpBattleBtn">🎁 Abholen &amp; Neu (30m)</button>
    </div>
-   <div class="inquisitor-active-banner" id="inquisitorActiveBanner">
-    <div><strong style="color:#ffd166" id="inquisitorBannerTitle">⚔ INQUISITOR-HINRICHTUNG!</strong><div style="font-size:9px;color:#ffb3c6" id="inquisitorBannerSub">Ein hochrangiger Diener Aureons stellt sich dir in der Kampfbühne!</div></div>
-    <span style="font-size:9.5px;font-weight:800;color:#ffffff;white-space:nowrap">MINI-BOSS</span>
-   </div>
-   <div class="trial-active-banner" id="trialActiveBanner">
-    <div><strong style="color:#ffd166">⚔ PRÜFUNG DER VERGANGENHEIT</strong><div style="font-size:9px;color:var(--cyan)" id="trialDmgText">Schaden: 0 · Belohnung: +1 Echo</div></div>
-    <div style="text-align:right"><strong id="trialTimerText" style="font-size:13px;color:#ffffff">60.0s</strong><div><button type="button" class="reaction-reset" id="abortTrialBtn" style="color:#ffb3c6">Beenden</button></div></div>
-   </div>
-   <div class="flashback-active-banner" id="flashbackActiveBanner">
-    <div><strong style="color:#ffd166" id="flashbackBannerTitle">⏳ RÜCKBLENDE DER ERSTEN ÄRA</strong><div style="font-size:9px;color:var(--cyan)" id="flashbackBannerSub">Göttliche Macht vor 1.000 Jahren entfesselt!</div></div>
-    <div style="text-align:right"><strong id="flashbackTimerText" style="font-size:13px;color:#ffffff">35.0s</strong><div><button type="button" class="reaction-reset" id="abortFlashbackBtn" style="color:#ffb3c6">Beenden</button></div></div>
+   <div class="unified-special-banner" id="unifiedSpecialBannerWrap">
+    <div class="invasion-active-banner" id="invasionActiveBanner">
+     <div><strong style="color:#ff708d" id="invasionBannerTitle">🩸 AUREONS RACHE · LIVE-INVASION!</strong><div style="font-size:9px;color:#ffd166" id="invasionSubText">Ein Vorbote von Aureon, dem Ewigen ist erschienen!</div></div>
+     <span style="font-size:10px;font-weight:800;color:#ffffff;white-space:nowrap" id="invasionBannerBadge">LIVE-EVENT</span>
+    </div>
+    <div class="inquisitor-active-banner" id="inquisitorActiveBanner">
+     <div><strong style="color:#ffd166" id="inquisitorBannerTitle">⚔ INQUISITOR-HINRICHTUNG!</strong><div style="font-size:9px;color:#ffb3c6" id="inquisitorBannerSub">Ein hochrangiger Diener Aureons stellt sich dir in der Kampfbühne!</div></div>
+     <span style="font-size:9.5px;font-weight:800;color:#ffffff;white-space:nowrap">MINI-BOSS</span>
+    </div>
+    <div class="trial-active-banner" id="trialActiveBanner">
+     <div><strong style="color:#ffd166">⚔ PRÜFUNG DER VERGANGENHEIT</strong><div style="font-size:9px;color:var(--cyan)" id="trialDmgText">Schaden: 0 · Belohnung: +1 Echo</div></div>
+     <div style="text-align:right"><strong id="trialTimerText" style="font-size:13px;color:#ffffff">60.0s</strong><div><button type="button" class="reaction-reset" id="abortTrialBtn" style="color:#ffb3c6">Beenden</button></div></div>
+    </div>
+    <div class="flashback-active-banner" id="flashbackActiveBanner">
+     <div><strong style="color:#ffd166" id="flashbackBannerTitle">⏳ RÜCKBLENDE DER ERSTEN ÄRA</strong><div style="font-size:9px;color:var(--cyan)" id="flashbackBannerSub">Göttliche Macht vor 1.000 Jahren entfesselt!</div></div>
+     <div style="text-align:right"><strong id="flashbackTimerText" style="font-size:13px;color:#ffffff">35.0s</strong><div><button type="button" class="reaction-reset" id="abortFlashbackBtn" style="color:#ffb3c6">Beenden</button></div></div>
+    </div>
    </div>
    <div class="colossus-arena" id="colossusArena">
     <div class="arena-hud">
@@ -2885,13 +2984,12 @@ body.low-power-mode .sky-wrath-overload{
     <canvas class="arena-canvas" id="combatArenaCanvas" width="680" height="244"></canvas>
     <div class="arena-footer">
      <span id="arenaColossusHint">Schwachpunkt-Siegel aktiv</span>
-     <button type="button" class="colossus-preview-btn" id="cycleColossusBtn" title="Schaltet durch die 8 Shadow of the Colossus Boss-Skins zur Vorschau">🗿 Koloss-Skin: Auto</button>
     </div>
    </div>
    <div class="bars"><div class="barline"><span>LEBEN DES GEGNERS</span><span id="enemyHpText">100 / 100</span></div><div class="bar"><span id="enemyHpBar"></span></div>
    <div class="bossbar" id="bossBarWrap" style="display:none"><div class="barline"><span id="bossLabel">BOSS</span><span id="bossHpText"></span></div><div class="bar"><span id="bossHpBar"></span></div></div>
    <div class="overcharge-wrap" id="overchargeWrap" style="margin-top:10px">
-    <div class="barline"><span id="overchargeLabel">ϟ GÖTTLICHE ENTLADUNG</span><span id="overchargeText">0%</span></div>
+    <div class="barline"><span><span id="overchargeLabel">ϟ GÖTTLICHE ENTLADUNG</span><span class="oc-info-tooltip-icon" id="blackFocusInfoIcon" style="display:none" title="⚡ Schwarzer Fokus: Halte den Balken oder das Blitz-Symbol gedrückt, um schwarze Blitze zu bündeln (3,5x schnellere Aufladung). Tippe bei ⚡ zum Entladen!">ⓘ</span></span><span id="overchargeText">0%</span></div>
     <div class="bar"><span id="overchargeBar" style="background:linear-gradient(90deg,#8fe8ff,#ed8bff)"></span></div>
     <div class="oc-stacks-row" id="ocStacksRow" title="Bis zu 5x stapelbar · Jede Stapelung dauert länger · Bei 5 Stacks: Göttliche Spährenentfaltung">
      <span class="oc-stack-pip" id="ocPip1"></span>
@@ -3016,10 +3114,7 @@ body.low-power-mode .sky-wrath-overload{
    <div id="constellationList"></div>
   </div>
  </div>
- <div class="section">
-  <div class="sectionhead"><h2>Wöchentliche Anomalie & Saison-Events</h2><span class="small" id="weeklyAnomalyWeekTag">Kalenderwoche</span></div>
-  <div class="card" id="weeklyAnomalyCard"></div>
- </div>
+
 </section>
 
 <section class="page" id="page-lore">
@@ -3053,18 +3148,28 @@ body.low-power-mode .sky-wrath-overload{
    <p class="creator-byline">Entwickelt von <span>zTempest</span></p>
   </div>
   <div class="card">
-   <h3 style="font-family:Georgia,serif;margin:0 0 4px">Spielstand sichern</h3>
-   <p class="setting-note">Exportiere deinen Fortschritt als JSON-Datei oder importiere einen zuvor exportierten Spielstand. Beim Import wird der aktuelle Fortschritt ersetzt.</p>
+   <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:4px">
+    <h3 style="font-family:Georgia,serif;margin:0">Spielstand sichern</h3>
+    <span class="small" id="backupStatusBadge" style="color:var(--cyan)">Backup-Status</span>
+   </div>
+   <p class="setting-note">Exportiere deinen Fortschritt als JSON-Datei oder importiere einen zuvor exportierten Spielstand. Wenn dein letztes Backup länger als 7 Tage zurückliegt, erinnert dich ein roter Punkt am Einstellungs-Tab.</p>
    <div class="settings-actions" style="margin-top:12px"><button class="secondary" id="exportSaveBtn">↓ Spielstand exportieren</button><button class="secondary" id="importSaveBtn">↑ Spielstand importieren</button></div>
    <input id="saveImportFile" type="file" accept=".json,application/json" hidden>
+  </div>
+  <div class="card" style="margin-top:10px">
+   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+    <h3 style="font-family:Georgia,serif;margin:0">Ruhmeshalle &amp; Ewige Statistik</h3>
+    <span class="small" style="color:var(--gold)">Über alle Zyklen</span>
+   </div>
+   <p class="setting-note">Deine dauerhafte Kampfbilanz über sämtliche Reinkarnationen hinweg.</p>
+   <div class="hall-of-fame-grid" id="hallOfFameGrid"></div>
   </div>
   <div class="card" style="margin-top:10px">
    <h3 style="font-family:Georgia,serif;margin:0 0 4px">Tribut-Gewölbe & Login-Tage</h3>
    <p class="setting-note">Deine Login-Statistik nach lokaler Systemzeit sowie Meilenstein-Belohnungen (7 & 30 Tage) und die tägliche Prüfung der Vergangenheit.</p>
    <div id="settingsLoginStatsBox" style="margin-top:8px"></div>
-   <div class="settings-actions" style="margin-top:10px">
-    <button class="secondary" type="button" id="openTributVaultFromSettingsBtn">🏆 Tribut-Gewölbe öffnen</button>
-    <button class="secondary" type="button" id="startPastTrialFromSettingsBtn">⚔ Prüfung der Vergangenheit</button>
+   <div style="margin-top:10px">
+    <button class="secondary" type="button" id="startPastTrialFromSettingsBtn">⚔ Prüfung der Vergangenheit starten (60s)</button>
    </div>
   </div>
   <div class="card" style="margin-top:10px">
@@ -3077,8 +3182,17 @@ body.low-power-mode .sky-wrath-overload{
    <div class="settings-field"><label for="paletteSelect">Farbschema</label><select id="paletteSelect"><option value="raiden">Electro Violet</option><option value="honkai">Herrscher of Thunder</option><option value="storm">Violetter Sturm</option><option value="crimson">Crimson Eclipse</option><option value="midnight">Midnight Azure</option></select></div>
    <div class="settings-field"><label for="titleSelect">Freigeschalteter Titel (Name)</label><select id="titleSelect" aria-label="Freigeschalteten Titel auswählen"></select><div id="customTitleWrap" style="display:none;margin-top:9px"><label for="customTitleInput" style="font-size:11px;font-weight:700;color:var(--cyan);margin-bottom:5px;display:block">Eigener Titel (Nur Textform · Alle Titel freigeschaltet)</label><input type="text" id="customTitleInput" maxlength="40" placeholder="Deinen eigenen Titel eingeben …"></div><p class="setting-note" id="titleUnlockNote">Weitere Titel werden durch Fortschritt und besondere Meilensteine freigeschaltet.</p></div>
    <div class="settings-field"><label for="titleEffectSelect">Visueller Titel-Effekt (Blitze, Aura & Reiatsu-Farbe)</label><select id="titleEffectSelect" aria-label="Visuellen Titel-Effekt auswählen"></select><div class="title-fx-explain-box" id="titleEffectDetailBox"></div></div>
-   <button class="secondary" id="saveAppearanceBtn">Darstellung speichern</button>
-   <p class="setting-note">Dein Titel erscheint direkt unter Vaeliths Namen. Das Farbschema lässt sich jederzeit wechseln.</p>
+   <p class="setting-note">Farbschema, Titel und visuelle Effekte werden beim Auswählen sofort live übernommen und gespeichert.</p>
+   <div class="settings-field" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line)">
+    <label for="seasonalEventSelect">Saisonales Event (Welt-Effekt &amp; Event-Buffs)</label>
+    <select id="seasonalEventSelect" aria-label="Saisonales Event auswählen"></select>
+    <p class="setting-note" id="seasonalEventSettingsNote">Steuert die saisonalen Effekte und Buffs (auch jederzeit über die Pillen im Kampf-Tab einsehbar).</p>
+   </div>
+   <div class="settings-field" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line)">
+    <label for="cycleColossusBtn">Kampfbühnen-Vorschau (Koloss-Skins)</label>
+    <button class="secondary" type="button" id="cycleColossusBtn">🗿 Koloss-Skin in Kampfbühne: Auto</button>
+    <p class="setting-note">Schaltet zur Ansicht durch die 8 Shadow-of-the-Colossus-Bosse in der Kampfbühne.</p>
+   </div>
    <div class="settings-field" style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line)">
     <label for="toggleUpgradeValuesBtn">Upgrade- & Fähigkeitsbeschreibung</label>
     <button class="secondary" id="toggleUpgradeValuesBtn" type="button">Anzeige: Werte anzeigen</button>
@@ -3139,8 +3253,7 @@ body.low-power-mode .sky-wrath-overload{
      <option value="custom" id="portraitCustomOption" disabled>Eigenes hochgeladenes Bild</option>
     </select>
    </div>
-   <div class="settings-actions" style="margin-top:8px">
-    <button class="secondary" type="button" id="useVaelithPngBtn">⚡ Standardbild</button>
+   <div style="margin-top:8px">
     <button class="secondary" type="button" id="removeImageBtn">✕ Eigenes Bild entfernen</button>
    </div>
   </div>
@@ -3158,7 +3271,7 @@ body.low-power-mode .sky-wrath-overload{
  <button class="tab" data-page="relics"><span>◇</span>Relikte</button>
  <button class="tab" data-page="prestige"><span>✧</span>Prestige</button>
  <button class="tab" data-page="lore"><span>☽</span>Chroniken</button>
- <button class="tab" data-page="settings"><span>⚙</span>Einst.</button>
+ <button class="tab" data-page="settings"><span>⚙</span><div>Einst.<i class="backup-warn-dot" id="backupWarnDot" title="Letztes manuelles Spielstand-Backup liegt mehr als 7 Tage zurück"></i></div></button>
 </nav>
 
 <div class="cropper-modal" id="cropperModal" role="dialog" aria-modal="true" aria-labelledby="cropTitle">
@@ -3219,6 +3332,18 @@ body.low-power-mode .sky-wrath-overload{
  </div>
 </div>
 
+
+<div class="info-modal" id="offlineWelcomeModal" role="dialog" aria-modal="true" aria-labelledby="offlineModalTitle">
+ <div class="info-modal-card">
+  <div class="info-modal-head">
+   <h3 id="offlineModalTitle">🌾 Vaeliths Rückkehr · Offline-Beute</h3>
+   <button class="iconbtn" type="button" id="closeOfflineModalBtn" aria-label="Offline-Bericht schließen" style="width:32px;height:32px">✕</button>
+  </div>
+  <div class="info-modal-body" id="offlineWelcomeModalBody"></div>
+  <button class="primary" type="button" id="claimOfflineModalBtn" style="margin-top:10px">⚡ BEUTE ANNEHMEN &amp; WEITERKÄMPFEN</button>
+ </div>
+</div>
+
 <div class="toast" id="toast"></div>
 </div>
 <script>
@@ -3231,7 +3356,7 @@ const state={
  talents:{memory:0,revenge:0,truth:0,divinity:0,cataclysm:0},relics:[],memories:[],kills:0,bossKills:0,
  overcharge:0,overchargeStacks:0,activeOverchargeStacks:0,overchargeActiveUntil:0,
  lastTime:Date.now(),lastPrestige:0,muted:true,characterTitle:'Die Sturmgeborene',selectedTitle:'stormborn',customTitle:'',selectedTitleEffect:'stormborn',unlockedTitles:['stormborn'],palette:'raiden',
- offlineHistory:[],memoryReactions:{},activeEncounter:null,lastEncounterOutcome:null,seenEncounterIds:[],rivalAwakened:false,rivalDialogues:{},activeRivalChapter:0,friend2Awakened:false,friend2Dialogues:{},activeFriend2Chapter:0,aureonAwakened:false,aureonDialogues:{},activeAureonChapter:0,showUpgradeValues:true,dailyLogin:{lastClaimDate:'',streak:0,totalDays:0,maxStreak:0,lastTrialDate:'',bestTrialDmg:0},activeCompanion:'',loreBuff:{type:'',label:'',until:0},mercyCount:0,wrathCount:0,reincarnations:0,musicEnabled:true,customOstName:'',fearMilestoneChoices:{},invasionActive:false,seasonalMode:'auto',relicStars:{},encounterChoices:{},seenFollowupIds:[],holdStage:false,maxStageReached:1,activeInquisitorBoss:null,seenInquisitorIds:[],portraitMode:'vaelith_png',ostPlayMode:'dynamic',constellations:{twilightBlade:0,brokenThrone:0,primalHeart:0},selectedConstellation:'twilightBlade',aureonEyeMeter:0,aureonEyeWave:null,brokenEyeBuffUntil:0,seenBossIntroKeys:[],mirrorShards:0,mirrorRefinements:{power:0,speed:0,crit:0,essence:0,greed:0,penetration:0},doppelgangerActive:false,expedition:{companion:'',endsAt:0},lowPowerMode:false,completedFlashbacks:[]
+ offlineHistory:[],memoryReactions:{},activeEncounter:null,lastEncounterOutcome:null,seenEncounterIds:[],rivalAwakened:false,rivalDialogues:{},activeRivalChapter:0,friend2Awakened:false,friend2Dialogues:{},activeFriend2Chapter:0,aureonAwakened:false,aureonDialogues:{},activeAureonChapter:0,showUpgradeValues:true,dailyLogin:{lastClaimDate:'',streak:0,totalDays:0,maxStreak:0,lastTrialDate:'',bestTrialDmg:0},activeCompanion:'',loreBuff:{type:'',label:'',until:0},mercyCount:0,wrathCount:0,reincarnations:0,musicEnabled:true,customOstName:'',fearMilestoneChoices:{},invasionActive:false,seasonalMode:'auto',relicStars:{},encounterChoices:{},seenFollowupIds:[],holdStage:false,maxStageReached:1,activeInquisitorBoss:null,seenInquisitorIds:[],portraitMode:'vaelith_png',ostPlayMode:'dynamic',constellations:{twilightBlade:0,brokenThrone:0,primalHeart:0},selectedConstellation:'twilightBlade',aureonEyeMeter:0,aureonEyeWave:null,brokenEyeBuffUntil:0,seenBossIntroKeys:[],mirrorShards:0,mirrorRefinements:{power:0,speed:0,crit:0,essence:0,greed:0,penetration:0},doppelgangerActive:false,expedition:{companion:'',endsAt:0},lowPowerMode:false,completedFlashbacks:[],lastBackupAt:0,blackFocusUses:0,stats:{totalPlaySec:0,maxHit:0,totalKills:0,totalBossKills:0,totalEchoesEarned:0,spaehrenCount:0}
 };
 const paletteColorInfo={
  raiden:{name:'Electro Violet',main:'#c28aff',mainName:'Elektro-Violett',sub:'#9d4edd',subName:'Tiefes Amethyst',core:'#ffffff',coreName:'Reinweiß'},
@@ -4843,6 +4968,9 @@ function attackTick(allowAnim=true){
  if(state.skills.storm>0)damage*=1+.08*state.skills.storm;
  if((state.skills.nova||0)>0)damage*=1+.35*state.skills.nova;
  state.enemyHp-=damage;
+ if(!state.stats||typeof state.stats!=='object')state.stats={totalPlaySec:0,maxHit:0,totalKills:0,totalBossKills:0,totalEchoesEarned:0,spaehrenCount:0};
+ const totalStrike=damage+(typeof isLyseraCombo!=='undefined'&&isLyseraCombo?lyseraDmg:0);
+ if(totalStrike>(state.stats.maxHit||0))state.stats.maxHit=totalStrike;
  const isChain=state.skills.chain>0&&Math.random()<Math.min(.75,.12*state.skills.chain);
  if(isChain)state.enemyHp-=damage*(.6+state.skills.chain*.15);
  // Sternbild „Die Dämmerungsklinge“: Gemeinsame Kombo-Angriffe mit Lysera
@@ -4902,6 +5030,9 @@ function killEnemy(){
  if(typeof triggerArenaKillAnim==='function')triggerArenaKillAnim(boss && !isFarmedBoss);
  playSound((boss && !isFarmedBoss)?'boss':'kill');
  state.kills++;
+ if(!state.stats||typeof state.stats!=='object')state.stats={totalPlaySec:0,maxHit:0,totalKills:0,totalBossKills:0,totalEchoesEarned:0,spaehrenCount:0};
+ state.stats.totalKills=(state.stats.totalKills||0)+1;
+ if(boss)state.stats.totalBossKills=(state.stats.totalBossKills||0)+1;
  if(typeof isFlashbackActive==='function'&&isFlashbackActive()){
   flashbackState.kills++;
   const fb=eraFlashbacksData.find(x=>x.id===flashbackState.id);
@@ -5020,11 +5151,7 @@ function killEnemy(){
   if(!state.holdStage && typeof triggerCyberExplosion==='function')triggerCyberExplosion();
   if(!state.holdStage)say('Boss besiegt! Ein Splitter der Vergangenheit gehört dir.');
   relicData.forEach(r=>{if(state.stage>=r.unlock&&!state.relics.includes(r.id))unlockRelic(r.id)});
- }else if(Math.random()<.18){
-  say('Ein Schatten zerfällt zu Blitzessenz …');
  }
-
- if(!boss&&state.kills%5===0)say('Vaeliths Macht wächst. Die nächste Welle nähert sich.');
  if(!state.activeEncounter&&Math.random()<.16){
   state.activeEncounter=pickNextMortalEncounter();
  }
@@ -5300,7 +5427,7 @@ function prestigeGain(){
  return Math.max(1,Math.floor(Math.sqrt(hs-8)*(1+state.talents.truth*.1)*mirrorMult*(anom.echoMult||1))+(seas?seas.bonusEcho||0:0));
 }
 function doPrestige(){let gain=prestigeGain();if(gain<1)return; if(!confirm('Ein neues Zeitalter beginnen? Du erhältst '+gain+' Echos. Gold, Essenz, Stufen und die Offline-Ertragshistorie werden zurückgesetzt.'))return;
- state.echoes+=gain;state.reincarnations=(state.reincarnations||0)+1;state.invasionActive=false;state.activeInquisitorBoss=null;document.body.classList.remove('aureon-invasion-active');if($('invasionActiveBanner'))$('invasionActiveBanner').classList.remove('active');state.lastPrestige=Date.now();state.gold=0;state.essence=0;state.stage=1;state.maxStageReached=1;state.holdStage=false;state.kills=0;state.bossKills=0;state.upgrades={power:0,speed:0,crit:0,essence:0,greed:0,penetration:0};state.skills={chain:0,storm:0,wrath:0,nova:0,timefracture:0};const startStacks=getConstellationLevel('primalHeart')>0?Math.min(5,1+getConstellationLevel('primalHeart')):0;state.overcharge=startStacks>=5?100:0;state.overchargeStacks=startStacks;state.activeOverchargeStacks=0;state.overchargeActiveUntil=0;state.aureonEyeMeter=0;state.aureonEyeWave=null;state.offlineHistory=[];state.attack=8;state.attackSpeed=.8;renderOfflineHistory();resetEnemy();if(typeof triggerCyberExplosion==='function')triggerCyberExplosion();say('Die Zeit bricht zum '+state.reincarnations+'. Mal. Doch diesmal erinnert sich Vaelith.');toast('Reinkarnation #'+state.reincarnations+': +'+gain+' Echos');save()}
+ state.echoes+=gain;if(state.stats)state.stats.totalEchoesEarned=(state.stats.totalEchoesEarned||0)+gain;state.reincarnations=(state.reincarnations||0)+1;state.invasionActive=false;state.activeInquisitorBoss=null;document.body.classList.remove('aureon-invasion-active');if($('invasionActiveBanner'))$('invasionActiveBanner').classList.remove('active');state.lastPrestige=Date.now();state.gold=0;state.essence=0;state.stage=1;state.maxStageReached=1;state.holdStage=false;state.kills=0;state.bossKills=0;state.upgrades={power:0,speed:0,crit:0,essence:0,greed:0,penetration:0};state.skills={chain:0,storm:0,wrath:0,nova:0,timefracture:0};const startStacks=getConstellationLevel('primalHeart')>0?Math.min(5,1+getConstellationLevel('primalHeart')):0;state.overcharge=startStacks>=5?100:0;state.overchargeStacks=startStacks;state.activeOverchargeStacks=0;state.overchargeActiveUntil=0;state.aureonEyeMeter=0;state.aureonEyeWave=null;state.offlineHistory=[];state.attack=8;state.attackSpeed=.8;renderOfflineHistory();resetEnemy();if(typeof triggerCyberExplosion==='function')triggerCyberExplosion();say('Die Zeit bricht zum '+state.reincarnations+'. Mal. Doch diesmal erinnert sich Vaelith.');toast('Reinkarnation #'+state.reincarnations+': +'+gain+' Echos');save()}
 let domBuilt=false;
 function buildInteractiveLists(){
  $('upgradeGrid').innerHTML=upgradeData.map(u=>`<div class="card"><div class="cardhead"><div class="cardicon">${u.icon}</div><div><div class="cardtitle">${u.name}</div><div class="level" id="up-lvl-${u.id}">Rang 0</div></div></div><div class="carddesc">${u.desc}<span class="stat-val-line"><br>${u.stat}</span></div><button class="buy" type="button" id="up-btn-${u.id}" data-up="${u.id}">⬡ 0 Gold</button><button class="refine-btn" type="button" id="up-ref-${u.id}" title="Mit Spiegelscherben dauerhaft veredeln (+20 % Grundwert pro Stufe, bleibt nach Prestige)">🪞 Veredeln ✦0/10 (1 Scherbe)</button></div>`).join('');
@@ -5851,6 +5978,25 @@ function render(){
    $('inquisitorBannerTitle').textContent='🗡 HINRICHTUNG: '+state.activeInquisitorBoss.enemyName;
   }
  }
+ const anySpecialActive=Boolean(state.invasionActive)||hasInqBoss||(typeof isPastTrialActive==='function'&&isPastTrialActive())||(typeof isFlashbackActive==='function'&&isFlashbackActive());
+ if($('unifiedSpecialBannerWrap')){
+  $('unifiedSpecialBannerWrap').classList.toggle('has-active',anySpecialActive);
+ }
+ const expReadyToClaim=Boolean(state.expedition&&state.expedition.endsAt>0&&Date.now()>=state.expedition.endsAt);
+ if($('expeditionBattleBanner')){
+  $('expeditionBattleBanner').classList.toggle('active',expReadyToClaim);
+  if(expReadyToClaim){
+   const cName=state.expedition.companion==='seraphina'?'Seraphina':'Lysera';
+   if($('expBattleBannerTitle'))$('expBattleBannerTitle').textContent=`🌌 EXPEDITION ZURÜCK (${cName.toUpperCase()})!`;
+  }
+ }
+ const bfUses=Number(state.blackFocusUses)||0;
+ if($('blackFocusHint')&&!isBlackFocusHolding){
+  $('blackFocusHint').style.display=(bfUses>=3)?'none':'block';
+ }
+ if($('blackFocusInfoIcon')){
+  $('blackFocusInfoIcon').style.display=(bfUses>=3)?'inline-flex':'none';
+ }
  setText('mirrorShardsCount',String(state.mirrorShards||0));
  upgradeData.forEach(u=>{
   let c=costUpgrade(u),l=state.upgrades[u.id],can=state.gold>=c;
@@ -5916,52 +6062,56 @@ function render(){
    <div style="margin-top:6px;font-size:8.5px;color:var(--muted);text-align:right">PC: Maus drüberhalten · Handy: Antippen zum Schließen</div>
   `;
  }
- setText('weeklyAnomalyWeekTag',`Kalenderwoche ${curWk}${curSeas?' · '+curSeas.shortName:''}`);
- if($('weeklyAnomalyCard')&&$('weeklyAnomalyCard').dataset.sig!==popSig){
-  $('weeklyAnomalyCard').dataset.sig=popSig;
+ const selSeas=$('seasonalEventSelect');
+ if(selSeas&&selSeas.dataset.sig!==popSig){
+  selSeas.dataset.sig=popSig;
   const sMode=state.seasonalMode||'auto';
-  $('weeklyAnomalyCard').innerHTML=`
-   <div class="listitem" style="display:block;padding:6px 0 10px">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-     <strong style="color:var(--gold);font-size:13px">${curAnom.name} (KW ${curWk})</strong>
-     <span style="color:#9ff0c2;font-size:10.5px;font-weight:800">WÖCHENTLICH AKTIV</span>
-    </div>
-    <p style="color:var(--text);margin-top:4px">${curAnom.desc}</p>
-    <ul class="anomaly-buff-list" style="margin-top:6px">
-     ${(curAnom.buffs||[]).map(b=>`<li>${b}</li>`).join('')}
-    </ul>
-   </div>
-   <div class="listitem" style="display:block;padding:10px 0 4px">
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
-     <strong style="color:var(--pink);font-size:13px">${curSeas?curSeas.name:'🌙 Kein Saisonales Event in dieser Woche'}</strong>
-     <span style="color:${curSeas?'#ffd166':'var(--muted)'};font-size:10px;font-weight:800">${curSeas?(sMode==='auto'?'SAISON AKTIV':'VORSCHAU AKTIV'):'RUHEND'}</span>
-    </div>
-    ${curSeas?`
-     <p style="color:var(--text);margin-top:4px"><strong>Zeitraum:</strong> ${curSeas.kwLabel}</p>
-     <ul class="anomaly-buff-list" style="margin-top:5px">
-      ${curSeas.buffs.map(b=>`<li><strong style="color:#ffd166">${b}</strong></li>`).join('')}
-      <li><strong style="color:var(--cyan)">Spielveränderung:</strong> ${curSeas.visualChange}</li>
-     </ul>
-    `:`<p class="small" style="margin-top:4px">Saisonale Events starten automatisch in besonderen Kalenderwochen (z. B. Halloween in KW 43–44, Weihnachten in KW 49–52, Neujahr in KW 1–2, Frühling in KW 13–15, Sonnenwende in KW 24–26).</p>`}
-    <div class="settings-field" style="margin:10px 0 2px">
-     <label for="seasonalEventSelect" style="font-size:10.5px;color:var(--cyan)">Saisonales Event (Automatisch nach KW oder direkt auswählen)</label>
-     <select id="seasonalEventSelect">
-      <option value="auto" ${sMode==='auto'?'selected':''}>📅 Automatisch nach Kalenderwoche (KW ${curWk}: ${natSeas?natSeas.shortName:'Kein Event'})</option>
-      ${seasonalEventsData.map(ev=>`<option value="${ev.id}" ${sMode===ev.id?'selected':''}>${ev.name} (${ev.kwLabel})</option>`).join('')}
-      <option value="off" ${sMode==='off'?'selected':''}>✕ Saisonale Events deaktivieren</option>
-     </select>
-    </div>
-   </div>
+  selSeas.innerHTML=`
+   <option value="auto" ${sMode==='auto'?'selected':''}>📅 Automatisch nach KW (KW ${curWk}: ${natSeas?natSeas.shortName:'Kein Event'})</option>
+   ${seasonalEventsData.map(ev=>`<option value="${ev.id}" ${sMode===ev.id?'selected':''}>${ev.name} (${ev.kwLabel})</option>`).join('')}
+   <option value="off" ${sMode==='off'?'selected':''}>✕ Saisonale Events deaktivieren</option>
   `;
-  const sel=$('seasonalEventSelect');
-  if(sel){
-   sel.onchange=()=>{
-    state.seasonalMode=sel.value||'auto';
-    render();
-    save();
-    const activeEv=getActiveSeasonalEvent();
-    toast(activeEv?`🎉 Saison-Event aktiv: ${activeEv.shortName}`:'Saison-Events auf Automatisch / Aus');
-   };
+  selSeas.value=sMode;
+  if($('seasonalEventSettingsNote')){
+   $('seasonalEventSettingsNote').textContent=curSeas?`Aktiv: ${curSeas.name} — ${curSeas.buffs.join(' · ')}`:'Aktuell kein saisonales Event aktiv. Details zu Anomalien siehst du jederzeit per Klick auf die Pillen im Kampf-Tab.';
+  }
+ }
+ // #3: Backup-Erinnerungs-Punkt prüfen (> 7 Tage seit letztem Backup oder noch nie gesichert nach mind. 10 Min. Spielzeit)
+ const sevenDaysMs=7*86400000;
+ const lastBk=Number(state.lastBackupAt)||0;
+ const playSec=(state.stats&&state.stats.totalPlaySec)||0;
+ const backupOverdue=(lastBk>0 && (Date.now()-lastBk)>sevenDaysMs) || (lastBk===0 && playSec>=600);
+ if($('backupWarnDot'))$('backupWarnDot').classList.toggle('show',backupOverdue);
+ if($('backupStatusBadge')){
+  if(lastBk===0){
+   $('backupStatusBadge').textContent=backupOverdue?'⚠ Noch kein Backup erstellt':'Noch kein Backup';
+   $('backupStatusBadge').style.color=backupOverdue?'#ff708d':'var(--muted)';
+  }else{
+   const daysAgo=Math.floor((Date.now()-lastBk)/86400000);
+   $('backupStatusBadge').textContent=backupOverdue?`⚠ Vor ${daysAgo} Tagen gesichert`:(daysAgo===0?'✓ Heute gesichert':`✓ Vor ${daysAgo} ${daysAgo===1?'Tag':'Tagen'} gesichert`);
+   $('backupStatusBadge').style.color=backupOverdue?'#ff708d':'#9ff0c2';
+  }
+ }
+ // #10: Permanente Statistik-Tafel (Ruhmeshalle) aktualisieren
+ const hofGrid=$('hallOfFameGrid');
+ if(hofGrid){
+  const stObj=state.stats||{};
+  const totKills=Math.max(state.kills||0,stObj.totalKills||0);
+  const totBoss=Math.max(state.bossKills||0,stObj.totalBossKills||0);
+  const totEcho=Math.max(state.echoes||0,stObj.totalEchoesEarned||0);
+  const hofSig=`${Math.floor((stObj.totalPlaySec||0)/10)}|${Math.floor(stObj.maxHit||0)}|${totKills}|${totBoss}|${totEcho}|${stObj.spaehrenCount||0}|${ getHighestStage()}|${state.reincarnations||0}`;
+  if(hofGrid.dataset.sig!==hofSig){
+   hofGrid.dataset.sig=hofSig;
+   hofGrid.innerHTML=`
+    <div class="hof-stat-box"><div class="hof-stat-label">⏳ Gesamtspielzeit</div><div class="hof-stat-val">${formatDuration(stObj.totalPlaySec||0)}</div></div>
+    <div class="hof-stat-box"><div class="hof-stat-label">💥 Höchster Einzelschlag</div><div class="hof-stat-val">${fmt(stObj.maxHit||0)}</div></div>
+    <div class="hof-stat-box"><div class="hof-stat-label">⚔ Besiegte Gegner (Gesamt)</div><div class="hof-stat-val">${fmt(totKills)}</div></div>
+    <div class="hof-stat-box"><div class="hof-stat-label">🗿 Besiegte Kolosse &amp; Bosse</div><div class="hof-stat-val">${fmt(totBoss)}</div></div>
+    <div class="hof-stat-box"><div class="hof-stat-label">✧ Verdiente Echos (Gesamt)</div><div class="hof-stat-val">${fmt(totEcho)}</div></div>
+    <div class="hof-stat-box"><div class="hof-stat-label">⚡ Spährenentfaltungen</div><div class="hof-stat-val">${fmt(stObj.spaehrenCount||0)}</div></div>
+    <div class="hof-stat-box"><div class="hof-stat-label">🏔 Höchste Stufe</div><div class="hof-stat-val">Stufe ${getHighestStage()}</div></div>
+    <div class="hof-stat-box"><div class="hof-stat-label">🔄 Reinkarnationen</div><div class="hof-stat-val">${state.reincarnations||0}</div></div>
+   `;
   }
  }
 
@@ -6805,7 +6955,7 @@ function refreshCachedThemeColors(){
 }
 function applyPalette(){document.body.dataset.palette=state.palette||'raiden';document.body.dataset.titleFx=state.selectedTitleEffect||'stormborn';if($('paletteSelect'))$('paletteSelect').value=state.palette||'raiden';if($('titleEffectSelect'))$('titleEffectSelect').value=state.selectedTitleEffect||'stormborn';refreshCachedThemeColors();}
 function save(){try{state.lastTime=Date.now();localStorage.setItem('thunderborn-save-v1',JSON.stringify(state))}catch(e){toast('Speichern fehlgeschlagen: eventuell ist der Speicher voll.')}}
-function load(){try{let raw=localStorage.getItem('thunderborn-save-v1');if(!raw){renderOfflineHistory();return;}let s=JSON.parse(raw);Object.assign(state,s);state.characterTitle=typeof s.characterTitle==='string'?s.characterTitle:'Die Sturmgeborene';state.selectedTitle=typeof s.selectedTitle==='string'?s.selectedTitle:'stormborn';state.customTitle=sanitizePlainTextTitle(s.customTitle||'');state.selectedTitleEffect=typeof s.selectedTitleEffect==='string'?s.selectedTitleEffect:state.selectedTitle;state.unlockedTitles=Array.isArray(s.unlockedTitles)?s.unlockedTitles:['stormborn'];state.offlineHistory=Array.isArray(s.offlineHistory)?s.offlineHistory.slice(0,3):[];state.memoryReactions=(s.memoryReactions&&typeof s.memoryReactions==='object')?s.memoryReactions:{};state.seenEncounterIds=Array.isArray(s.seenEncounterIds)?s.seenEncounterIds:[];state.rivalAwakened=Boolean(s.rivalAwakened);state.rivalDialogues=(s.rivalDialogues&&typeof s.rivalDialogues==='object')?s.rivalDialogues:{};state.activeRivalChapter=Number(s.activeRivalChapter)||0;state.friend2Awakened=Boolean(s.friend2Awakened);state.friend2Dialogues=(s.friend2Dialogues&&typeof s.friend2Dialogues==='object')?s.friend2Dialogues:{};state.activeFriend2Chapter=Number(s.activeFriend2Chapter)||0;state.aureonAwakened=Boolean(s.aureonAwakened);state.aureonDialogues=(s.aureonDialogues&&typeof s.aureonDialogues==='object')?s.aureonDialogues:{};state.activeAureonChapter=Number(s.activeAureonChapter)||0;state.showUpgradeValues=(s.showUpgradeValues!==undefined)?Boolean(s.showUpgradeValues):true;state.dailyLogin=(s.dailyLogin&&typeof s.dailyLogin==='object')?{lastClaimDate:String(s.dailyLogin.lastClaimDate||''),streak:Number(s.dailyLogin.streak)||0,totalDays:Number(s.dailyLogin.totalDays)||0,maxStreak:Number(s.dailyLogin.maxStreak)||Number(s.dailyLogin.streak)||0,lastTrialDate:String(s.dailyLogin.lastTrialDate||''),bestTrialDmg:Number(s.dailyLogin.bestTrialDmg)||0}:{lastClaimDate:'',streak:0,totalDays:0,maxStreak:0,lastTrialDate:'',bestTrialDmg:0};state.activeCompanion=typeof s.activeCompanion==='string'?s.activeCompanion:'';state.loreBuff=(s.loreBuff&&typeof s.loreBuff==='object')?s.loreBuff:{type:'',label:'',until:0};state.mercyCount=Number(s.mercyCount)||0;state.wrathCount=Number(s.wrathCount)||0;state.reincarnations=Number(s.reincarnations)||0;state.musicEnabled=(s.musicEnabled!==undefined)?Boolean(s.musicEnabled):true;state.customOstName=typeof s.customOstName==='string'?s.customOstName:'';state.ostPlayMode=(typeof s.ostPlayMode==='string'&&['dynamic','ost1','phonk','ost2','ost3','phonkcalm'].includes(s.ostPlayMode))?s.ostPlayMode:'dynamic';state.fearMilestoneChoices=(s.fearMilestoneChoices&&typeof s.fearMilestoneChoices==='object')?s.fearMilestoneChoices:{};state.invasionActive=Boolean(s.invasionActive);state.seasonalMode=typeof s.seasonalMode==='string'?s.seasonalMode:'auto';state.relicStars=(s.relicStars&&typeof s.relicStars==='object')?s.relicStars:{};state.encounterChoices=(s.encounterChoices&&typeof s.encounterChoices==='object')?s.encounterChoices:{};state.seenFollowupIds=Array.isArray(s.seenFollowupIds)?s.seenFollowupIds:[];state.holdStage=Boolean(s.holdStage);state.maxStageReached=Math.max(Number(s.stage)||1,Number(s.maxStageReached)||1);state.activeInquisitorBoss=(s.activeInquisitorBoss&&typeof s.activeInquisitorBoss==='object')?s.activeInquisitorBoss:null;state.seenInquisitorIds=Array.isArray(s.seenInquisitorIds)?s.seenInquisitorIds:[];syncUpgradeValuesUI();syncLowPowerModeUI();state.palette=['raiden','honkai','storm','crimson','midnight','sovereign'].includes(s.palette)?s.palette:'raiden';applyPalette();const validPortraits=['vaelith_png','vaelith_alt1','vaelith_alt2','vaelith_alt3','vaelith_alt4','custom'];state.portraitMode=(validPortraits.includes(s.portraitMode)&&!(s.portraitMode==='custom'&&!state.characterImage))?s.portraitMode:'vaelith_png';refreshCharacterImage();state.upgrades=Object.assign({power:0,speed:0,crit:0,essence:0,greed:0,penetration:0},s.upgrades||{});state.skills=Object.assign({chain:0,storm:0,wrath:0,nova:0,timefracture:0},s.skills||{});state.talents=Object.assign({memory:0,revenge:0,truth:0,divinity:0,cataclysm:0},s.talents||{});state.constellations=Object.assign({twilightBlade:0,brokenThrone:0,primalHeart:0},s.constellations||{});state.selectedConstellation=typeof s.selectedConstellation==='string'?s.selectedConstellation:'twilightBlade';state.aureonEyeMeter=Math.max(0,Math.min(100,Number(s.aureonEyeMeter)||0));state.aureonEyeWave=(s.aureonEyeWave&&typeof s.aureonEyeWave==='object')?s.aureonEyeWave:null;state.brokenEyeBuffUntil=Number(s.brokenEyeBuffUntil)||0;state.seenBossIntroKeys=Array.isArray(s.seenBossIntroKeys)?s.seenBossIntroKeys:[];state.mirrorShards=Math.max(0,Number(s.mirrorShards)||0);state.mirrorRefinements=Object.assign({power:0,speed:0,crit:0,essence:0,greed:0,penetration:0},s.mirrorRefinements||{});state.doppelgangerActive=Boolean(s.doppelgangerActive);state.expedition=(s.expedition&&typeof s.expedition==='object')?{companion:String(s.expedition.companion||''),endsAt:Number(s.expedition.endsAt)||0}:{companion:'',endsAt:0};state.lowPowerMode=Boolean(s.lowPowerMode);state.completedFlashbacks=Array.isArray(s.completedFlashbacks)?s.completedFlashbacks:[];state.overchargeStacks=Math.min(5,Math.max(0,Number(s.overchargeStacks)||0));if(state.overcharge>=100&&state.overchargeStacks===0){state.overchargeStacks=1;state.overcharge=0;}let elapsed=Math.min(8*3600,Math.max(0,(Date.now()-(s.lastTime||Date.now()))/1000));if(elapsed>=5){enableAutoSmartFarmForOffline();}const bestOffFarm=findOptimalFarmStage()||calcStageRewardsAndEfficiency(state.stage||1);const offMemMult=(1+(state.talents.memory||0)*.15)*getRelicBonusMult('crown');let offGold=Math.floor(elapsed*(bestOffFarm.goldPerSec||0)*0.65*offMemMult);let offEss=Math.floor(elapsed*(bestOffFarm.essPerSec||0)*0.65*offMemMult);if(elapsed>=10&&(offGold>0||offEss>0)){state.gold+=offGold;state.essence+=offEss;const estKills=Math.max(1,Math.floor((elapsed*0.65)/Math.max(0.25,bestOffFarm.clearTimeSec||1)));state.kills=(state.kills||0)+estKills;const nowStr=new Date().toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'})+' Uhr';state.offlineHistory.unshift({dateStr:nowStr+' (Smart-Farm St. '+bestOffFarm.stage+')',durationSec:Math.floor(elapsed),gold:offGold,essence:offEss});state.offlineHistory=state.offlineHistory.slice(0,3);setTimeout(()=>toast('🌾 Offline Smart-Farm (St. '+bestOffFarm.stage+'):\n+'+fmt(offGold)+' Gold & +'+fmt(offEss)+' Essenz'),500)}renderOfflineHistory();resetEnemy()}catch(e){}}
+function load(){try{let raw=localStorage.getItem('thunderborn-save-v1');if(!raw){renderOfflineHistory();return;}let s=JSON.parse(raw);Object.assign(state,s);state.characterTitle=typeof s.characterTitle==='string'?s.characterTitle:'Die Sturmgeborene';state.selectedTitle=typeof s.selectedTitle==='string'?s.selectedTitle:'stormborn';state.customTitle=sanitizePlainTextTitle(s.customTitle||'');state.selectedTitleEffect=typeof s.selectedTitleEffect==='string'?s.selectedTitleEffect:state.selectedTitle;state.unlockedTitles=Array.isArray(s.unlockedTitles)?s.unlockedTitles:['stormborn'];state.offlineHistory=Array.isArray(s.offlineHistory)?s.offlineHistory.slice(0,3):[];state.memoryReactions=(s.memoryReactions&&typeof s.memoryReactions==='object')?s.memoryReactions:{};state.seenEncounterIds=Array.isArray(s.seenEncounterIds)?s.seenEncounterIds:[];state.rivalAwakened=Boolean(s.rivalAwakened);state.rivalDialogues=(s.rivalDialogues&&typeof s.rivalDialogues==='object')?s.rivalDialogues:{};state.activeRivalChapter=Number(s.activeRivalChapter)||0;state.friend2Awakened=Boolean(s.friend2Awakened);state.friend2Dialogues=(s.friend2Dialogues&&typeof s.friend2Dialogues==='object')?s.friend2Dialogues:{};state.activeFriend2Chapter=Number(s.activeFriend2Chapter)||0;state.aureonAwakened=Boolean(s.aureonAwakened);state.aureonDialogues=(s.aureonDialogues&&typeof s.aureonDialogues==='object')?s.aureonDialogues:{};state.activeAureonChapter=Number(s.activeAureonChapter)||0;state.showUpgradeValues=(s.showUpgradeValues!==undefined)?Boolean(s.showUpgradeValues):true;state.dailyLogin=(s.dailyLogin&&typeof s.dailyLogin==='object')?{lastClaimDate:String(s.dailyLogin.lastClaimDate||''),streak:Number(s.dailyLogin.streak)||0,totalDays:Number(s.dailyLogin.totalDays)||0,maxStreak:Number(s.dailyLogin.maxStreak)||Number(s.dailyLogin.streak)||0,lastTrialDate:String(s.dailyLogin.lastTrialDate||''),bestTrialDmg:Number(s.dailyLogin.bestTrialDmg)||0}:{lastClaimDate:'',streak:0,totalDays:0,maxStreak:0,lastTrialDate:'',bestTrialDmg:0};state.activeCompanion=typeof s.activeCompanion==='string'?s.activeCompanion:'';state.loreBuff=(s.loreBuff&&typeof s.loreBuff==='object')?s.loreBuff:{type:'',label:'',until:0};state.mercyCount=Number(s.mercyCount)||0;state.wrathCount=Number(s.wrathCount)||0;state.reincarnations=Number(s.reincarnations)||0;state.musicEnabled=(s.musicEnabled!==undefined)?Boolean(s.musicEnabled):true;state.customOstName=typeof s.customOstName==='string'?s.customOstName:'';state.ostPlayMode=(typeof s.ostPlayMode==='string'&&['dynamic','ost1','phonk','ost2','ost3','phonkcalm'].includes(s.ostPlayMode))?s.ostPlayMode:'dynamic';state.fearMilestoneChoices=(s.fearMilestoneChoices&&typeof s.fearMilestoneChoices==='object')?s.fearMilestoneChoices:{};state.invasionActive=Boolean(s.invasionActive);state.seasonalMode=typeof s.seasonalMode==='string'?s.seasonalMode:'auto';state.relicStars=(s.relicStars&&typeof s.relicStars==='object')?s.relicStars:{};state.encounterChoices=(s.encounterChoices&&typeof s.encounterChoices==='object')?s.encounterChoices:{};state.seenFollowupIds=Array.isArray(s.seenFollowupIds)?s.seenFollowupIds:[];state.holdStage=Boolean(s.holdStage);state.maxStageReached=Math.max(Number(s.stage)||1,Number(s.maxStageReached)||1);state.activeInquisitorBoss=(s.activeInquisitorBoss&&typeof s.activeInquisitorBoss==='object')?s.activeInquisitorBoss:null;state.seenInquisitorIds=Array.isArray(s.seenInquisitorIds)?s.seenInquisitorIds:[];syncUpgradeValuesUI();syncLowPowerModeUI();state.palette=['raiden','honkai','storm','crimson','midnight','sovereign'].includes(s.palette)?s.palette:'raiden';applyPalette();const validPortraits=['vaelith_png','vaelith_alt1','vaelith_alt2','vaelith_alt3','vaelith_alt4','custom'];state.portraitMode=(validPortraits.includes(s.portraitMode)&&!(s.portraitMode==='custom'&&!state.characterImage))?s.portraitMode:'vaelith_png';refreshCharacterImage();state.upgrades=Object.assign({power:0,speed:0,crit:0,essence:0,greed:0,penetration:0},s.upgrades||{});state.skills=Object.assign({chain:0,storm:0,wrath:0,nova:0,timefracture:0},s.skills||{});state.talents=Object.assign({memory:0,revenge:0,truth:0,divinity:0,cataclysm:0},s.talents||{});state.constellations=Object.assign({twilightBlade:0,brokenThrone:0,primalHeart:0},s.constellations||{});state.selectedConstellation=typeof s.selectedConstellation==='string'?s.selectedConstellation:'twilightBlade';state.aureonEyeMeter=Math.max(0,Math.min(100,Number(s.aureonEyeMeter)||0));state.aureonEyeWave=(s.aureonEyeWave&&typeof s.aureonEyeWave==='object')?s.aureonEyeWave:null;state.brokenEyeBuffUntil=Number(s.brokenEyeBuffUntil)||0;state.seenBossIntroKeys=Array.isArray(s.seenBossIntroKeys)?s.seenBossIntroKeys:[];state.mirrorShards=Math.max(0,Number(s.mirrorShards)||0);state.mirrorRefinements=Object.assign({power:0,speed:0,crit:0,essence:0,greed:0,penetration:0},s.mirrorRefinements||{});state.doppelgangerActive=Boolean(s.doppelgangerActive);state.expedition=(s.expedition&&typeof s.expedition==='object')?{companion:String(s.expedition.companion||''),endsAt:Number(s.expedition.endsAt)||0}:{companion:'',endsAt:0};state.lowPowerMode=Boolean(s.lowPowerMode);state.completedFlashbacks=Array.isArray(s.completedFlashbacks)?s.completedFlashbacks:[];state.lastBackupAt=Math.max(0,Number(s.lastBackupAt)||0);state.blackFocusUses=Math.max(0,Number(s.blackFocusUses)||0);const defStats={totalPlaySec:0,maxHit:0,totalKills:state.kills||0,totalBossKills:state.bossKills||0,totalEchoesEarned:state.echoes||0,spaehrenCount:0};state.stats=(s.stats&&typeof s.stats==='object')?{totalPlaySec:Math.max(0,Number(s.stats.totalPlaySec)||0),maxHit:Math.max(0,Number(s.stats.maxHit)||0),totalKills:Math.max(state.kills||0,Number(s.stats.totalKills)||0),totalBossKills:Math.max(state.bossKills||0,Number(s.stats.totalBossKills)||0),totalEchoesEarned:Math.max(state.echoes||0,Number(s.stats.totalEchoesEarned)||0),spaehrenCount:Math.max(0,Number(s.stats.spaehrenCount)||0)}:defStats;state.overchargeStacks=Math.min(5,Math.max(0,Number(s.overchargeStacks)||0));if(state.overcharge>=100&&state.overchargeStacks===0){state.overchargeStacks=1;state.overcharge=0;}let elapsed=Math.min(8*3600,Math.max(0,(Date.now()-(s.lastTime||Date.now()))/1000));if(elapsed>=5){enableAutoSmartFarmForOffline();}const bestOffFarm=findOptimalFarmStage()||calcStageRewardsAndEfficiency(state.stage||1);const offMemMult=(1+(state.talents.memory||0)*.15)*getRelicBonusMult('crown');let offGold=Math.floor(elapsed*(bestOffFarm.goldPerSec||0)*0.65*offMemMult);let offEss=Math.floor(elapsed*(bestOffFarm.essPerSec||0)*0.65*offMemMult);if(elapsed>=10&&(offGold>0||offEss>0)){state.gold+=offGold;state.essence+=offEss;const estKills=Math.max(1,Math.floor((elapsed*0.65)/Math.max(0.25,bestOffFarm.clearTimeSec||1)));state.kills=(state.kills||0)+estKills;state.stats.totalKills=(state.stats.totalKills||0)+estKills;const nowStr=new Date().toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'})+' Uhr';state.offlineHistory.unshift({dateStr:nowStr+' (Smart-Farm St. '+bestOffFarm.stage+')',durationSec:Math.floor(elapsed),gold:offGold,essence:offEss});state.offlineHistory=state.offlineHistory.slice(0,3);if(elapsed>=900){setTimeout(()=>openOfflineWelcomeModal(Math.floor(elapsed),bestOffFarm.stage,offGold,offEss,estKills),450);}else{setTimeout(()=>toast('🌾 Offline Smart-Farm (St. '+bestOffFarm.stage+'):\n+'+fmt(offGold)+' Gold & +'+fmt(offEss)+' Essenz'),500);}}renderOfflineHistory();resetEnemy()}catch(e){}}
 document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id==='page-'+b.dataset.page));if(typeof clearArenaAnimations==='function')clearArenaAnimations();if(typeof updateOstForActiveTab==='function')updateOstForActiveTab(b.dataset.page);}));
 // Direct onclick handlers bound on persistent DOM buttons in buildInteractiveLists()
 $('prestigeBtn').onclick=doPrestige;
@@ -6851,8 +7001,12 @@ function startBlackFocusHold(e){
  if(blackFocusHoldTimer)clearTimeout(blackFocusHoldTimer);
  blackFocusHoldTimer=setTimeout(()=>{
   isBlackFocusHolding=true;
+  state.blackFocusUses=(Number(state.blackFocusUses)||0)+1;
   document.body.classList.add('black-focus-holding');
-  if($('blackFocusHint'))$('blackFocusHint').textContent='⚡ SCHWARZER FOKUS AKTIV: Bündelt schwarze Blitze (+350 % Aufladung)!';
+  if($('blackFocusHint')){
+   $('blackFocusHint').style.display='block';
+   $('blackFocusHint').textContent='⚡ SCHWARZER FOKUS AKTIV: Bündelt schwarze Blitze (+350 % Aufladung)!';
+  }
  },190);
 }
 function stopBlackFocusHold(){
@@ -6860,7 +7014,14 @@ function stopBlackFocusHold(){
  if(isBlackFocusHolding){
   isBlackFocusHolding=false;
   document.body.classList.remove('black-focus-holding');
-  if($('blackFocusHint'))$('blackFocusHint').textContent='⚡ Gedrückthalten: Schwarzer Fokus (Schnell-Aufladung) · Antippen bei ⚡: Entladen';
+  const uses=Number(state.blackFocusUses)||0;
+  if($('blackFocusHint')){
+   $('blackFocusHint').textContent='⚡ Gedrückthalten: Schwarzer Fokus (Schnell-Aufladung) · Antippen bei ⚡: Entladen';
+   $('blackFocusHint').style.display=(uses>=3)?'none':'block';
+  }
+  if($('blackFocusInfoIcon')){
+   $('blackFocusInfoIcon').style.display=(uses>=3)?'inline-flex':'none';
+  }
  }
 }
 if($('overchargeWrap')){
@@ -6873,6 +7034,7 @@ function activateDivineDischarge(){
  const stacksReady=Math.min(5,Math.max(0,(state.overchargeStacks||0)+((state.overcharge>=100&&(state.overchargeStacks||0)===0)?1:0)));
  if(stacksReady<1||isOvercharged())return;
  state.activeOverchargeStacks=stacksReady;
+ if(stacksReady>=5&&state.stats){state.stats.spaehrenCount=(state.stats.spaehrenCount||0)+1;}
  state.overchargeStacks=0;
  state.overcharge=0;
  const durMs=(stacksReady>=5)?14000:(10000+(stacksReady-1)*750);
@@ -7097,7 +7259,6 @@ function refreshCharacterImage(){
   if(img.getAttribute('src')!==preset.src)img.src=preset.src;
   if($('portraitModeStatusText'))$('portraitModeStatusText').textContent='Aktiv: '+preset.label;
  }
- if($('useVaelithPngBtn'))$('useVaelithPngBtn').style.borderColor=(mode==='vaelith_png')?'var(--cyan)':'';
 }
 if($('portraitPresetSelect'))$('portraitPresetSelect').addEventListener('change',()=>{
  const val=$('portraitPresetSelect').value||'vaelith_png';
@@ -7113,7 +7274,7 @@ if($('portraitPresetSelect'))$('portraitPresetSelect').addEventListener('change'
  toast('Porträt gewechselt: '+(pObj?pObj.label:'Eigenes Bild'));
 });
 function downloadText(filename,text,mime){const blob=new Blob([text],{type:mime});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
-$('exportSaveBtn').onclick=()=>{save();downloadText('thunderborn-save-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify({...state,exportedAt:new Date().toISOString(),game:'THUNDERBORN',version:'0.7.0'},null,2),'application/json');toast('Spielstand exportiert')};
+$('exportSaveBtn').onclick=()=>{state.lastBackupAt=Date.now();save();render();downloadText('thunderborn-save-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify({...state,exportedAt:new Date().toISOString(),game:'THUNDERBORN',version:'0.7.0'},null,2),'application/json');toast('✓ Spielstand exportiert & Backup-Status aktualisiert')};
 $('importSaveBtn').onclick=()=>$('saveImportFile').click();
 $('saveImportFile').addEventListener('change',async e=>{const file=e.target.files&&e.target.files[0];if(!file)return;try{const imported=JSON.parse(await file.text());if(!imported||typeof imported!=='object'||!('stage'in imported)||!('gold'in imported)||!('upgrades'in imported))throw new Error('Ungültiges Format');if(!confirm('Importieren und den aktuellen Spielstand ersetzen?'))return;const safe={...imported};delete safe.exportedAt;delete safe.game;Object.assign(state,safe);state.stage=Math.max(1,Math.floor(Number(state.stage)||1));state.gold=Math.max(0,Number(state.gold)||0);state.essence=Math.max(0,Number(state.essence)||0);state.echoes=Math.max(0,Number(state.echoes)||0);state.palette=['raiden','honkai','storm','crimson','midnight','sovereign'].includes(state.palette)?state.palette:'raiden';state.characterTitle=String(state.characterTitle||'Die Sturmgeborene').slice(0,40);state.selectedTitle=typeof state.selectedTitle==='string'?state.selectedTitle:'stormborn';state.selectedTitleEffect=typeof state.selectedTitleEffect==='string'?state.selectedTitleEffect:state.selectedTitle;state.unlockedTitles=Array.isArray(state.unlockedTitles)?state.unlockedTitles:['stormborn'];state.lastTime=Date.now();applyPalette();refreshCharacterImage();resetEnemy();render();renderTitleOptions();$('paletteSelect').value=state.palette;save();toast('Spielstand importiert')}catch(err){toast('Import fehlgeschlagen: ungültige oder beschädigte Datei')}finally{e.target.value=''}});
 if($('customTitleInput'))$('customTitleInput').addEventListener('input',()=>{
@@ -7142,38 +7303,36 @@ document.addEventListener('pointerdown',e=>{
 },{passive:true});
 
 // Live-Vorschau beim Ändern von Farbschema oder Visuellem Titel-Effekt in den Einstellungen
-if($('titleEffectSelect'))$('titleEffectSelect').addEventListener('change',()=>{
- state.selectedTitleEffect=$('titleEffectSelect').value||'stormborn';
- applyPalette();
- renderTitleEffectDetailBox();
-});
-if($('paletteSelect'))$('paletteSelect').addEventListener('change',()=>{
- state.palette=$('paletteSelect').value||'raiden';
- applyPalette();
- renderTitleEffectDetailBox();
-});
-
-$('saveAppearanceBtn').onclick=()=>{
- state.palette=$('paletteSelect').value;
- state.selectedTitle=$('titleSelect').value||'stormborn';
+function applyLiveAppearanceChange(msg){
+ if($('paletteSelect'))state.palette=$('paletteSelect').value||'raiden';
+ if($('titleSelect'))state.selectedTitle=$('titleSelect').value||'stormborn';
  if(allTitlesUnlocked()&&$('customTitleInput')){
   const typed=sanitizePlainTextTitle($('customTitleInput').value);
   state.customTitle=typed;
   if(state.selectedTitle==='custom'&&!typed){
    state.selectedTitle='stormborn';
-   $('titleSelect').value='stormborn';
+   if($('titleSelect'))$('titleSelect').value='stormborn';
   }
  }
  state.selectedTitleEffect=$('titleEffectSelect')?($('titleEffectSelect').value||'stormborn'):'stormborn';
  state.characterTitle=resolveCharacterTitle();
- applyPalette();render();save();toast('Titel, Effekt & Farbschema gespeichert');
-};
-if($('useVaelithPngBtn'))$('useVaelithPngBtn').onclick=()=>{
- state.portraitMode='vaelith_png';
- refreshCharacterImage();
+ applyPalette();
+ renderTitleEffectDetailBox();
+ render();
  save();
- toast('⚡ Standardbild aktiviert');
-};
+ if(msg)toast(msg);
+}
+if($('paletteSelect'))$('paletteSelect').addEventListener('change',()=>applyLiveAppearanceChange('🎨 Farbschema gewechselt'));
+if($('titleSelect'))$('titleSelect').addEventListener('change',()=>applyLiveAppearanceChange('👑 Titel gewechselt: '+resolveCharacterTitle()));
+if($('titleEffectSelect'))$('titleEffectSelect').addEventListener('change',()=>applyLiveAppearanceChange('⚡ Visueller Titel-Effekt aktiv'));
+if($('customTitleInput'))$('customTitleInput').addEventListener('change',()=>applyLiveAppearanceChange('✦ Eigener Titel gespeichert'));
+if($('seasonalEventSelect'))$('seasonalEventSelect').addEventListener('change',()=>{
+ state.seasonalMode=$('seasonalEventSelect').value||'auto';
+ render();
+ save();
+ const activeEv=getActiveSeasonalEvent();
+ toast(activeEv?`🎉 Saison-Event aktiv: ${activeEv.shortName}`:'📅 Saison-Events: Automatisch / Aus');
+});
 
 $('removeImageBtn').onclick=()=>{
  if(!state.characterImage&&state.portraitMode==='vaelith_png'){
@@ -7190,7 +7349,7 @@ $('removeImageBtn').onclick=()=>{
 $('showResetBtn').onclick=()=>{$('resetPanel').classList.add('open');$('resetConfirmInput').value='';$('confirmResetBtn').disabled=true;$('resetConfirmInput').focus()};
 $('resetConfirmInput').addEventListener('input',()=>{$('confirmResetBtn').disabled=$('resetConfirmInput').value.trim()!=='ALLES LÖSCHEN'});
 $('cancelResetBtn').onclick=()=>{$('resetPanel').classList.remove('open');$('resetConfirmInput').value=''};
-$('confirmResetBtn').onclick=()=>{if($('resetConfirmInput').value.trim()!=='ALLES LÖSCHEN')return;localStorage.removeItem('thunderborn-save-v1');for(const k of Object.keys(state))delete state[k];Object.assign(state,{gold:0,essence:0,echoes:0,stage:1,enemyHp:0,enemyMax:0,attack:8,attackSpeed:.8,upgrades:{power:0,speed:0,crit:0,essence:0,greed:0,penetration:0},skills:{chain:0,storm:0,wrath:0,nova:0,timefracture:0},talents:{memory:0,revenge:0,truth:0,divinity:0,cataclysm:0},relics:[],memories:[],kills:0,bossKills:0,overcharge:0,overchargeStacks:0,activeOverchargeStacks:0,overchargeActiveUntil:0,lastTime:Date.now(),lastPrestige:0,muted:true,characterTitle:'Die Sturmgeborene',selectedTitle:'stormborn',customTitle:'',selectedTitleEffect:'stormborn',unlockedTitles:['stormborn'],palette:'raiden',characterImage:'',offlineHistory:[],memoryReactions:{},activeEncounter:null,lastEncounterOutcome:null,seenEncounterIds:[],rivalAwakened:false,rivalDialogues:{},activeRivalChapter:0,friend2Awakened:false,friend2Dialogues:{},activeFriend2Chapter:0,aureonAwakened:false,aureonDialogues:{},activeAureonChapter:0,showUpgradeValues:true,dailyLogin:{lastClaimDate:'',streak:0,totalDays:0,maxStreak:0,lastTrialDate:'',bestTrialDmg:0},activeCompanion:'',loreBuff:{type:'',label:'',until:0},mercyCount:0,wrathCount:0,reincarnations:0,musicEnabled:true,customOstName:'',fearMilestoneChoices:{},invasionActive:false,seasonalMode:'auto',relicStars:{},encounterChoices:{},seenFollowupIds:[],holdStage:false,maxStageReached:1,activeInquisitorBoss:null,seenInquisitorIds:[],portraitMode:'vaelith_png',ostPlayMode:'dynamic',constellations:{twilightBlade:0,brokenThrone:0,primalHeart:0},selectedConstellation:'twilightBlade',aureonEyeMeter:0,aureonEyeWave:null,brokenEyeBuffUntil:0,seenBossIntroKeys:[],mirrorShards:0,mirrorRefinements:{power:0,speed:0,crit:0,essence:0,greed:0,penetration:0},doppelgangerActive:false,expedition:{companion:'',endsAt:0},lowPowerMode:false,completedFlashbacks:[]});deleteCustomOstFromDb();initOstPlayer();syncDailyLoginUI();renderOfflineHistory();syncSoundUI();applyPalette();refreshCharacterImage();renderTitleOptions();$('resetPanel').classList.remove('open');resetEnemy();render();save();toast('Spielstand vollständig zurückgesetzt')};
+$('confirmResetBtn').onclick=()=>{if($('resetConfirmInput').value.trim()!=='ALLES LÖSCHEN')return;localStorage.removeItem('thunderborn-save-v1');for(const k of Object.keys(state))delete state[k];Object.assign(state,{gold:0,essence:0,echoes:0,stage:1,enemyHp:0,enemyMax:0,attack:8,attackSpeed:.8,upgrades:{power:0,speed:0,crit:0,essence:0,greed:0,penetration:0},skills:{chain:0,storm:0,wrath:0,nova:0,timefracture:0},talents:{memory:0,revenge:0,truth:0,divinity:0,cataclysm:0},relics:[],memories:[],kills:0,bossKills:0,overcharge:0,overchargeStacks:0,activeOverchargeStacks:0,overchargeActiveUntil:0,lastTime:Date.now(),lastPrestige:0,muted:true,characterTitle:'Die Sturmgeborene',selectedTitle:'stormborn',customTitle:'',selectedTitleEffect:'stormborn',unlockedTitles:['stormborn'],palette:'raiden',characterImage:'',offlineHistory:[],memoryReactions:{},activeEncounter:null,lastEncounterOutcome:null,seenEncounterIds:[],rivalAwakened:false,rivalDialogues:{},activeRivalChapter:0,friend2Awakened:false,friend2Dialogues:{},activeFriend2Chapter:0,aureonAwakened:false,aureonDialogues:{},activeAureonChapter:0,showUpgradeValues:true,dailyLogin:{lastClaimDate:'',streak:0,totalDays:0,maxStreak:0,lastTrialDate:'',bestTrialDmg:0},activeCompanion:'',loreBuff:{type:'',label:'',until:0},mercyCount:0,wrathCount:0,reincarnations:0,musicEnabled:true,customOstName:'',fearMilestoneChoices:{},invasionActive:false,seasonalMode:'auto',relicStars:{},encounterChoices:{},seenFollowupIds:[],holdStage:false,maxStageReached:1,activeInquisitorBoss:null,seenInquisitorIds:[],portraitMode:'vaelith_png',ostPlayMode:'dynamic',constellations:{twilightBlade:0,brokenThrone:0,primalHeart:0},selectedConstellation:'twilightBlade',aureonEyeMeter:0,aureonEyeWave:null,brokenEyeBuffUntil:0,seenBossIntroKeys:[],mirrorShards:0,mirrorRefinements:{power:0,speed:0,crit:0,essence:0,greed:0,penetration:0},doppelgangerActive:false,expedition:{companion:'',endsAt:0},lowPowerMode:false,completedFlashbacks:[],lastBackupAt:0,blackFocusUses:0,stats:{totalPlaySec:0,maxHit:0,totalKills:0,totalBossKills:0,totalEchoesEarned:0,spaehrenCount:0}});deleteCustomOstFromDb();initOstPlayer();syncDailyLoginUI();renderOfflineHistory();syncSoundUI();applyPalette();refreshCharacterImage();renderTitleOptions();$('resetPanel').classList.remove('open');resetEnemy();render();save();toast('Spielstand vollständig zurückgesetzt')};
 // Procedural Anime-Style Lightning Generator: builds thin, jagged, asymmetric main arcs, forks, and micro-tendrils on every discharge
 function buildBoltGeometry(svg){
  const segs=7+Math.floor(Math.random()*5);
@@ -9317,7 +9476,7 @@ function initCombatArenaLoop(){
  if($('cycleColossusBtn')){
   $('cycleColossusBtn').onclick=()=>{
    previewColossusIdx=(previewColossusIdx+1)%(colossusBossSkins.length+1);
-   $('cycleColossusBtn').textContent=previewColossusIdx===0?'🗿 Koloss-Skin: Auto':`🗿 Koloss ${previewColossusIdx}/${colossusBossSkins.length}`;
+   $('cycleColossusBtn').textContent=previewColossusIdx===0?'🗿 Koloss-Skin in Kampfbühne: Auto':`🗿 Vorschau: Koloss ${previewColossusIdx}/${colossusBossSkins.length}`;
    if(previewColossusIdx>0){
     arenaState.sigilWindowUntil=Date.now()+4200;
    }
@@ -10122,6 +10281,47 @@ function claimZeitrissExpedition(){
  render();
  save();
 }
+function claimAndRestartZeitrissExpedition(){
+ if(!state.expedition || !state.expedition.endsAt || Date.now()<state.expedition.endsAt)return;
+ claimZeitrissExpedition();
+ const cand=getInactiveCompanionForExpedition();
+ if(cand){
+  state.expedition={companion:cand.id,endsAt:Date.now()+EXPEDITION_DURATION_MS};
+  lastLoreSig='';
+  toast(`🚀 ${cand.name.split(',')[0]} direkt wieder auf 30m Expedition geschickt!`);
+  render();
+  save();
+ }
+}
+if($('claimAndRestartExpBattleBtn'))$('claimAndRestartExpBattleBtn').onclick=claimAndRestartZeitrissExpedition;
+
+function openOfflineWelcomeModal(elapsedSec,farmStage,goldWon,essWon,killsWon){
+ const modal=$('offlineWelcomeModal'),body=$('offlineWelcomeModalBody');
+ if(!modal||!body)return;
+ const regName=getRegionNameForStage(farmStage);
+ body.innerHTML=`
+  <div class="daily-status-banner" style="border-color:var(--violet);background:linear-gradient(145deg,rgba(42,22,72,0.75),rgba(10,6,20,0.9))">
+   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+    <strong style="color:#ffd166">🌾 Automatischer Smart-Farm-Bericht</strong>
+    <span class="small" style="color:var(--cyan)">${formatDuration(elapsedSec)} offline</span>
+   </div>
+   <p class="small" style="margin:0;color:var(--text);line-height:1.5">Während deiner Abwesenheit hat Vaelith im Gebiet <strong>${regName} (Stufe ${farmStage})</strong> ununterbrochen weitergekämpft:</p>
+  </div>
+  <div class="hall-of-fame-grid" style="margin-top:10px">
+   <div class="hof-stat-box"><div class="hof-stat-label">◈ Erbeutetes Gold</div><div class="hof-stat-val" style="color:#ffd166">+${fmt(goldWon)}</div></div>
+   <div class="hof-stat-box"><div class="hof-stat-label">ϟ Blitzessenz</div><div class="hof-stat-val" style="color:var(--pink)">+${fmt(essWon)}</div></div>
+   <div class="hof-stat-box"><div class="hof-stat-label">⚔ Besiegte Schatten</div><div class="hof-stat-val">+${fmt(killsWon)}</div></div>
+   <div class="hof-stat-box"><div class="hof-stat-label">🏔 Farm-Stufe</div><div class="hof-stat-val">Stufe ${farmStage}</div></div>
+  </div>
+ `;
+ modal.classList.add('open');
+}
+function closeOfflineWelcomeModal(){
+ if($('offlineWelcomeModal'))$('offlineWelcomeModal').classList.remove('open');
+}
+if($('closeOfflineModalBtn'))$('closeOfflineModalBtn').onclick=closeOfflineWelcomeModal;
+if($('claimOfflineModalBtn'))$('claimOfflineModalBtn').onclick=closeOfflineWelcomeModal;
+if($('offlineWelcomeModal'))$('offlineWelcomeModal').addEventListener('click',e=>{if(e.target===$('offlineWelcomeModal'))closeOfflineWelcomeModal();});
 
 // Feature 17: 3 Spielbare Erinnerungs-Rückblenden aus der Ersten Ära (Vor 1.000 Jahren)
 const eraFlashbacksData=[
@@ -10315,7 +10515,6 @@ if($('abortTrialBtn'))$('abortTrialBtn').onclick=()=>finishPastTrial(true);
 if($('abortFlashbackBtn'))$('abortFlashbackBtn').onclick=()=>finishEraFlashback(false,true);
 if($('startPastTrialBtn'))$('startPastTrialBtn').onclick=startPastTrial;
 if($('startPastTrialFromSettingsBtn'))$('startPastTrialFromSettingsBtn').onclick=startPastTrial;
-if($('openTributVaultFromSettingsBtn'))$('openTributVaultFromSettingsBtn').onclick=openDailyLoginModal;
 
 // 4. TÄGLICHER LOGIN & TRIBUT-GEWÖLBE (INKL. EINSTELLUNGEN-ÜBERSICHT & STREAK-BELOHNUNGEN)
 function getLocalYYYYMMDD(d=new Date()){
@@ -10885,6 +11084,8 @@ setInterval(()=>{
  let now=Date.now(),rawDt=Math.max(0,(now-last)/1000);last=now;
  // Im Hintergrund-Tab drosseln Browser setInterval; wir erlauben volles dt bis 3600s, damit 100% des Fortschritts weiterläuft, aber unterdrücken gestaute Animationen!
  const dt=Math.min(3600,rawDt);
+ if(!state.stats||typeof state.stats!=='object')state.stats={totalPlaySec:0,maxHit:0,totalKills:0,totalBossKills:0,totalEchoesEarned:0,spaehrenCount:0};
+ state.stats.totalPlaySec=(state.stats.totalPlaySec||0)+dt;
  const seasSpd=getActiveSeasonalEvent();const effSpeed=state.attackSpeed*(1+getUpgradeRefinement('speed')*0.08)*(1+(state.skills.timefracture||0)*.08)*getRelicBonusMult('wings')*(isOvercharged()?2.2:1)*((seasSpd&&!state.invasionActive)?seasSpd.speedMult||1:1);
  attackAccumulator+=dt*effSpeed;
  const maxBatch=600;
