@@ -4968,9 +4968,6 @@ function attackTick(allowAnim=true){
  if(state.skills.storm>0)damage*=1+.08*state.skills.storm;
  if((state.skills.nova||0)>0)damage*=1+.35*state.skills.nova;
  state.enemyHp-=damage;
- if(!state.stats||typeof state.stats!=='object')state.stats={totalPlaySec:0,maxHit:0,totalKills:0,totalBossKills:0,totalEchoesEarned:0,spaehrenCount:0};
- const totalStrike=damage+(typeof isLyseraCombo!=='undefined'&&isLyseraCombo?lyseraDmg:0);
- if(totalStrike>(state.stats.maxHit||0))state.stats.maxHit=totalStrike;
  const isChain=state.skills.chain>0&&Math.random()<Math.min(.75,.12*state.skills.chain);
  if(isChain)state.enemyHp-=damage*(.6+state.skills.chain*.15);
  // Sternbild „Die Dämmerungsklinge“: Gemeinsame Kombo-Angriffe mit Lysera
@@ -4986,6 +4983,9 @@ function attackTick(allowAnim=true){
    state.enemyHp-=lyseraDmg;
   }
  }
+ if(!state.stats||typeof state.stats!=='object')state.stats={totalPlaySec:0,maxHit:0,totalKills:0,totalBossKills:0,totalEchoesEarned:0,spaehrenCount:0};
+ const totalStrike=damage+(isLyseraCombo?lyseraDmg:0);
+ if(totalStrike>(state.stats.maxHit||0))state.stats.maxHit=totalStrike;
  if(allowAnim&&typeof triggerArenaAttackAnim==='function')triggerArenaAttackAnim(damage,isCrit,isWrath,isChain,isLyseraCombo,lyseraDmg);
  if(!isOvercharged()){
   const curStacks=Math.min(5,Math.max(0,state.overchargeStacks||0));
@@ -5991,7 +5991,7 @@ function render(){
   }
  }
  const bfUses=Number(state.blackFocusUses)||0;
- if($('blackFocusHint')&&!isBlackFocusHolding){
+ if($('blackFocusHint')&&!document.body.classList.contains('black-focus-holding')){
   $('blackFocusHint').style.display=(bfUses>=3)?'none':'block';
  }
  if($('blackFocusInfoIcon')){
