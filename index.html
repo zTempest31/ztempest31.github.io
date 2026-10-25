@@ -2045,7 +2045,7 @@ body[data-sky-overload="2"] .sky-tier2-only{
  opacity:1;
 }
 
-/* 2. Neu gestalteter 1-Billion (1,00B / 1,00T) Dimensions-Kristallspalt & Spiegelsplitter-Effekt am Porträt-Rand */
+/* 2. Neu gestalteter 1-Billion (1,00B) & 1-Trillion (1,00T) Dimensions-Splitter- & Bruch-Effekt (echtes Zerbrechen statt milchigem Glas) */
 .dimension-shatter-lens{
  position:absolute;
  inset:0;
@@ -2053,7 +2053,7 @@ body[data-sky-overload="2"] .sky-tier2-only{
  clip-path:circle(50% at 50% 50%);
  -webkit-clip-path:circle(50% at 50% 50%);
  pointer-events:none;
- z-index:3;
+ z-index:4;
  opacity:0;
  transition:opacity .65s ease;
  overflow:hidden;
@@ -2071,58 +2071,89 @@ body[data-sky-overload="2"] .sky-tier2-only{
  border-radius:50%;
  pointer-events:none;
 }
-.shard-void-gap{
- fill:#04020a;
+/* Aufgebrochene schwarze Leeren-Kluften (ausgebrochene Randstücke) */
+.shatter-void-breach{
+ fill:#030108;
  stroke:var(--fx-main);
- stroke-width:.65;
- opacity:.88;
+ stroke-width:1.15;
+ stroke-linejoin:miter;
 }
-.shard-prism-bright{
- fill:url(#dimShardBright);
- stroke:rgba(255,255,255,0.62);
- stroke-width:.55;
+.shatter-void-inner{
+ fill:url(#voidBreachGrad);
+ opacity:.92;
 }
-.shard-prism-mid{
- fill:url(#dimShardMid);
+/* Scharfkantige, abgesprengte Bruchsplitter (ohne milchigen Glas-Schleier) */
+.shatter-chip-solid{
+ fill:#0a0517;
+ stroke:var(--fx-core);
+ stroke-width:.95;
+ stroke-linejoin:miter;
+}
+.shatter-chip-edge{
+ fill:color-mix(in srgb, var(--fx-sub) 38%, #06020e);
  stroke:var(--fx-main);
- stroke-width:.5;
- opacity:.85;
+ stroke-width:.8;
+ stroke-linejoin:miter;
 }
-.shard-prism-dark{
- fill:url(#dimShardDark);
- stroke:rgba(255,255,255,0.35);
- stroke-width:.45;
+@keyframes shatterCrackFlash{
+ 0%,100%{opacity:.82;stroke-width:1.05}
+ 50%{opacity:1;stroke-width:1.35}
 }
-@keyframes shardCrackPulse{
- 0%,100%{opacity:.76}
- 50%{opacity:1}
+@keyframes shatterSplinterFloatA{
+ 0%,100%{transform:translate(0,0) rotate(0deg)}
+ 50%{transform:translate(-1.8px,-1.5px) rotate(-3deg)}
+}
+@keyframes shatterSplinterFloatB{
+ 0%,100%{transform:translate(0,0) rotate(0deg)}
+ 50%{transform:translate(1.8px,-1.4px) rotate(3.5deg)}
+}
+@keyframes shatterSplinterFloatC{
+ 0%,100%{transform:translate(0,0) rotate(0deg)}
+ 50%{transform:translate(-1.5px,1.8px) rotate(2.5deg)}
+}
+@keyframes shatterSplinterFloatD{
+ 0%,100%{transform:translate(0,0) rotate(0deg)}
+ 50%{transform:translate(1.6px,1.7px) rotate(-3deg)}
+}
+.splinter-drift-tl{transform-origin:24px 28px;animation:shatterSplinterFloatA 3.6s ease-in-out infinite}
+.splinter-drift-tr{transform-origin:136px 28px;animation:shatterSplinterFloatB 3.9s ease-in-out infinite}
+.splinter-drift-bl{transform-origin:24px 132px;animation:shatterSplinterFloatC 4.1s ease-in-out infinite}
+.splinter-drift-br{transform-origin:136px 132px;animation:shatterSplinterFloatD 3.7s ease-in-out infinite}
+/* Gezackte Tektonik- & Raum-Bruchrisse */
+.shard-crack-void{
+ fill:none;
+ stroke:#020106;
+ stroke-width:2.7;
+ stroke-linecap:butt;
+ stroke-linejoin:miter;
 }
 .shard-crack-glow{
  fill:none;
  stroke:var(--fx-main);
- stroke-width:1.45;
- stroke-linecap:round;
- stroke-linejoin:round;
- opacity:.72;
+ stroke-width:1.85;
+ stroke-linecap:square;
+ stroke-linejoin:miter;
+ opacity:.88;
 }
 .shard-crack-core{
  fill:none;
  stroke:#ffffff;
- stroke-width:.72;
- stroke-linecap:round;
- stroke-linejoin:round;
- animation:shardCrackPulse 3.4s ease-in-out infinite;
+ stroke-width:.95;
+ stroke-linecap:square;
+ stroke-linejoin:miter;
+ animation:shatterCrackFlash 2.6s ease-in-out infinite;
 }
 .shard-crack-fine{
  fill:none;
- stroke:rgba(255,255,255,0.78);
- stroke-width:.42;
- stroke-linecap:round;
- stroke-linejoin:round;
+ stroke:var(--fx-core);
+ stroke-width:.58;
+ stroke-linecap:square;
+ stroke-linejoin:miter;
+ opacity:.9;
 }
 .glass-tier2-seams{
  opacity:0;
- transition:opacity .6s ease;
+ transition:opacity .5s ease;
 }
 #characterStage[data-dimension-shatter="2"] .glass-tier2-seams{
  opacity:1;
@@ -2976,69 +3007,86 @@ button:focus, button:active, .overcharge-sigil-btn:focus, .overcharge-sigil-btn:
     <svg class="dimension-shatter-svg" viewBox="0 0 160 160">
      <defs>
       <clipPath id="dimCircleClip">
-       <circle cx="80" cy="80" r="77.4"/>
+       <circle cx="80" cy="80" r="78"/>
       </clipPath>
-      <linearGradient id="dimShardBright" x1="0%" y1="0%" x2="100%" y2="100%">
-       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.48"/>
-       <stop offset="55%" style="stop-color:var(--fx-core,#ffffff);stop-opacity:0.18"/>
-       <stop offset="100%" style="stop-color:var(--fx-main,#c28aff);stop-opacity:0.06"/>
-      </linearGradient>
-      <linearGradient id="dimShardMid" x1="100%" y1="0%" x2="0%" y2="100%">
-       <stop offset="0%" style="stop-color:var(--fx-main,#c28aff);stop-opacity:0.36"/>
-       <stop offset="60%" style="stop-color:var(--fx-sub,#9d4edd);stop-opacity:0.16"/>
-       <stop offset="100%" stop-color="#05020c" stop-opacity="0.32"/>
-      </linearGradient>
-      <linearGradient id="dimShardDark" x1="0%" y1="100%" x2="100%" y2="0%">
-       <stop offset="0%" stop-color="#040209" stop-opacity="0.58"/>
-       <stop offset="65%" style="stop-color:var(--fx-sub,#9d4edd);stop-opacity:0.22"/>
-       <stop offset="100%" stop-color="#ffffff" stop-opacity="0.28"/>
-      </linearGradient>
+      <radialGradient id="voidBreachGrad" cx="50%" cy="50%" r="55%">
+       <stop offset="0%" stop-color="#020005" stop-opacity="0.98"/>
+       <stop offset="72%" stop-color="#090316" stop-opacity="0.94"/>
+       <stop offset="100%" style="stop-color:var(--fx-sub,#9d4edd);stop-opacity:0.55"/>
+      </radialGradient>
      </defs>
      <g clip-path="url(#dimCircleClip)">
-      <!-- STUFE 1 (ab 1,00B Götterfurcht): Scharfkantige asymmetrische Kristall- & Spiegelsplitter entlang der Ränder (Gesichtsmitte bleibt vollkommen frei!) -->
-      <!-- Oben-Links Splitter-Cluster -->
-      <polygon class="shard-void-gap" points="4,46 18,39 12,26"/>
-      <polygon class="shard-prism-bright" points="12,26 31,14 29,31 18,39"/>
-      <polygon class="shard-prism-mid" points="31,14 52,5 43,23 29,31"/>
-      <polygon class="shard-prism-dark" points="4,46 18,39 24,54 8,63"/>
-      <polygon class="shard-prism-bright" points="18,39 29,31 36,44 24,54"/>
+      <!-- STUFE 1 (ab 1,00B Götterfurcht): Scharfe Raum-Risse & erste abgesprengte Rand-Splitter (ohne milchige Glasflächen!) -->
+      <!-- Ausgebrochene dunkle Leeren-Kerben am Rand -->
+      <polygon class="shatter-void-breach" points="0,34 15,28 11,17 24,10 0,8"/>
+      <polygon class="shatter-void-breach" points="160,36 144,29 149,18 135,10 160,8"/>
+      <polygon class="shatter-void-breach" points="0,124 16,131 11,142 25,151 0,152"/>
+      <polygon class="shatter-void-breach" points="160,126 143,132 148,143 134,151 160,152"/>
 
-      <!-- Oben-Rechts Splitter-Cluster -->
-      <polygon class="shard-void-gap" points="156,48 141,38 148,24"/>
-      <polygon class="shard-prism-mid" points="148,24 128,12 131,30 141,38"/>
-      <polygon class="shard-prism-bright" points="128,12 106,5 117,22 131,30"/>
-      <polygon class="shard-prism-dark" points="156,48 141,38 135,53 152,65"/>
-      <polygon class="shard-prism-bright" points="141,38 131,30 124,43 135,53"/>
+      <!-- Abgesprengte, scharfkantige Splitter-Fragmente (Stufe 1) -->
+      <g class="splinter-drift-tl">
+       <polygon class="shatter-chip-solid" points="16,25 27,19 23,31"/>
+       <polygon class="shatter-chip-edge" points="29,14 39,11 33,21"/>
+      </g>
+      <g class="splinter-drift-tr">
+       <polygon class="shatter-chip-solid" points="143,26 132,19 136,31"/>
+       <polygon class="shatter-chip-edge" points="130,14 120,11 126,21"/>
+      </g>
+      <g class="splinter-drift-bl">
+       <polygon class="shatter-chip-solid" points="17,134 28,140 23,128"/>
+       <polygon class="shatter-chip-edge" points="30,145 40,148 34,138"/>
+      </g>
+      <g class="splinter-drift-br">
+       <polygon class="shatter-chip-solid" points="142,135 131,141 136,129"/>
+       <polygon class="shatter-chip-edge" points="129,145 119,148 125,138"/>
+      </g>
 
-      <!-- Unten-Links Splitter-Cluster -->
-      <polygon class="shard-void-gap" points="6,108 21,116 14,132"/>
-      <polygon class="shard-prism-mid" points="6,108 23,98 31,111 21,116"/>
-      <polygon class="shard-prism-bright" points="21,116 31,111 41,126 27,139 14,132"/>
-      <polygon class="shard-prism-dark" points="27,139 41,126 56,138 48,152"/>
+      <!-- Scharfe, gezackte Bruchlinien mit schwarzem Spalt-Kern (Stufe 1) -->
+      <path class="shard-crack-void" d="M24,10 L35,22 L28,33 L40,42 M15,28 L26,38 L14,49 L6,58 M135,10 L124,22 L131,33 L119,42 M144,29 L133,39 L145,50 L153,59 M25,151 L36,138 L29,127 L41,118 M16,131 L27,121 L15,110 L7,101 M134,151 L123,138 L130,127 L118,118 M143,132 L132,121 L144,110 L152,101"/>
+      <path class="shard-crack-glow" d="M24,10 L35,22 L28,33 L40,42 M15,28 L26,38 L14,49 L6,58 M135,10 L124,22 L131,33 L119,42 M144,29 L133,39 L145,50 L153,59 M25,151 L36,138 L29,127 L41,118 M16,131 L27,121 L15,110 L7,101 M134,151 L123,138 L130,127 L118,118 M143,132 L132,121 L144,110 L152,101"/>
+      <path class="shard-crack-core" d="M24,10 L35,22 L28,33 L40,42 M15,28 L26,38 L14,49 L6,58 M135,10 L124,22 L131,33 L119,42 M144,29 L133,39 L145,50 L153,59 M25,151 L36,138 L29,127 L41,118 M16,131 L27,121 L15,110 L7,101 M134,151 L123,138 L130,127 L118,118 M143,132 L132,121 L144,110 L152,101"/>
+      <path class="shard-crack-fine" d="M35,22 L45,19 M28,33 L19,35 M26,38 L34,46 M124,22 L114,19 M131,33 L140,35 M133,39 L125,46 M36,138 L46,141 M29,127 L20,125 M27,121 L35,114 M123,138 L113,141 M130,127 L139,125 M132,121 L124,114"/>
 
-      <!-- Unten-Rechts Splitter-Cluster -->
-      <polygon class="shard-void-gap" points="154,110 138,118 146,134"/>
-      <polygon class="shard-prism-bright" points="154,110 137,99 128,112 138,118"/>
-      <polygon class="shard-prism-mid" points="138,118 128,112 118,127 132,140 146,134"/>
-      <polygon class="shard-prism-dark" points="132,140 118,127 103,139 112,152"/>
-
-      <!-- Leuchtende Haupt-Risskanten & feine Blitz-Verästelungen (Stufe 1) -->
-      <path class="shard-crack-glow" d="M52,5 L43,23 L29,31 L36,44 L24,54 L8,63 M29,31 L18,39 L4,46 M106,5 L117,22 L131,30 L124,43 L135,53 L152,65 M131,30 L141,38 L156,48 M6,108 L23,98 L31,111 L41,126 L56,138 L48,152 M31,111 L21,116 L14,132 M154,110 L137,99 L128,112 L118,127 L103,139 L112,152 M128,112 L138,118 L146,134"/>
-      <path class="shard-crack-core" d="M52,5 L43,23 L29,31 L36,44 L24,54 L8,63 M29,31 L18,39 L4,46 M106,5 L117,22 L131,30 L124,43 L135,53 L152,65 M131,30 L141,38 L156,48 M6,108 L23,98 L31,111 L41,126 L56,138 L48,152 M31,111 L21,116 L14,132 M154,110 L137,99 L128,112 L118,127 L103,139 L112,152 M128,112 L138,118 L146,134"/>
-      <path class="shard-crack-fine" d="M43,23 L51,31 M36,44 L45,48 M24,54 L31,63 M117,22 L109,30 M124,43 L115,47 M135,53 L128,62 M23,98 L32,92 M41,126 L49,119 M137,99 L128,93 M118,127 L110,120"/>
-
-      <!-- STUFE 2 (ab 1,00T Götterfurcht): Zusätzliche Kristall-Kronensplitter oben & unten sowie seitliche Spiegelfragmente -->
+      <!-- STUFE 2 (ab 1,00T Götterfurcht): MASSIVES ZERBRECHEN & ZERSPLITTERN DER BARRIERE (aufgerissene Leeren-Krater, tiefe Schock-Risse & umherfliegende scharfe Splitter) -->
       <g class="glass-tier2-seams">
-       <polygon class="shard-prism-bright" points="52,5 68,2 63,16 43,23"/>
-       <polygon class="shard-void-gap" points="68,2 80,6 74,15 63,16"/>
-       <polygon class="shard-prism-mid" points="80,6 93,2 97,16 86,15"/>
-       <polygon class="shard-prism-bright" points="93,2 106,5 117,22 97,16"/>
-       <polygon class="shard-prism-mid" points="48,152 66,157 62,143 56,138"/>
-       <polygon class="shard-void-gap" points="66,157 80,153 74,144 62,143"/>
-       <polygon class="shard-prism-bright" points="80,153 94,157 98,143 86,144"/>
-       <polygon class="shard-prism-dark" points="94,157 112,152 103,139 98,143"/>
-       <path class="shard-crack-glow" d="M43,23 L63,16 L74,15 L80,6 L86,15 L97,16 L117,22 M56,138 L62,143 L74,144 L80,153 L86,144 L98,143 L103,139 M8,63 L14,80 L6,108 M152,65 L146,80 L154,110"/>
-       <path class="shard-crack-core" d="M43,23 L63,16 L74,15 L80,6 L86,15 L97,16 L117,22 M56,138 L62,143 L74,144 L80,153 L86,144 L98,143 L103,139 M8,63 L14,80 L6,108 M152,65 L146,80 L154,110"/>
+       <!-- Aufgebrochene schwarze Dimensions-Krater an Krone, Basis & Flanken -->
+       <polygon class="shatter-void-breach" points="58,0 71,12 79,4 88,14 101,0"/>
+       <polygon class="shatter-void-breach" points="57,160 70,148 80,156 89,146 102,160"/>
+       <polygon class="shatter-void-breach" points="0,68 13,76 5,84 15,92 0,98"/>
+       <polygon class="shatter-void-breach" points="160,68 147,76 155,84 145,92 160,98"/>
+
+       <!-- Scharfkantige, freigesprengte Splitter-Schwärme (driften leicht im Reiatsu-Druck) -->
+       <g class="splinter-drift-tl">
+        <polygon class="shatter-chip-solid" points="41,15 51,9 48,22 38,21"/>
+        <polygon class="shatter-chip-edge" points="54,18 61,13 58,24"/>
+        <polygon class="shatter-chip-solid" points="14,58 24,53 21,64"/>
+        <polygon class="shatter-chip-edge" points="25,44 32,41 29,49"/>
+       </g>
+       <g class="splinter-drift-tr">
+        <polygon class="shatter-chip-solid" points="118,15 108,9 111,22 121,21"/>
+        <polygon class="shatter-chip-edge" points="105,18 98,13 101,24"/>
+        <polygon class="shatter-chip-solid" points="145,58 135,53 138,64"/>
+        <polygon class="shatter-chip-edge" points="134,44 127,41 130,49"/>
+       </g>
+       <g class="splinter-drift-bl">
+        <polygon class="shatter-chip-solid" points="42,145 52,151 49,138 39,139"/>
+        <polygon class="shatter-chip-edge" points="55,142 62,147 59,136"/>
+        <polygon class="shatter-chip-solid" points="15,102 25,107 22,96"/>
+        <polygon class="shatter-chip-edge" points="26,116 33,119 30,111"/>
+       </g>
+       <g class="splinter-drift-br">
+        <polygon class="shatter-chip-solid" points="117,145 107,151 110,138 120,139"/>
+        <polygon class="shatter-chip-edge" points="104,142 97,147 100,136"/>
+        <polygon class="shatter-chip-solid" points="144,102 134,107 137,96"/>
+        <polygon class="shatter-chip-edge" points="133,116 126,119 129,111"/>
+       </g>
+
+       <!-- Tiefe, klaffende Zickzack-Bruchspalten (schwarzer Riss + glühende Bruchkante + weißer Blitzkern) -->
+       <path class="shard-crack-void" d="M71,12 L64,25 L74,33 L68,43 M88,14 L95,26 L85,34 L92,44 M13,76 L26,71 L21,82 L33,87 L24,96 M147,76 L134,71 L139,82 L127,87 L136,96 M70,148 L63,135 L73,127 L67,117 M89,146 L96,134 L86,126 L93,116 M40,42 L49,54 L39,65 L48,74 M119,42 L110,54 L120,65 L111,74 M41,118 L50,106 L40,95 L49,86 M118,118 L109,106 L119,95 L110,86"/>
+       <path class="shard-crack-glow" d="M71,12 L64,25 L74,33 L68,43 M88,14 L95,26 L85,34 L92,44 M13,76 L26,71 L21,82 L33,87 L24,96 M147,76 L134,71 L139,82 L127,87 L136,96 M70,148 L63,135 L73,127 L67,117 M89,146 L96,134 L86,126 L93,116 M40,42 L49,54 L39,65 L48,74 M119,42 L110,54 L120,65 L111,74 M41,118 L50,106 L40,95 L49,86 M118,118 L109,106 L119,95 L110,86"/>
+       <path class="shard-crack-core" d="M71,12 L64,25 L74,33 L68,43 M88,14 L95,26 L85,34 L92,44 M13,76 L26,71 L21,82 L33,87 L24,96 M147,76 L134,71 L139,82 L127,87 L136,96 M70,148 L63,135 L73,127 L67,117 M89,146 L96,134 L86,126 L93,116 M40,42 L49,54 L39,65 L48,74 M119,42 L110,54 L120,65 L111,74 M41,118 L50,106 L40,95 L49,86 M118,118 L109,106 L119,95 L110,86"/>
+       <!-- Feine verästelte Haarrisse entlang der Bruchkanten -->
+       <path class="shard-crack-fine" d="M64,25 L54,28 M74,33 L80,29 M95,26 L105,29 M85,34 L79,30 M26,71 L32,63 M33,87 L41,83 M134,71 L128,63 M127,87 L119,83 M49,54 L57,51 M39,65 L31,67 M110,54 L102,51 M120,65 L128,67 M63,135 L53,132 M96,134 L106,131 M50,106 L58,109 M109,106 L101,109"/>
       </g>
      </g>
     </svg>
