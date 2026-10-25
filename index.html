@@ -2045,7 +2045,7 @@ body[data-sky-overload="2"] .sky-tier2-only{
  opacity:1;
 }
 
-/* 2. Neu gestalteter 1-Billion (1,00B / 1,00T) Dimensions-Kristallspalt & Spiegelsplitter-Effekt am Porträt-Rand */
+/* 2. 1-Billion (1,00B+) Dimensions-Kristallspalt & Spiegelsplitter-Effekt am Porträt-Rand (Stufe 1 bleibt dauerhaft) */
 .dimension-shatter-lens{
  position:absolute;
  inset:0;
@@ -2058,8 +2058,7 @@ body[data-sky-overload="2"] .sky-tier2-only{
  transition:opacity .65s ease;
  overflow:hidden;
 }
-#characterStage[data-dimension-shatter="1"] .dimension-shatter-lens,
-#characterStage[data-dimension-shatter="2"] .dimension-shatter-lens{
+#characterStage[data-dimension-shatter="1"] .dimension-shatter-lens{
  opacity:1;
 }
 .dimension-shatter-svg{
@@ -2118,82 +2117,6 @@ body[data-sky-overload="2"] .sky-tier2-only{
  stroke:rgba(255,255,255,0.78);
  stroke-width:.42;
  stroke-linecap:round;
- stroke-linejoin:round;
-}
-.glass-tier2-seams{
- opacity:0;
- transition:opacity .6s ease;
-}
-#characterStage[data-dimension-shatter="2"] .glass-tier2-seams{
- opacity:1;
-}
-/* 1,00T (Stufe 2): Scharfe Raum-Risse & versetztes Auseinanderbrechen der 4 Eck-Cluster */
-@keyframes tier2FracturePulseTL{
- 0%,100%{transform:translate(-1.2px,-1.2px) rotate(-0.8deg)}
- 50%{transform:translate(-2.4px,-2.2px) rotate(-1.6deg)}
-}
-@keyframes tier2FracturePulseTR{
- 0%,100%{transform:translate(1.2px,-1.2px) rotate(0.8deg)}
- 50%{transform:translate(2.4px,-2.2px) rotate(1.6deg)}
-}
-@keyframes tier2FracturePulseBL{
- 0%,100%{transform:translate(-1.2px,1.2px) rotate(0.8deg)}
- 50%{transform:translate(-2.4px,2.2px) rotate(1.6deg)}
-}
-@keyframes tier2FracturePulseBR{
- 0%,100%{transform:translate(1.2px,1.2px) rotate(-0.8deg)}
- 50%{transform:translate(2.4px,2.2px) rotate(-1.6deg)}
-}
-#characterStage[data-dimension-shatter="2"] .shard-cluster-tl{
- transform-origin:25px 30px;
- animation:tier2FracturePulseTL 3.8s ease-in-out infinite;
-}
-#characterStage[data-dimension-shatter="2"] .shard-cluster-tr{
- transform-origin:135px 30px;
- animation:tier2FracturePulseTR 4.1s ease-in-out infinite;
-}
-#characterStage[data-dimension-shatter="2"] .shard-cluster-bl{
- transform-origin:25px 130px;
- animation:tier2FracturePulseBL 4.0s ease-in-out infinite;
-}
-#characterStage[data-dimension-shatter="2"] .shard-cluster-br{
- transform-origin:135px 130px;
- animation:tier2FracturePulseBR 3.7s ease-in-out infinite;
-}
-.tier2-rift-shadow{
- fill:none;
- stroke:#030108;
- stroke-width:2.3;
- stroke-linecap:round;
- stroke-linejoin:round;
- opacity:.9;
-}
-.tier2-rift-glow{
- fill:none;
- stroke:var(--fx-main);
- stroke-width:1.65;
- stroke-linecap:round;
- stroke-linejoin:round;
- opacity:.88;
-}
-.tier2-rift-core{
- fill:none;
- stroke:#ffffff;
- stroke-width:.85;
- stroke-linecap:round;
- stroke-linejoin:round;
- animation:shardCrackPulse 2.2s ease-in-out infinite;
-}
-.tier2-needle-shard{
- fill:url(#dimShardBright);
- stroke:#ffffff;
- stroke-width:.6;
- stroke-linejoin:round;
-}
-.tier2-void-needle{
- fill:#04020a;
- stroke:var(--fx-main);
- stroke-width:.65;
  stroke-linejoin:round;
 }
 
@@ -3064,81 +2987,37 @@ button:focus, button:active, .overcharge-sigil-btn:focus, .overcharge-sigil-btn:
       </linearGradient>
      </defs>
      <g clip-path="url(#dimCircleClip)">
-      <!-- STUFE 1 (ab 1,00B Götterfurcht): EXAKT DEIN GELIEBTER EFFEKT MIT DEN 4 ECK-CLUSTERN -->
+      <!-- STUFE 1 (ab 1,00B Götterfurcht, bleibt dauerhaft): Scharfkantige asymmetrische Kristall- & Spiegelsplitter entlang der Ränder -->
       <!-- Oben-Links Splitter-Cluster -->
-      <g class="shard-cluster-tl">
-       <polygon class="shard-void-gap" points="4,46 18,39 12,26"/>
-       <polygon class="shard-prism-bright" points="12,26 31,14 29,31 18,39"/>
-       <polygon class="shard-prism-mid" points="31,14 52,5 43,23 29,31"/>
-       <polygon class="shard-prism-dark" points="4,46 18,39 24,54 8,63"/>
-       <polygon class="shard-prism-bright" points="18,39 29,31 36,44 24,54"/>
-       <path class="shard-crack-glow" d="M52,5 L43,23 L29,31 L36,44 L24,54 L8,63 M29,31 L18,39 L4,46"/>
-       <path class="shard-crack-core" d="M52,5 L43,23 L29,31 L36,44 L24,54 L8,63 M29,31 L18,39 L4,46"/>
-       <path class="shard-crack-fine" d="M43,23 L51,31 M36,44 L45,48 M24,54 L31,63"/>
-      </g>
+      <polygon class="shard-void-gap" points="4,46 18,39 12,26"/>
+      <polygon class="shard-prism-bright" points="12,26 31,14 29,31 18,39"/>
+      <polygon class="shard-prism-mid" points="31,14 52,5 43,23 29,31"/>
+      <polygon class="shard-prism-dark" points="4,46 18,39 24,54 8,63"/>
+      <polygon class="shard-prism-bright" points="18,39 29,31 36,44 24,54"/>
 
       <!-- Oben-Rechts Splitter-Cluster -->
-      <g class="shard-cluster-tr">
-       <polygon class="shard-void-gap" points="156,48 141,38 148,24"/>
-       <polygon class="shard-prism-mid" points="148,24 128,12 131,30 141,38"/>
-       <polygon class="shard-prism-bright" points="128,12 106,5 117,22 131,30"/>
-       <polygon class="shard-prism-dark" points="156,48 141,38 135,53 152,65"/>
-       <polygon class="shard-prism-bright" points="141,38 131,30 124,43 135,53"/>
-       <path class="shard-crack-glow" d="M106,5 L117,22 L131,30 L124,43 L135,53 L152,65 M131,30 L141,38 L156,48"/>
-       <path class="shard-crack-core" d="M106,5 L117,22 L131,30 L124,43 L135,53 L152,65 M131,30 L141,38 L156,48"/>
-       <path class="shard-crack-fine" d="M117,22 L109,30 M124,43 L115,47 M135,53 L128,62"/>
-      </g>
+      <polygon class="shard-void-gap" points="156,48 141,38 148,24"/>
+      <polygon class="shard-prism-mid" points="148,24 128,12 131,30 141,38"/>
+      <polygon class="shard-prism-bright" points="128,12 106,5 117,22 131,30"/>
+      <polygon class="shard-prism-dark" points="156,48 141,38 135,53 152,65"/>
+      <polygon class="shard-prism-bright" points="141,38 131,30 124,43 135,53"/>
 
       <!-- Unten-Links Splitter-Cluster -->
-      <g class="shard-cluster-bl">
-       <polygon class="shard-void-gap" points="6,108 21,116 14,132"/>
-       <polygon class="shard-prism-mid" points="6,108 23,98 31,111 21,116"/>
-       <polygon class="shard-prism-bright" points="21,116 31,111 41,126 27,139 14,132"/>
-       <polygon class="shard-prism-dark" points="27,139 41,126 56,138 48,152"/>
-       <path class="shard-crack-glow" d="M6,108 L23,98 L31,111 L41,126 L56,138 L48,152 M31,111 L21,116 L14,132"/>
-       <path class="shard-crack-core" d="M6,108 L23,98 L31,111 L41,126 L56,138 L48,152 M31,111 L21,116 L14,132"/>
-       <path class="shard-crack-fine" d="M23,98 L32,92 M41,126 L49,119"/>
-      </g>
+      <polygon class="shard-void-gap" points="6,108 21,116 14,132"/>
+      <polygon class="shard-prism-mid" points="6,108 23,98 31,111 21,116"/>
+      <polygon class="shard-prism-bright" points="21,116 31,111 41,126 27,139 14,132"/>
+      <polygon class="shard-prism-dark" points="27,139 41,126 56,138 48,152"/>
 
       <!-- Unten-Rechts Splitter-Cluster -->
-      <g class="shard-cluster-br">
-       <polygon class="shard-void-gap" points="154,110 138,118 146,134"/>
-       <polygon class="shard-prism-bright" points="154,110 137,99 128,112 138,118"/>
-       <polygon class="shard-prism-mid" points="138,118 128,112 118,127 132,140 146,134"/>
-       <polygon class="shard-prism-dark" points="132,140 118,127 103,139 112,152"/>
-       <path class="shard-crack-glow" d="M154,110 L137,99 L128,112 L118,127 L103,139 L112,152 M128,112 L138,118 L146,134"/>
-       <path class="shard-crack-core" d="M154,110 L137,99 L128,112 L118,127 L103,139 L112,152 M128,112 L138,118 L146,134"/>
-       <path class="shard-crack-fine" d="M137,99 L128,93 M118,127 L110,120"/>
-      </g>
+      <polygon class="shard-void-gap" points="154,110 138,118 146,134"/>
+      <polygon class="shard-prism-bright" points="154,110 137,99 128,112 138,118"/>
+      <polygon class="shard-prism-mid" points="138,118 128,112 118,127 132,140 146,134"/>
+      <polygon class="shard-prism-dark" points="132,140 118,127 103,139 112,152"/>
 
-      <!-- STUFE 2 (ab 1,00T Götterfurcht): KEINE KLOBIGEN KRONEN-POLYGONE MEHR!
-           Stattdessen brechen aus den 4 Eck-Clustern messerscharfe, verzweigte Schock-Risse und feine Nadelsplitter heraus,
-           während die 4 Eck-Cluster selbst unter dem Druck leicht auseinanderdriften! -->
-      <g class="glass-tier2-seams">
-       <!-- Scharfe, schlanke Nadelsplitter, die sich direkt von den 4 Ecken ablösen (gleicher edler Prisma-Stil wie 1B) -->
-       <polygon class="tier2-needle-shard" points="36,44 49,39 43,49"/>
-       <polygon class="tier2-void-needle" points="43,23 56,18 50,27"/>
-       <polygon class="tier2-needle-shard" points="24,54 35,62 26,65"/>
-
-       <polygon class="tier2-needle-shard" points="124,43 111,39 117,49"/>
-       <polygon class="tier2-void-needle" points="117,22 104,18 110,27"/>
-       <polygon class="tier2-needle-shard" points="135,53 125,62 134,65"/>
-
-       <polygon class="tier2-needle-shard" points="41,126 53,120 48,131"/>
-       <polygon class="tier2-void-needle" points="23,98 13,86 22,90"/>
-       <polygon class="tier2-needle-shard" points="56,138 68,144 59,147"/>
-
-       <polygon class="tier2-needle-shard" points="118,127 107,120 112,131"/>
-       <polygon class="tier2-void-needle" points="137,99 147,86 138,90"/>
-       <polygon class="tier2-needle-shard" points="103,139 92,144 101,147"/>
-
-       <!-- Gezackte, energiegeladene Bruch- & Schockrisse, die aus den 4 Eck-Clustern schlagen (lassen die Bildmitte komplett frei) -->
-       <path class="tier2-rift-shadow" d="M43,23 L58,15 L67,21 L76,12 M36,44 L51,38 L57,46 L66,42 M24,54 L34,65 L27,76 L35,84 M117,22 L102,15 L93,21 L84,12 M124,43 L109,38 L103,46 L94,42 M135,53 L126,65 L133,76 L125,84 M23,98 L33,89 L26,79 M41,126 L54,118 L63,125 L72,119 M56,138 L69,145 L77,138 M137,99 L127,89 L134,79 M118,127 L106,118 L97,125 L88,119 M103,139 L91,145 L83,138"/>
-       <path class="tier2-rift-glow" d="M43,23 L58,15 L67,21 L76,12 M36,44 L51,38 L57,46 L66,42 M24,54 L34,65 L27,76 L35,84 M117,22 L102,15 L93,21 L84,12 M124,43 L109,38 L103,46 L94,42 M135,53 L126,65 L133,76 L125,84 M23,98 L33,89 L26,79 M41,126 L54,118 L63,125 L72,119 M56,138 L69,145 L77,138 M137,99 L127,89 L134,79 M118,127 L106,118 L97,125 L88,119 M103,139 L91,145 L83,138"/>
-       <path class="tier2-rift-core" d="M43,23 L58,15 L67,21 L76,12 M36,44 L51,38 L57,46 L66,42 M24,54 L34,65 L27,76 L35,84 M117,22 L102,15 L93,21 L84,12 M124,43 L109,38 L103,46 L94,42 M135,53 L126,65 L133,76 L125,84 M23,98 L33,89 L26,79 M41,126 L54,118 L63,125 L72,119 M56,138 L69,145 L77,138 M137,99 L127,89 L134,79 M118,127 L106,118 L97,125 L88,119 M103,139 L91,145 L83,138"/>
-       <!-- Feine Sekundär-Verästelungen an den Spitzen der 1T-Schockrisse -->
-       <path class="shard-crack-fine" d="M58,15 L62,8 M67,21 L71,28 M51,38 L55,31 M34,65 L42,63 M102,15 L98,8 M93,21 L89,28 M109,38 L105,31 M126,65 L118,63 M54,118 L50,111 M63,125 L67,132 M106,118 L110,111 M97,125 L93,132"/>
-      </g>
+      <!-- Leuchtende Haupt-Risskanten & feine Blitz-Verästelungen (Stufe 1) -->
+      <path class="shard-crack-glow" d="M52,5 L43,23 L29,31 L36,44 L24,54 L8,63 M29,31 L18,39 L4,46 M106,5 L117,22 L131,30 L124,43 L135,53 L152,65 M131,30 L141,38 L156,48 M6,108 L23,98 L31,111 L41,126 L56,138 L48,152 M31,111 L21,116 L14,132 M154,110 L137,99 L128,112 L118,127 L103,139 L112,152 M128,112 L138,118 L146,134"/>
+      <path class="shard-crack-core" d="M52,5 L43,23 L29,31 L36,44 L24,54 L8,63 M29,31 L18,39 L4,46 M106,5 L117,22 L131,30 L124,43 L135,53 L152,65 M131,30 L141,38 L156,48 M6,108 L23,98 L31,111 L41,126 L56,138 L48,152 M31,111 L21,116 L14,132 M154,110 L137,99 L128,112 L118,127 L103,139 L112,152 M128,112 L138,118 L146,134"/>
+      <path class="shard-crack-fine" d="M43,23 L51,31 M36,44 L45,48 M24,54 L31,63 M117,22 L109,30 M124,43 L115,47 M135,53 L128,62 M23,98 L32,92 M41,126 L49,119 M137,99 L128,93 M118,127 L110,120"/>
      </g>
     </svg>
    </div></button>
@@ -5054,7 +4933,8 @@ function getFearRank(val){
  if(val<50000000)return 'Urblitz-Souveränin · MAX DRUCK';
  if(val<300000000)return 'Sternenabgrund-Kaiserin · MAX DRUCK';
  // Ab 300M steht nur noch der Götterfurcht-Rangname ohne "MAX DRUCK"-Zusatz (Effekte bleiben voll aktiv)
- return '☠ TRANSZENDENTE URGÖTTIN ☠';
+ if(val<1000000000000)return '☠ TRANSZENDENTE URGÖTTIN ☠';
+ return '⚡ WELTENSPALT-GOTTHEIT ⚡';
 }
 function getReiatsuLevel(val){
  if(val<5000)return 1;
@@ -6303,7 +6183,7 @@ function render(){
  if(document.body.dataset.skyOverload!==String(skyOverloadLvl)){
   document.body.dataset.skyOverload=String(skyOverloadLvl);
  }
- const dimShatterLvl=fearVal>=1e12?2:(fearVal>=1e9?1:0);
+ const dimShatterLvl=fearVal>=1e9?1:0;
  if($('characterStage')&&$('characterStage').dataset.dimensionShatter!==String(dimShatterLvl)){
   $('characterStage').dataset.dimensionShatter=String(dimShatterLvl);
  }
