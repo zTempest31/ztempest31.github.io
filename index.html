@@ -540,11 +540,56 @@ body.reiatsu-suppressed .reiatsu-suppress-btn{
  background:linear-gradient(90deg, rgba(12, 42, 46, 0.9), rgba(14, 18, 32, 0.95));
  box-shadow:0 0 10px rgba(114, 239, 221, 0.25);
 }
+.reiatsu-suppress-btn{
+ position:relative;
+ overflow:visible;
+}
+.siegel-bolts-svg{
+ position:absolute;
+ inset:-6px;
+ width:calc(100% + 12px);
+ height:calc(100% + 12px);
+ pointer-events:none;
+ z-index:4;
+ opacity:0;
+ overflow:visible;
+ filter:drop-shadow(0 0 3px #fffbeb) drop-shadow(0 0 6px #ffd166);
+ transition:opacity .2s;
+}
+.reiatsu-suppress-btn.comp-ready .siegel-bolts-svg{
+ opacity:1;
+}
+.siegel-bolt-glow{
+ fill:none;
+ stroke:#f59e0b;
+ stroke-width:2.5;
+ stroke-linecap:round;
+ stroke-linejoin:round;
+ opacity:.82;
+}
+.siegel-bolt-core{
+ fill:none;
+ stroke:#fffbeb;
+ stroke-width:1.15;
+ stroke-linecap:round;
+ stroke-linejoin:round;
+}
 body.reiatsu-suppressed .reiatsu-suppress-btn.comp-ready{
  border-color:#ffd166;
  color:#ffd166;
- box-shadow:0 0 14px rgba(255, 209, 102, 0.45);
- animation:sigilHeartbeat 1.2s ease-in-out infinite;
+ box-shadow:0 0 12px rgba(255, 209, 102, 0.48), inset 0 0 8px rgba(255, 209, 102, 0.22);
+ animation:none!important;
+ transform:none!important;
+}
+/* Stärkeres Augenleuchten sobald das Siegel zu 100 % komprimiert ist */
+body.siegel-100-ready .character.default-png-active .vaelith-eye-sword-fx{
+ filter:drop-shadow(0 0 8px #ffffff) drop-shadow(0 0 16px #ffd166) drop-shadow(0 0 24px var(--fx-main))!important;
+}
+body.siegel-100-ready .vaelith-eye-group{
+ filter:drop-shadow(0 0 4px #ffffff) drop-shadow(0 0 8px #ffd166) brightness(1.45);
+}
+body.siegel-100-ready .portrait-hitbox{
+ box-shadow:0 0 24px rgba(255, 209, 102, 0.48), inset 0 0 16px #090710!important;
 }
 body.reiatsu-unleashed .reiatsu-suppress-btn{
  border-color:#ff4d6d;
@@ -2976,14 +3021,14 @@ button:focus, button:active, .overcharge-sigil-btn:focus, .overcharge-sigil-btn:
     <g clip-path="url(#vPngCircleClip)">
      <g id="fxGroupDefault">
       <!-- 1. LINKES AUGE (präzise auf die Irisgröße von Vaelith.png angepasst, damit nichts über die Iris hinausragt) -->
-      <g transform="rotate(-4 60.5 77.2)">
+      <g class="vaelith-eye-group" transform="rotate(-4 60.5 77.2)">
        <ellipse cx="60.5" cy="77.2" rx="6.5" ry="3.4" fill="url(#vEyeGlowGrad)"/>
        <ellipse cx="60.5" cy="77.0" rx="2.5" ry="1.4" fill="#ffffff" opacity="0.82"/>
        <ellipse cx="60.5" cy="76.9" rx="0.8" ry="1.2" style="fill:var(--fx-core,#ffffff)" opacity="0.98"/>
       </g>
 
       <!-- 2. RECHTES AUGE (präzise auf die Irisgröße von Vaelith.png angepasst) -->
-      <g transform="rotate(-17 99.8 67.1)">
+      <g class="vaelith-eye-group" transform="rotate(-17 99.8 67.1)">
        <ellipse cx="99.8" cy="67.1" rx="6.8" ry="3.6" fill="url(#vEyeGlowGrad)"/>
        <ellipse cx="99.8" cy="66.9" rx="2.6" ry="1.5" fill="#ffffff" opacity="0.84"/>
        <ellipse cx="99.8" cy="66.8" rx="0.8" ry="1.3" style="fill:var(--fx-core,#ffffff)" opacity="0.98"/>
@@ -2998,13 +3043,13 @@ button:focus, button:active, .overcharge-sigil-btn:focus, .overcharge-sigil-btn:
      <!-- B) PIXELGENAUER AUGEN- & SCHWERT-LEUCHTEFFEKT FÜR VAELITHALT4 (ARTS/VaelithAlt4.png) -->
      <g id="fxGroupAlt4" style="display:none">
       <!-- Linke Iris (strikt innerhalb der Iris von VaelithAlt4: Zentrum 69.8, 57.3, rx=4.1, ry=2.0) -->
-      <g transform="rotate(9 69.8 57.3)">
+      <g class="vaelith-eye-group" transform="rotate(9 69.8 57.3)">
        <ellipse cx="69.8" cy="57.3" rx="4.1" ry="2.0" fill="url(#vEyeGlowGrad)"/>
        <ellipse cx="69.8" cy="57.2" rx="1.8" ry="0.95" fill="#ffffff" opacity="0.86"/>
        <ellipse cx="69.8" cy="57.2" rx="0.62" ry="1.2" style="fill:var(--fx-core,#ffffff)" opacity="0.98"/>
       </g>
       <!-- Rechte Iris (strikt innerhalb der Iris von VaelithAlt4: Zentrum 107.2, 60.8, rx=3.5, ry=1.85) -->
-      <g transform="rotate(-6 107.2 60.8)">
+      <g class="vaelith-eye-group" transform="rotate(-6 107.2 60.8)">
        <ellipse cx="107.2" cy="60.8" rx="3.5" ry="1.85" fill="url(#vEyeGlowGrad)"/>
        <ellipse cx="107.2" cy="60.7" rx="1.55" ry="0.85" fill="#ffffff" opacity="0.86"/>
        <ellipse cx="107.2" cy="60.7" rx="0.58" ry="1.1" style="fill:var(--fx-core,#ffffff)" opacity="0.98"/>
@@ -3019,13 +3064,13 @@ button:focus, button:active, .overcharge-sigil-btn:focus, .overcharge-sigil-btn:
      <!-- C) PIXELGENAUER AUGEN- & SCHWERT-LEUCHTEFFEKT FÜR VAELITHALT (152883.png -> ARTS/VaelithAlt.png) -->
      <g id="fxGroupAlt1" style="display:none">
       <!-- Linke Iris (strikt innerhalb der Iris: Zentrum 31.8, 64.5, rx=3.8, ry=2.1) -->
-      <g transform="rotate(6 31.8 64.5)">
+      <g class="vaelith-eye-group" transform="rotate(6 31.8 64.5)">
        <ellipse cx="31.8" cy="64.5" rx="3.8" ry="2.1" fill="url(#vEyeGlowGrad)"/>
        <ellipse cx="31.8" cy="64.4" rx="1.65" ry="0.95" fill="#ffffff" opacity="0.86"/>
        <ellipse cx="31.8" cy="64.4" rx="0.6" ry="1.2" style="fill:var(--fx-core,#ffffff)" opacity="0.98"/>
       </g>
       <!-- Rechte Iris (strikt innerhalb der Iris: Zentrum 76.5, 51.0, rx=4.4, ry=2.6) -->
-      <g transform="rotate(-14 76.5 51.0)">
+      <g class="vaelith-eye-group" transform="rotate(-14 76.5 51.0)">
        <ellipse cx="76.5" cy="51.0" rx="4.4" ry="2.6" fill="url(#vEyeGlowGrad)"/>
        <ellipse cx="76.5" cy="50.9" rx="1.9" ry="1.15" fill="#ffffff" opacity="0.86"/>
        <ellipse cx="76.5" cy="50.9" rx="0.68" ry="1.45" style="fill:var(--fx-core,#ffffff)" opacity="0.98"/>
@@ -3040,13 +3085,13 @@ button:focus, button:active, .overcharge-sigil-btn:focus, .overcharge-sigil-btn:
      <!-- D) PIXELGENAUER AUGEN- & SCHWERT-LEUCHTEFFEKT FÜR VAELITHALT2 (152884.png -> ARTS/VaelithAlt2.png) -->
      <g id="fxGroupAlt2" style="display:none">
       <!-- Linke Iris (strikt innerhalb der Iris: Zentrum 47.2, 72.3, rx=3.9, ry=2.0) -->
-      <g transform="rotate(4 47.2 72.3)">
+      <g class="vaelith-eye-group" transform="rotate(4 47.2 72.3)">
        <ellipse cx="47.2" cy="72.3" rx="3.9" ry="2.0" fill="url(#vEyeGlowGrad)"/>
        <ellipse cx="47.2" cy="72.2" rx="1.7" ry="0.9" fill="#ffffff" opacity="0.86"/>
        <ellipse cx="47.2" cy="72.2" rx="0.62" ry="1.18" style="fill:var(--fx-core,#ffffff)" opacity="0.98"/>
       </g>
       <!-- Rechte Iris (strikt innerhalb der Iris: Zentrum 84.3, 63.5, rx=3.2, ry=2.2) -->
-      <g transform="rotate(-18 84.3 63.5)">
+      <g class="vaelith-eye-group" transform="rotate(-18 84.3 63.5)">
        <ellipse cx="84.3" cy="63.5" rx="3.2" ry="2.2" fill="url(#vEyeGlowGrad)"/>
        <ellipse cx="84.3" cy="63.4" rx="1.45" ry="1.0" fill="#ffffff" opacity="0.86"/>
        <ellipse cx="84.3" cy="63.4" rx="0.58" ry="1.25" style="fill:var(--fx-core,#ffffff)" opacity="0.98"/>
@@ -3065,13 +3110,13 @@ button:focus, button:active, .overcharge-sigil-btn:focus, .overcharge-sigil-btn:
      <!-- E) PIXELGENAUER AUGEN- & SCHWERT-LEUCHTEFFEKT FÜR VAELITHALT3 (152885.png -> ARTS/VaelithAlt3.png) -->
      <g id="fxGroupAlt3" style="display:none">
       <!-- Linke Iris (strikt innerhalb der Iris: Zentrum 67.3, 61.0, rx=3.2, ry=1.55) -->
-      <g transform="rotate(8 67.3 61.0)">
+      <g class="vaelith-eye-group" transform="rotate(8 67.3 61.0)">
        <ellipse cx="67.3" cy="61.0" rx="3.2" ry="1.55" fill="url(#vEyeGlowGrad)"/>
        <ellipse cx="67.3" cy="60.9" rx="1.4" ry="0.75" fill="#ffffff" opacity="0.86"/>
        <ellipse cx="67.3" cy="60.9" rx="0.52" ry="0.98" style="fill:var(--fx-core,#ffffff)" opacity="0.98"/>
       </g>
       <!-- Rechte Iris (strikt innerhalb der Iris: Zentrum 102.5, 58.1, rx=3.3, ry=1.65) -->
-      <g transform="rotate(-11 102.5 58.1)">
+      <g class="vaelith-eye-group" transform="rotate(-11 102.5 58.1)">
        <ellipse cx="102.5" cy="58.1" rx="3.3" ry="1.65" fill="url(#vEyeGlowGrad)"/>
        <ellipse cx="102.5" cy="58.0" rx="1.45" ry="0.78" fill="#ffffff" opacity="0.86"/>
        <ellipse cx="102.5" cy="58.0" rx="0.54" ry="1.05" style="fill:var(--fx-core,#ffffff)" opacity="0.98"/>
@@ -3158,7 +3203,7 @@ button:focus, button:active, .overcharge-sigil-btn:focus, .overcharge-sigil-btn:
    <div class="name">Vaelith</div><div class="epithet" id="characterTitleDisplay">Die Sturmgeborene</div>
    <div class="fear-row-wrap">
     <div class="fear-banner" title="Die Furcht der Götter wächst automatisch mit deiner gesamten Macht, deinen Siegen, Upgrades und Relikten"><span class="fear-icon">☠&#xFE0E;</span><span class="fear-label">Götterfurcht</span><span class="fear-val" id="fearValueDisplay">10</span><span class="fear-rank" id="fearRankDisplay">Unbekannte Sterbliche</span></div>
-    <button type="button" class="reiatsu-suppress-btn" id="reiatsuSuppressBtn" title="Siegel-Täuschung (Reiatsu-Unterdrückung): Verbirgt Vaeliths Aura (+45 % Gold & Blitzessenz) und komprimiert ihren Druck. Beim Aufheben (Entfesselt) entlädt sich die Kompression für bis zu 15 Sek. (+120 % Schaden)!">⚡ Siegel: Offen</button>
+    <button type="button" class="reiatsu-suppress-btn" id="reiatsuSuppressBtn" title="Siegel-Täuschung (Reiatsu-Unterdrückung): Verbirgt Vaeliths Aura (+45 % Gold & Blitzessenz) und komprimiert ihren Druck. Bei 100 % Ladung erhält Vaelith +35 % Schaden & verstärktes Augenleuchten; beim Öffnen des Siegels entlädt sich ein Blitz-Ausstoß mit +120 % Schaden für bis zu 15 Sek.!"><svg class="siegel-bolts-svg" viewBox="0 0 130 34" aria-hidden="true"><path class="siegel-bolt-glow" id="siegelBoltGlow1" d=""/><path class="siegel-bolt-core" id="siegelBoltCore1" d=""/><path class="siegel-bolt-glow" id="siegelBoltGlow2" d=""/><path class="siegel-bolt-core" id="siegelBoltCore2" d=""/><path class="siegel-bolt-glow" id="siegelBoltGlow3" d=""/><path class="siegel-bolt-core" id="siegelBoltCore3" d=""/></svg><span id="reiatsuSuppressLabel">⚡ Siegel: Offen</span></button>
    </div>
    <div class="anomaly-bar-wrap" id="anomalyBarWrap">
     <button type="button" class="anomaly-pill" id="weeklyAnomalyPill" aria-expanded="false"></button>
@@ -3424,7 +3469,7 @@ button:focus, button:active, .overcharge-sigil-btn:focus, .overcharge-sigil-btn:
      <div id="offlineHistoryList" style="margin-top:4px"></div>
      <div style="margin-top:9px;padding:9px 10px;border-radius:10px;border:1px solid color-mix(in srgb, var(--violet) 45%, var(--line));background:rgba(10,6,20,0.65)">
       <strong style="font-size:10.5px;color:#ffd166;display:block;margin-bottom:3px">🧪 Offline-Ertrag &amp; Vaelith-Bilder testen</strong>
-      <p class="setting-note" style="margin:0 0 8px">Erste 8 Std. sammeln mit <strong>100 %</strong> Offline-Rate, danach läuft die Sammlung mit <strong>20 %</strong> weiter. Zeigt zufällig <code>offline/VaeOff1.jpg</code>, <code>VaeOff2.jpg</code> oder <code>VaeOff3.jpg</code>.</p>
+      <p class="setting-note" style="margin:0 0 8px">Erste 8 Std. sammeln mit <strong>100 %</strong> Offline-Rate, danach läuft die Sammlung mit <strong>20 %</strong> weiter. Zeigt zufällig <code>offline/VaeOff1.png</code>, <code>VaeOff2.png</code> oder <code>VaeOff3.png</code>.</p>
       <div class="settings-actions">
        <button class="secondary" type="button" id="testOffline4hBtn" style="padding:8px;font-size:11px">⏱ Test: 4 Std. (100 %)</button>
        <button class="secondary" type="button" id="testOffline14hBtn" style="padding:8px;font-size:11px">🌙 Test: 14 Std. (8h + 20 %)</button>
@@ -5222,6 +5267,15 @@ function toggleReiatsuSuppression(){
    const burstDmg=state.attack*damageMult()*3.0;
    state.enemyHp-=burstDmg;
    playSound('boss');
+   if(!state.lowPowerMode){
+    triggerSSJ2ExpulsionBurst();
+    const allBolts=[...document.querySelectorAll('.lightning')];
+    allBolts.forEach((b,idx)=>setTimeout(()=>fireSingleBolt(b,idx),idx*45));
+    document.body.classList.remove('overcharge-impact');
+    void document.body.offsetWidth;
+    document.body.classList.add('overcharge-impact');
+    setTimeout(()=>document.body.classList.remove('overcharge-impact'),750);
+   }
    if(!document.hidden&&isArenaVisible()){
     document.body.classList.remove('glitch-full');
     void document.body.offsetWidth;
@@ -5232,9 +5286,14 @@ function toggleReiatsuSuppression(){
    toast(`⚡ Reiatsu entfesselt (${Math.round(comp)}%):\n+120 % Schaden für ${durSec} Sek.!`);
    if(state.enemyHp<=0)killEnemy();
   }else{
+   if(!state.lowPowerMode){
+    triggerSSJ2ExpulsionBurst();
+    const allBolts=[...document.querySelectorAll('.lightning')];
+    allBolts.forEach((b,idx)=>setTimeout(()=>fireSingleBolt(b,idx),idx*55));
+   }
    playSound('tap');
-   say('⚡ Siegel-Täuschung aufgehoben: Vaeliths Reiatsu fließt wieder frei.');
-   toast('⚡ Reiatsu wieder entfesselt');
+   say('⚡ Siegel geöffnet: Ein Blitz-Ausstoß durchbricht die Hülle und Vaeliths Reiatsu fließt wieder frei.');
+   toast('⚡ Siegel geöffnet · Blitz-Ausstoß!');
   }
  }
  syncOptimalFarmStageIfNeeded(false);
@@ -5255,6 +5314,7 @@ function damageMult(){
  if(isOvercharged())m*=getOverchargeStackMult(state.activeOverchargeStacks||1);
  else if((state.overchargeStacks||0)>=5)m*=2.5; // Passiver Macht-Schub solange 5 Max Stacks gehalten werden
  if(isReiatsuUnleashed())m*=2.2;
+ else if(state.reiatsuSuppressed&&(state.reiatsuCompression||0)>=100)m*=1.35;
  if(Array.isArray(state.completedFlashbacks)&&state.completedFlashbacks.length>0){
   m*=(1 + state.completedFlashbacks.length*0.15);
  }
@@ -6344,18 +6404,20 @@ function render(){
  }
  const supActive=Boolean(state.reiatsuSuppressed);
  const unlActive=isReiatsuUnleashed();
+ const compPct=Math.min(100,Math.max(0,Math.floor(state.reiatsuCompression||0)));
+ const isSiegel100=supActive&&compPct>=100;
  document.body.classList.toggle('reiatsu-suppressed',supActive&&!isOvercharged());
  document.body.classList.toggle('reiatsu-unleashed',unlActive);
+ document.body.classList.toggle('siegel-100-ready',isSiegel100);
  if($('reiatsuSuppressBtn')){
-  const compPct=Math.min(100,Math.max(0,Math.floor(state.reiatsuCompression||0)));
-  $('reiatsuSuppressBtn').classList.toggle('comp-ready',supActive&&compPct>=100);
+  $('reiatsuSuppressBtn').classList.toggle('comp-ready',isSiegel100);
   if(unlActive){
    const uRem=Math.max(1,Math.ceil((state.reiatsuUnleashedUntil-Date.now())/1000));
-   setText('reiatsuSuppressBtn',`🔥 Entfesselt +120% (${uRem}s)`);
+   setText('reiatsuSuppressLabel',`🔥 Entfesselt +120% (${uRem}s)`);
   }else if(supActive){
-   setText('reiatsuSuppressBtn',compPct>=100?'⚡ Siegel: 100% · Entfesseln!':`🕊 Unterdrückt · ${compPct}%`);
+   setText('reiatsuSuppressLabel',isSiegel100?'⚡ Siegel: 100% (+35% DMG)':`🕊 Unterdrückt · ${compPct}%`);
   }else{
-   setText('reiatsuSuppressBtn','⚡ Siegel: Offen');
+   setText('reiatsuSuppressLabel','⚡ Siegel: Offen');
   }
  }
  if($('characterStage')&&$('characterStage').dataset.reiatsu!==String(rLvl)){
@@ -6645,30 +6707,35 @@ function render(){
   if(titleEl)titleEl.textContent=`${t.icon} ${t.name} · Rang ${l}${t.max>=9999?'':'/'+t.max}`;
   if(btnEl){btnEl.textContent=maxed?'MAX':fmt(c)+' Echos';btnEl.disabled=maxed;btnEl.classList.toggle('locked',!can&&!maxed);btnEl.setAttribute('aria-disabled',String(!can));}
  });
- // Aureons Auge UI-Update
+ // Aureons Auge UI-Update (wird im Smart-Farm-Modus komplett ausgeblendet)
  if($('aureonEyePill')){
   const brokenOn=isBrokenEyeBlessingActive();
   const waveOn=Boolean(state.aureonEyeWave&&state.aureonEyeWave.active);
-  const pct=Math.min(100,Math.max(0,Math.round(state.aureonEyeMeter||0)));
-  $('aureonEyePill').classList.toggle('broken-eye-blessing',brokenOn);
-  $('aureonEyePill').classList.toggle('high-threat',!brokenOn&&(waveOn||pct>=75));
-  if(brokenOn){
-   const remMin=Math.max(1,Math.ceil((state.brokenEyeBuffUntil-Date.now())/60000));
-   const remSec=Math.max(1,Math.ceil((state.brokenEyeBuffUntil-Date.now())/1000));
-   setText('aureonEyeIcon','✨');
-   setText('aureonEyeText',`Gebrochenes Auge: +100% Ressourcen (${remSec>90?remMin+'m':remSec+'s'})`);
-   if($('aureonEyeBarWrap'))$('aureonEyeBarWrap').style.display='none';
-  }else if(waveOn){
-   const w=state.aureonEyeWave;
-   setText('aureonEyeIcon','👁');
-   setText('aureonEyeText',w.type==='seraph'?'Aureons Auge: ERZ-SERAPH AKTIV!':`Aureons Auge: EXEKUTIONSWELLE (${w.step}/${w.total})`);
-   if($('aureonEyeBarWrap'))$('aureonEyeBarWrap').style.display='inline-block';
-   if($('aureonEyeBarFill'))$('aureonEyeBarFill').style.width='100%';
+  if(state.holdStage&&!brokenOn&&!waveOn){
+   $('aureonEyePill').style.display='none';
   }else{
-   setText('aureonEyeIcon','👁');
-   setText('aureonEyeText',`Aureons Auge: ${pct}%${state.holdStage?' (Pausiert)':''}`);
-   if($('aureonEyeBarWrap'))$('aureonEyeBarWrap').style.display='inline-block';
-   if($('aureonEyeBarFill'))$('aureonEyeBarFill').style.width=pct+'%';
+   $('aureonEyePill').style.display='inline-flex';
+   const pct=Math.min(100,Math.max(0,Math.round(state.aureonEyeMeter||0)));
+   $('aureonEyePill').classList.toggle('broken-eye-blessing',brokenOn);
+   $('aureonEyePill').classList.toggle('high-threat',!brokenOn&&(waveOn||pct>=75));
+   if(brokenOn){
+    const remMin=Math.max(1,Math.ceil((state.brokenEyeBuffUntil-Date.now())/60000));
+    const remSec=Math.max(1,Math.ceil((state.brokenEyeBuffUntil-Date.now())/1000));
+    setText('aureonEyeIcon','✨');
+    setText('aureonEyeText',`Gebrochenes Auge: +100% Ressourcen (${remSec>90?remMin+'m':remSec+'s'})`);
+    if($('aureonEyeBarWrap'))$('aureonEyeBarWrap').style.display='none';
+   }else if(waveOn){
+    const w=state.aureonEyeWave;
+    setText('aureonEyeIcon','👁');
+    setText('aureonEyeText',w.type==='seraph'?'Aureons Auge: ERZ-SERAPH AKTIV!':`Aureons Auge: EXEKUTIONSWELLE (${w.step}/${w.total})`);
+    if($('aureonEyeBarWrap'))$('aureonEyeBarWrap').style.display='inline-block';
+    if($('aureonEyeBarFill'))$('aureonEyeBarFill').style.width='100%';
+   }else{
+    setText('aureonEyeIcon','👁');
+    setText('aureonEyeText',`Aureons Auge: ${pct}%`);
+    if($('aureonEyeBarWrap'))$('aureonEyeBarWrap').style.display='inline-block';
+    if($('aureonEyeBarFill'))$('aureonEyeBarFill').style.width=pct+'%';
+   }
   }
  }
  // Konstellationen des Sternenabgrunds UI-Update
@@ -8118,6 +8185,28 @@ function tickSSJ2BioElectricity(){
    bg.setAttribute('d',dStr);
    bc.setAttribute('d',dStr);
   }
+ }
+ // 4. Gelbe Blitze direkt am Siegel-Button bei 100 % Ladung (ohne Hoch-/Runter-Bewegung)
+ const siegel100=Boolean(state.reiatsuSuppressed&&(state.reiatsuCompression||0)>=100);
+ for(let sIdx=1;sIdx<=3;sIdx++){
+  const sg=$('siegelBoltGlow'+sIdx),sc=$('siegelBoltCore'+sIdx);
+  if(!sg||!sc)continue;
+  if(!siegel100){
+   sg.setAttribute('d','');
+   sc.setAttribute('d','');
+   continue;
+  }
+  const startX=10+((sIdx-1)*38)+Math.random()*14;
+  const endX=startX+24+Math.random()*18;
+  const topEdge=(sIdx%2===1);
+  const yBase=topEdge?4:30;
+  const mx1=startX+(endX-startX)*0.36;
+  const my1=yBase+(Math.random()-.5)*9;
+  const mx2=startX+(endX-startX)*0.72;
+  const my2=yBase+(Math.random()-.5)*9;
+  const dStr=`M${startX.toFixed(1)} ${yBase} L${mx1.toFixed(1)} ${my1.toFixed(1)} L${mx2.toFixed(1)} ${my2.toFixed(1)} L${endX.toFixed(1)} ${yBase}`;
+  sg.setAttribute('d',dStr);
+  sc.setAttribute('d',dStr);
  }
 }
 setInterval(tickSSJ2BioElectricity,320);
@@ -10341,9 +10430,9 @@ const changelogHistoryData=[
   version:'0.7.2',
   tag:'Aktueller Patch · Reiatsu-Unterdrückung & Erweiterter Offline-Ertrag',
   changes:[
-   'Reiatsu-Unterdrückung („Siegel-Täuschung“): Neuer Umschalter direkt neben der Götterfurcht-Anzeige. Verbirgt Vaeliths Aura (+45 % Gold & Blitzessenz) und staut komprimierten Druck auf; beim Wechsel zu „Entfesselt“ entlädt sich die Kompression mit +120 % Schaden für bis zu 15 Sek.!',
-   'Erweiterter Offline-Ertrag (8 Std. + 20 % Bonuszeit): Nach den ersten 8 Std. (100 % Rate) sammelt Vaelith unbegrenzt mit 20 % des ursprünglichen Ertrags weiter.',
-   'Zufällige Vaelith-Offline-Bilder & Test-Modus: Im Offline-Bericht erscheint zufällig eines der Bilder offline/VaeOff1.jpg, VaeOff2.jpg oder VaeOff3.jpg (inkl. Würfel-Button & 4h/14h-Test-Buttons unter Einstellungen → Ruhmeshalle).'
+   'Reiatsu-Unterdrückung („Siegel-Täuschung“): Verbirgt Vaeliths Aura (+45 % Gold & Blitzessenz) und staut komprimierten Druck auf. Bei 100 % Ladung erhält Vaelith +35 % Schaden, ihre Augen leuchten stärker und gelbe Blitze knistern am Knopf; beim Öffnen des Siegels entlädt sich ein Blitz-Ausstoß (+120 % Schaden für bis zu 15 Sek.)!',
+   'Aureons Auge & Smart-Farm: Aureons Auge wird im Smart-Farm-Modus komplett ausgeblendet, solange Vorstoß pausiert ist.',
+   'Erweiterter Offline-Ertrag (8 Std. + 20 % Bonuszeit) & Vaelith-Offline-Bilder (.png): Nach den ersten 8 Std. (100 %) sammelt Vaelith mit 20 % weiter. Im Offline-Bericht erscheint zufällig offline/VaeOff1.png, VaeOff2.png oder VaeOff3.png (inkl. Test-Buttons unter Einstellungen → Ruhmeshalle).'
   ]
  },
  {
@@ -10846,9 +10935,9 @@ function calculateOfflineEarnings(totalElapsedSec){
  };
 }
 const offlineVaeArtworks=[
- {src:'offline/VaeOff1.jpg',file:'VaeOff1.jpg',caption:'„Im stillen Schein des Urblitzes schleift Vaelith Nharak für den nächsten Sturm …“'},
- {src:'offline/VaeOff2.jpg',file:'VaeOff2.jpg',caption:'„Zwischen zwei Gewittern sammelt die vergessene Göttin die Essenz der Nacht.“'},
- {src:'offline/VaeOff3.jpg',file:'VaeOff3.jpg',caption:'„Selbst abseits des Schlachtfelds wächst ihr Donner unaufhaltsam weiter.“'}
+ {src:'offline/VaeOff1.png',file:'VaeOff1.png',caption:'„Im stillen Schein des Urblitzes schleift Vaelith Nharak für den nächsten Sturm …“'},
+ {src:'offline/VaeOff2.png',file:'VaeOff2.png',caption:'„Zwischen zwei Gewittern sammelt die vergessene Göttin die Essenz der Nacht.“'},
+ {src:'offline/VaeOff3.png',file:'VaeOff3.png',caption:'„Selbst abseits des Schlachtfelds wächst ihr Donner unaufhaltsam weiter.“'}
 ];
 let lastPickedOfflineArtIdx=-1;
 function pickRandomOfflineArtwork(excludeIdx=-1){
@@ -10860,7 +10949,7 @@ function pickRandomOfflineArtwork(excludeIdx=-1){
 function applyOfflineArtFallback(imgEl,fileName){
  if(!imgEl)return;
  imgEl.onerror=null;
- imgEl.src='data:image/svg+xml;utf8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400"><defs><radialGradient id="bg" cx="50%" cy="35%" r="65%"><stop offset="0%" stop-color="#351d5c"/><stop offset="65%" stop-color="#140c24"/><stop offset="100%" stop-color="#07050d"/></radialGradient><linearGradient id="blade" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#9d4edd"/><stop offset="50%" stop-color="#e0aaff"/><stop offset="100%" stop-color="#ffffff"/></linearGradient></defs><rect width="640" height="400" fill="url(#bg)"/><circle cx="320" cy="145" r="95" fill="none" stroke="#c28aff" stroke-opacity="0.28" stroke-width="1.5" stroke-dasharray="10 6"/><line x1="170" y1="265" x2="470" y2="115" stroke="url(#blade)" stroke-width="6" stroke-linecap="round"/><polygon points="462,110 492,104 474,126" fill="#ffffff"/><circle cx="315" cy="192" r="5" fill="#ffd166"/><circle cx="303" cy="204" r="3" fill="#e0aaff"/><circle cx="332" cy="182" r="3.5" fill="#8fe8ff"/><text x="320" y="310" text-anchor="middle" fill="#d9c4ff" font-family="Georgia,serif" font-size="16">Vaelith &amp; Nharak · Platzhalter (${fileName})</text><text x="320" y="332" text-anchor="middle" fill="#9a9bb5" font-family="sans-serif" font-size="12">Lege offline/VaeOff1.jpg, VaeOff2.jpg &amp; VaeOff3.jpg ab</text></svg>`);
+ imgEl.src='data:image/svg+xml;utf8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400"><defs><radialGradient id="bg" cx="50%" cy="35%" r="65%"><stop offset="0%" stop-color="#351d5c"/><stop offset="65%" stop-color="#140c24"/><stop offset="100%" stop-color="#07050d"/></radialGradient><linearGradient id="blade" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#9d4edd"/><stop offset="50%" stop-color="#e0aaff"/><stop offset="100%" stop-color="#ffffff"/></linearGradient></defs><rect width="640" height="400" fill="url(#bg)"/><circle cx="320" cy="145" r="95" fill="none" stroke="#c28aff" stroke-opacity="0.28" stroke-width="1.5" stroke-dasharray="10 6"/><line x1="170" y1="265" x2="470" y2="115" stroke="url(#blade)" stroke-width="6" stroke-linecap="round"/><polygon points="462,110 492,104 474,126" fill="#ffffff"/><circle cx="315" cy="192" r="5" fill="#ffd166"/><circle cx="303" cy="204" r="3" fill="#e0aaff"/><circle cx="332" cy="182" r="3.5" fill="#8fe8ff"/><text x="320" y="310" text-anchor="middle" fill="#d9c4ff" font-family="Georgia,serif" font-size="16">Vaelith &amp; Nharak · Platzhalter (${fileName})</text><text x="320" y="332" text-anchor="middle" fill="#9a9bb5" font-family="sans-serif" font-size="12">Lege offline/VaeOff1.png, VaeOff2.png &amp; VaeOff3.png ab</text></svg>`);
 }
 function openOfflineWelcomeModal(calcOrSec,isTestPreview=false){
  const modal=$('offlineWelcomeModal'),body=$('offlineWelcomeModalBody');
@@ -10874,7 +10963,7 @@ function openOfflineWelcomeModal(calcOrSec,isTestPreview=false){
    <img class="offline-art-img" id="offlineArtImg" src="${art.src}" alt="Vaelith während deiner Abwesenheit (${art.file})">
    <div class="offline-art-topbadge">
     <span id="offlineArtFileLabel">🖼 ${art.file}</span>
-    <button type="button" class="offline-art-shuffle" id="shuffleOfflineArtBtn" title="Zufallsbild aus offline/VaeOff1–3.jpg neu würfeln">🎲</button>
+    <button type="button" class="offline-art-shuffle" id="shuffleOfflineArtBtn" title="Zufallsbild aus offline/VaeOff1–3.png neu würfeln">🎲</button>
    </div>
    <div class="offline-art-caption" id="offlineArtCaption">${art.caption}</div>
   </div>
