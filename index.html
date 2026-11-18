@@ -3556,12 +3556,11 @@ body.lounge-chill-mode.cyber-explosion::after{
   </div>
   <div class="lounge-activity-grid" id="loungeActivityGrid"></div>
   <div class="card" style="margin-top:10px;padding:10px 12px">
-   <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
-    <div>
-     <strong style="font-size:11px;color:#ffd166">🧪 Lounge-Szenen &amp; Bilder testen</strong>
-     <p class="setting-note" style="margin:2px 0 0">Setzt alle Aktivitäts-Cooldowns zurück, damit du <code>VaeBath1–5</code>, <code>VaeTowel1–5</code>, <code>VaeTea1–5</code>, <code>VaeCasu1–5</code> &amp; <code>VaeCasuDirt1–3</code> testen kannst.</p>
-    </div>
-    <button type="button" class="secondary" id="resetLoungeCooldownsBtn" style="width:auto;padding:8px 10px;font-size:10.5px;white-space:nowrap">↻ Cooldowns Reset</button>
+   <strong style="font-size:11px;color:#ffd166;display:block">🧪 Lounge-Szenen &amp; Hygiene testen</strong>
+   <p class="setting-note" style="margin:2px 0 8px">Setzt Cooldowns oder Hygiene zurück (bei <strong>&lt; 30 % Hygiene</strong> erscheinen <code>VaeCasuDirt1–3</code> in der Casual-Ansicht).</p>
+   <div class="settings-actions">
+    <button type="button" class="secondary" id="resetLoungeCooldownsBtn" style="padding:8px 9px;font-size:10.5px">↻ Cooldowns Reset</button>
+    <button type="button" class="secondary" id="resetLoungeHygieneBtn" style="padding:8px 9px;font-size:10.5px">🧼 Hygiene Reset (15%)</button>
    </div>
   </div>
  </div>
@@ -10709,7 +10708,7 @@ const changelogHistoryData=[
   version:'0.7.3',
   tag:'Aktueller Patch · Vaeliths Lounge (Lofi & Ruhe), Hygiene & 5 Offline-Bilder',
   changes:[
-   'Vaeliths Zuflucht / Lounge (Eigener 6. Tab): Neuer Entspannungs- & Daily-Bereich mit zufälliger Casual-Ansicht (CASUAL/VaeCasu1–5.png & VaeCasuDirt1–3.png ab > 30 % Hygiene), Hygiene- & Wohlbefindens-Balken sowie 4 Aktivitäten inklusive jeweils 5 eigenen Szenen-Bildern: Äther-Dusche (VaeBath1–5.png), Abtrocknen & Mondlicht-Ruhe (VaeTowel1–5.png), Sternenblüten-Tee (VaeTea1–5.png) und „Einfach nur chillen“ (VaeCasu1–5.png).',
+   'Vaeliths Zuflucht / Lounge (Eigener 6. Tab): Neuer Entspannungs- & Daily-Bereich mit zufälliger Casual-Ansicht (CASUAL/VaeCasu1–5.png & VaeCasuDirt1–3.png unter 30 % Hygiene), Hygiene- & Wohlbefindens-Balken sowie 4 Aktivitäten inklusive jeweils 5 eigenen Szenen-Bildern: Äther-Dusche (VaeBath1–5.png), Abtrocknen & Mondlicht-Ruhe (VaeTowel1–5.png), Sternenblüten-Tee (VaeTea1–5.png) und „Einfach nur chillen“ (VaeCasu1–5.png).',
    'Entspannte Lounge-Atmosphäre (Warmes Farbdesign, größere Bilder & Lofi-Only): Unabhängig vom gewählten Kampf-Farbschema erstrahlt die Lounge in warmen, frohen Abendrot- & Goldtönen mit vergrößerter Bildbühne, während Lofi (OST/ost3.mp3) im Loop läuft und grelle Kampf-Effekte pausieren.',
    'Lounge-Segen & Test-Modus: Jede Aktivität verleiht einen Kampf- oder Ressourcen-Bonus und lässt sich per Würfel-Button (🎲) sowie Cooldown-Reset jederzeit durchtesten.',
    'Erweiterte Offline-Bilder (VaeOff1.png – VaeOff5.png): Der Offline-Bericht wählt nun per Zufallsprinzip aus allen 5 Bildern im Ordner OFFLINE/.'
@@ -12199,7 +12198,7 @@ function applyLoungeArtFallback(imgEl,item){
 function getEffectiveLoungePool(poolName){
  if(poolName==='casual'){
   const h=Number(state.lounge&&state.lounge.hygiene)||0;
-  if(h>30&&Array.isArray(loungeArtPools.casualDirt)){
+  if(h<30&&Array.isArray(loungeArtPools.casualDirt)){
    return [...loungeArtPools.casual,...loungeArtPools.casualDirt];
   }
  }
@@ -12257,6 +12256,17 @@ function resetLoungeCooldownsForTest(){
  playSound('tap');
  toast('🧪 Alle Lounge-Cooldowns zurückgesetzt!');
  renderLoungePage(true);
+ save();
+}
+function resetLoungeHygieneForTest(){
+ ensureLoungeState();
+ state.lounge.hygiene=15;
+ state.lounge.lastDecayAt=Date.now();
+ setLoungeScene('casual',true);
+ playSound('tap');
+ toast('🧼 Hygiene auf 15 % gesetzt (VaeCasuDirt1–3 aktiv)!');
+ renderLoungePage(true);
+ render();
  save();
 }
 let lastLoungeSig='';
@@ -12317,6 +12327,7 @@ if($('testOffline14hBtn'))$('testOffline14hBtn').onclick=()=>{openOfflineWelcome
 if($('shuffleLoungeSceneBtn'))$('shuffleLoungeSceneBtn').onclick=e=>{e.stopPropagation();setLoungeScene(currentLoungePool,true);};if($('loungeStageFrame'))$('loungeStageFrame').onclick=()=>setLoungeScene(currentLoungePool,true);
 if($('returnToCasualBtn'))$('returnToCasualBtn').onclick=()=>setLoungeScene('casual',true);
 if($('resetLoungeCooldownsBtn'))$('resetLoungeCooldownsBtn').onclick=resetLoungeCooldownsForTest;
+if($('resetLoungeHygieneBtn'))$('resetLoungeHygieneBtn').onclick=resetLoungeHygieneForTest;
 load();setLoungeScene('casual',false);renderLoungePage(true);initOstPlayer();checkAutoDailyLogin();renderOfflineHistory();if(!state.enemyMax)resetEnemy();applyPalette();syncUpgradeValuesUI();syncLowPowerModeUI();syncSoundUI();checkTitleUnlocks();renderTitleOptions();$('paletteSelect').value=state.palette||'raiden';refreshCharacterImage();startOrganicLightning();render();
 let last=Date.now(),saveTimer=0,attackAccumulator=0;
 setInterval(()=>{
