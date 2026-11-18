@@ -3029,6 +3029,41 @@ button:focus, button:active, .overcharge-sigil-btn:focus, .overcharge-sigil-btn:
  color:#ffd166;
  margin-bottom:7px;
 }
+/* Ruhige, abgemagerte Effekt-Atmosphäre in der Lounge */
+body.lounge-chill-mode #reiatsuCanvas{
+ display:none!important;
+}
+body.lounge-chill-mode .reiatsu-screen-vignette{
+ opacity:.18!important;
+ animation:none!important;
+ box-shadow:inset 0 0 65px rgba(6, 4, 14, 0.75)!important;
+ background:radial-gradient(ellipse at 50% 42%, transparent 52%, rgba(8, 5, 18, 0.55) 100%)!important;
+ backdrop-filter:none!important;
+}
+body.lounge-chill-mode::before{
+ opacity:0!important;
+}
+body.lounge-chill-mode.glitch-full .app,
+body.lounge-chill-mode.overcharge-impact .app,
+body.lounge-chill-mode.cyber-explosion .app{
+ animation:none!important;
+}
+body.lounge-chill-mode.glitch-full:after,
+body.lounge-chill-mode.overcharge-impact::after,
+body.lounge-chill-mode.cyber-explosion::after{
+ display:none!important;
+}
+.lounge-chill-indicator{
+ display:inline-flex;
+ align-items:center;
+ gap:4px;
+ font-size:9px;
+ color:var(--cyan);
+ background:rgba(16, 12, 30, 0.78);
+ border:1px solid color-mix(in srgb, var(--cyan) 40%, var(--line));
+ border-radius:99px;
+ padding:2px 8px;
+}
 
 
 </style>
@@ -3450,7 +3485,7 @@ button:focus, button:active, .overcharge-sigil-btn:focus, .overcharge-sigil-btn:
 
 <section class="page" id="page-lounge">
  <div class="section">
-  <div class="sectionhead"><h2>Vaeliths Zuflucht · Lounge</h2><span class="small" id="loungeDailyCountBadge">Alltag &amp; Erholung</span></div>
+  <div class="sectionhead"><h2>Vaeliths Zuflucht · Lounge</h2><span class="lounge-chill-indicator" id="loungeDailyCountBadge">🎵 Lofi · Ruhige Zuflucht</span></div>
   <div class="card lounge-hero-card">
    <div class="lounge-stage-frame" id="loungeStageFrame">
     <img class="lounge-stage-img" id="loungeStageImg" src="Casual/VaeCasu1.png" alt="Vaelith in ihrer Zuflucht">
@@ -6574,7 +6609,9 @@ function render(){
    $('loungeBuffPill').textContent=`${lnb.label} · ${mStr}`;
   }
  }
- if($('page-lounge')&&$('page-lounge').classList.contains('active')&&typeof renderLoungePage==='function'){
+ const inLounge=Boolean($('page-lounge')&&$('page-lounge').classList.contains('active'));
+ document.body.classList.toggle('lounge-chill-mode',inLounge);
+ if(inLounge&&typeof renderLoungePage==='function'){
   renderLoungePage();
  }
  if($('companionActivePill')){
@@ -7731,7 +7768,7 @@ function refreshCachedThemeColors(){
 function applyPalette(){document.body.dataset.palette=state.palette||'raiden';document.body.dataset.titleFx=state.selectedTitleEffect||'stormborn';if($('paletteSelect'))$('paletteSelect').value=state.palette||'raiden';if($('titleEffectSelect'))$('titleEffectSelect').value=state.selectedTitleEffect||'stormborn';refreshCachedThemeColors();}
 function save(){try{state.lastTime=Date.now();localStorage.setItem('thunderborn-save-v1',JSON.stringify(state))}catch(e){toast('Speichern fehlgeschlagen: eventuell ist der Speicher voll.')}}
 function load(){try{let raw=localStorage.getItem('thunderborn-save-v1');if(!raw){renderOfflineHistory();return;}let s=JSON.parse(raw);Object.assign(state,s);state.characterTitle=typeof s.characterTitle==='string'?s.characterTitle:'Die Sturmgeborene';state.selectedTitle=typeof s.selectedTitle==='string'?s.selectedTitle:'stormborn';state.customTitle=sanitizePlainTextTitle(s.customTitle||'');state.selectedTitleEffect=typeof s.selectedTitleEffect==='string'?s.selectedTitleEffect:state.selectedTitle;state.unlockedTitles=Array.isArray(s.unlockedTitles)?s.unlockedTitles:['stormborn'];state.offlineHistory=Array.isArray(s.offlineHistory)?s.offlineHistory.slice(0,3):[];state.memoryReactions=(s.memoryReactions&&typeof s.memoryReactions==='object')?s.memoryReactions:{};state.seenEncounterIds=Array.isArray(s.seenEncounterIds)?s.seenEncounterIds:[];state.rivalAwakened=Boolean(s.rivalAwakened);state.rivalDialogues=(s.rivalDialogues&&typeof s.rivalDialogues==='object')?s.rivalDialogues:{};state.activeRivalChapter=Number(s.activeRivalChapter)||0;state.friend2Awakened=Boolean(s.friend2Awakened);state.friend2Dialogues=(s.friend2Dialogues&&typeof s.friend2Dialogues==='object')?s.friend2Dialogues:{};state.activeFriend2Chapter=Number(s.activeFriend2Chapter)||0;state.aureonAwakened=Boolean(s.aureonAwakened);state.aureonDialogues=(s.aureonDialogues&&typeof s.aureonDialogues==='object')?s.aureonDialogues:{};state.activeAureonChapter=Number(s.activeAureonChapter)||0;state.showUpgradeValues=(s.showUpgradeValues!==undefined)?Boolean(s.showUpgradeValues):true;state.dailyLogin=(s.dailyLogin&&typeof s.dailyLogin==='object')?{lastClaimDate:String(s.dailyLogin.lastClaimDate||''),streak:Number(s.dailyLogin.streak)||0,totalDays:Number(s.dailyLogin.totalDays)||0,maxStreak:Number(s.dailyLogin.maxStreak)||Number(s.dailyLogin.streak)||0,lastTrialDate:String(s.dailyLogin.lastTrialDate||''),bestTrialDmg:Number(s.dailyLogin.bestTrialDmg)||0}:{lastClaimDate:'',streak:0,totalDays:0,maxStreak:0,lastTrialDate:'',bestTrialDmg:0};state.activeCompanion=typeof s.activeCompanion==='string'?s.activeCompanion:'';state.loreBuff=(s.loreBuff&&typeof s.loreBuff==='object')?s.loreBuff:{type:'',label:'',until:0};state.mercyCount=Number(s.mercyCount)||0;state.wrathCount=Number(s.wrathCount)||0;state.reincarnations=Number(s.reincarnations)||0;state.musicEnabled=(s.musicEnabled!==undefined)?Boolean(s.musicEnabled):true;state.customOstName=typeof s.customOstName==='string'?s.customOstName:'';state.ostPlayMode=(typeof s.ostPlayMode==='string'&&['dynamic','ost1','phonk','ost2','ost3','phonkcalm'].includes(s.ostPlayMode))?s.ostPlayMode:'dynamic';state.fearMilestoneChoices=(s.fearMilestoneChoices&&typeof s.fearMilestoneChoices==='object')?s.fearMilestoneChoices:{};state.invasionActive=Boolean(s.invasionActive);state.seasonalMode=typeof s.seasonalMode==='string'?s.seasonalMode:'auto';state.relicStars=(s.relicStars&&typeof s.relicStars==='object')?s.relicStars:{};state.encounterChoices=(s.encounterChoices&&typeof s.encounterChoices==='object')?s.encounterChoices:{};state.seenFollowupIds=Array.isArray(s.seenFollowupIds)?s.seenFollowupIds:[];state.holdStage=Boolean(s.holdStage);state.maxStageReached=Math.max(Number(s.stage)||1,Number(s.maxStageReached)||1);state.activeInquisitorBoss=(s.activeInquisitorBoss&&typeof s.activeInquisitorBoss==='object')?s.activeInquisitorBoss:null;state.seenInquisitorIds=Array.isArray(s.seenInquisitorIds)?s.seenInquisitorIds:[];syncUpgradeValuesUI();syncLowPowerModeUI();state.palette=['raiden','honkai','storm','crimson','midnight','sovereign'].includes(s.palette)?s.palette:'raiden';applyPalette();const validPortraits=['vaelith_png','vaelith_alt1','vaelith_alt2','vaelith_alt3','vaelith_alt4','custom'];state.portraitMode=(validPortraits.includes(s.portraitMode)&&!(s.portraitMode==='custom'&&!state.characterImage))?s.portraitMode:'vaelith_png';refreshCharacterImage();state.upgrades=Object.assign({power:0,speed:0,crit:0,essence:0,greed:0,penetration:0},s.upgrades||{});state.skills=Object.assign({chain:0,storm:0,wrath:0,nova:0,timefracture:0},s.skills||{});state.talents=Object.assign({memory:0,revenge:0,truth:0,divinity:0,cataclysm:0,overdrive:0},s.talents||{});state.constellations=Object.assign({twilightBlade:0,brokenThrone:0,primalHeart:0},s.constellations||{});state.selectedConstellation=typeof s.selectedConstellation==='string'?s.selectedConstellation:'twilightBlade';state.aureonEyeMeter=Math.max(0,Math.min(100,Number(s.aureonEyeMeter)||0));state.aureonEyeWave=(s.aureonEyeWave&&typeof s.aureonEyeWave==='object')?s.aureonEyeWave:null;state.brokenEyeBuffUntil=Number(s.brokenEyeBuffUntil)||0;state.seenBossIntroKeys=Array.isArray(s.seenBossIntroKeys)?s.seenBossIntroKeys:[];state.mirrorShards=Math.max(0,Number(s.mirrorShards)||0);state.mirrorRefinements=Object.assign({power:0,speed:0,crit:0,essence:0,greed:0,penetration:0},s.mirrorRefinements||{});state.doppelgangerActive=Boolean(s.doppelgangerActive);state.expedition=(s.expedition&&typeof s.expedition==='object')?{companion:String(s.expedition.companion||''),endsAt:Number(s.expedition.endsAt)||0}:{companion:'',endsAt:0};state.lowPowerMode=Boolean(s.lowPowerMode);state.completedFlashbacks=Array.isArray(s.completedFlashbacks)?s.completedFlashbacks:[];state.lastBackupAt=Math.max(0,Number(s.lastBackupAt)||0);state.blackFocusUses=Math.max(0,Number(s.blackFocusUses)||0);const defStats={totalPlaySec:0,maxHit:0,totalKills:state.kills||0,totalBossKills:state.bossKills||0,totalEchoesEarned:state.echoes||0,spaehrenCount:0};state.stats=(s.stats&&typeof s.stats==='object')?{totalPlaySec:Math.max(0,Number(s.stats.totalPlaySec)||0),maxHit:Math.max(0,Number(s.stats.maxHit)||0),totalKills:Math.max(state.kills||0,Number(s.stats.totalKills)||0),totalBossKills:Math.max(state.bossKills||0,Number(s.stats.totalBossKills)||0),totalEchoesEarned:Math.max(state.echoes||0,Number(s.stats.totalEchoesEarned)||0),spaehrenCount:Math.max(0,Number(s.stats.spaehrenCount)||0)}:defStats;state.overchargeStacks=Math.min(5,Math.max(0,Number(s.overchargeStacks)||0));if(state.overcharge>=100&&state.overchargeStacks===0){state.overchargeStacks=1;state.overcharge=0;}if(!state.stats||typeof state.stats!=='object')state.stats={totalPlaySec:0,maxHit:0,totalKills:0,totalBossKills:0,totalEchoesEarned:0,spaehrenCount:0};let rawElapsed=Math.max(0,(Date.now()-(s.lastTime||Date.now()))/1000);if(rawElapsed>=5){enableAutoSmartFarmForOffline();}const offCalc=calculateOfflineEarnings(rawElapsed);const bestOffFarm=offCalc.farmInfo;let offGold=offCalc.totalGold;let offEss=offCalc.totalEss;if(rawElapsed>=10&&(offGold>0||offEss>0)){state.gold+=offGold;state.essence+=offEss;const estKills=offCalc.estKills;state.kills=(state.kills||0)+estKills;state.stats.totalKills=(state.stats.totalKills||0)+estKills;const nowStr=new Date().toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'})+' Uhr';const extTag=offCalc.extSec>0?' · inkl. 20%-Bonuszeit':'';state.offlineHistory.unshift({dateStr:nowStr+' (Smart-Farm St. '+bestOffFarm.stage+extTag+')',durationSec:Math.floor(rawElapsed),gold:offGold,essence:offEss});state.offlineHistory=state.offlineHistory.slice(0,3);if(rawElapsed>=900){setTimeout(()=>openOfflineWelcomeModal(offCalc,false),450);}else{setTimeout(()=>toast('🌾 Offline Smart-Farm (St. '+bestOffFarm.stage+'):\n+'+fmt(offGold)+' Gold & +'+fmt(offEss)+' Essenz'),500);}}renderOfflineHistory();resetEnemy()}catch(e){}}
-document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id==='page-'+b.dataset.page));if(typeof clearArenaAnimations==='function')clearArenaAnimations();if(typeof updateOstForActiveTab==='function')updateOstForActiveTab(b.dataset.page);if(b.dataset.page==='lounge'){setLoungeScene('casual',true);renderLoungePage(true);}}));
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id==='page-'+b.dataset.page));if(typeof clearArenaAnimations==='function')clearArenaAnimations();document.body.classList.toggle('lounge-chill-mode',b.dataset.page==='lounge');if(typeof updateOstForActiveTab==='function')updateOstForActiveTab(b.dataset.page);if(b.dataset.page==='lounge'){setLoungeScene('casual',true);renderLoungePage(true);}}));
 // Direct onclick handlers bound on persistent DOM buttons in buildInteractiveLists()
 $('prestigeBtn').onclick=doPrestige;
 if($('stageHoldToggleBtn'))$('stageHoldToggleBtn').onclick=()=>{
@@ -8452,7 +8489,7 @@ function initBleachReiatsuCanvas(){
  function renderReiatsuFrame(nowMs){
   const over=isOvercharged();
   const minInterval=over?42:95;
-  if(!document.hidden && !state.lowPowerMode && (over||isArenaVisible()) && (nowMs-lastReiatsuMs>=minInterval)){
+  if(!document.hidden && !state.lowPowerMode && !document.body.classList.contains('lounge-chill-mode') && (over||isArenaVisible()) && (nowMs-lastReiatsuMs>=minInterval)){
    lastReiatsuMs=nowMs;
    ctx.clearRect(0,0,w,h);
    const rLvl=cachedReiatsuLvl;
@@ -10624,9 +10661,10 @@ function startOrganicLightning(){
 const changelogHistoryData=[
  {
   version:'0.7.3',
-  tag:'Aktueller Patch · Vaeliths Lounge (Casual & Hygiene) & 5 Offline-Bilder',
+  tag:'Aktueller Patch · Vaeliths Lounge (Lofi & Ruhe), Hygiene & 5 Offline-Bilder',
   changes:[
-   'Vaeliths Zuflucht / Lounge (Eigener 6. Tab): Neuer Entspannungs- & Daily-Bereich mit zufälliger Casual-Ansicht (Casual/VaeCasu1.png bis VaeCasu5.png), Hygiene- & Wohlbefindens-Balken sowie 4 Aktivitäten inklusive eigenen Szenen-Bildern: Äther-Dusche (VaeBath1–3.png), Abtrocknen & Mondlicht-Ruhe (VaeTowel1–3.png), Sternenblüten-Tee (VaeTea1–3.png) und Nharak-Pflege (VaeCasu1–5.png).',
+   'Vaeliths Zuflucht / Lounge (Eigener 6. Tab): Neuer Entspannungs- & Daily-Bereich mit zufälliger Casual-Ansicht (Casual/VaeCasu1.png bis VaeCasu5.png), Hygiene- & Wohlbefindens-Balken sowie 4 Aktivitäten inklusive eigenen Szenen-Bildern: Äther-Dusche (VaeBath1–3.png), Abtrocknen & Mondlicht-Ruhe (VaeTowel1–3.png), Sternenblüten-Tee (VaeTea1–3.png) und „Einfach nur chillen“ (VaeCasu1–5.png).',
+   'Entspannte Lounge-Atmosphäre (Lofi-Only & abgemagerte Effekte): Beim Betreten der Lounge wechselt die Musik automatisch auf Lofi (OST/ost3.mp3) im Loop, während Reiatsu-Flimmern, Bildschirm-Glitches, Erschütterungen und grelle Rand-Effekte für ungestörte Ruhe ausgeblendet werden.',
    'Lounge-Segen & Test-Modus: Jede Aktivität verleiht einen Kampf- oder Ressourcen-Bonus und lässt sich per Würfel-Button (🎲) sowie Cooldown-Reset jederzeit durchtesten.',
    'Erweiterte Offline-Bilder (VaeOff1.png – VaeOff5.png): Der Offline-Bericht wählt nun per Zufallsprinzip aus allen 5 Bildern im Ordner offline/.'
   ]
@@ -11643,6 +11681,10 @@ function getTargetOstAudioElement(){
  if(mode==='ost2')return (a2&&!ostTrack2Failed)?a2:a1;
  if(mode==='ost3')return (a3&&!ostTrack3Failed)?a3:((a2&&!ostTrack2Failed)?a2:a1);
  if(mode==='phonkcalm')return (aPhonkCalm&&!ostTrackPhonkCalmFailed)?aPhonkCalm:((a2&&!ostTrack2Failed)?a2:a1);
+ // In der Lounge läuft ausschließlich entspannte Lofi-Musik (OST/ost3.mp3)
+ if(currentOstZone==='lounge'){
+  return (a3&&!ostTrack3Failed)?a3:((a2&&!ostTrack2Failed)?a2:a1);
+ }
  // Standard ('dynamic'): Im Kampf-Tab Rotation aus ost.mp3 & Phonk.mp3; in allen anderen Tabs Rotation aus ost2.mp3, ost3.mp3 & Phonkcalm.mp3
  if(currentOstZone==='battle'){
   const bTracks=getAvailableBattleTracks();
@@ -11760,7 +11802,8 @@ function switchMenuSubTrack(){
  }
 }
 function updateOstForActiveTab(pageName){
- const nextZone=(pageName==='battle')?'battle':'menu';
+ const nextZone=(pageName==='battle')?'battle':(pageName==='lounge'?'lounge':'menu');
+ if($('ostAudio3'))$('ostAudio3').loop=((state.ostPlayMode||'dynamic')==='ost3')||(nextZone==='lounge');
  if(nextZone!==currentOstZone){
   const prevZone=currentOstZone;
   currentOstZone=nextZone;
@@ -11860,7 +11903,9 @@ async function initOstPlayer(){
   el.volume=0;
   el.onerror=()=>{markFailed();};
   el.onended=()=>{
-   if((state.ostPlayMode||'dynamic')==='dynamic'&&getAvailableMenuTracks().length>1){
+   if(currentOstZone==='lounge'&&idx===3){
+    try{el.currentTime=0;el.play().catch(()=>{});}catch(e){}
+   }else if((state.ostPlayMode||'dynamic')==='dynamic'&&getAvailableMenuTracks().length>1){
     switchMenuSubTrack();
    }else{
     try{el.currentTime=0;el.play().catch(()=>{});}catch(e){}
@@ -11886,7 +11931,7 @@ async function initOstPlayer(){
   a1.src='OST/ost.mp3';
   state.customOstName='';
  }
- currentOstZone=(getActivePageName()==='battle')?'battle':'menu';
+ const _initPg=getActivePageName();currentOstZone=(_initPg==='battle')?'battle':(_initPg==='lounge'?'lounge':'menu');
  syncOstUI();
 }
 function syncOstUI(){
@@ -11896,7 +11941,7 @@ function syncOstUI(){
  if(a1)a1.loop=Boolean(state.customOstName)||(mode==='ost1');
  if(aPhonk)aPhonk.loop=(mode==='phonk');
  if(a2)a2.loop=(mode==='ost2');
- if(a3)a3.loop=(mode==='ost3');
+ if(a3)a3.loop=(mode==='ost3')||(currentOstZone==='lounge');
  if(aPhonkCalm)aPhonkCalm.loop=(mode==='phonkcalm');
  if($('toggleOstMusicBtn')){
   $('toggleOstMusicBtn').textContent=(state.musicEnabled!==false)?'🎵 Musik: An':'🎵 Musik: Aus';
@@ -12059,17 +12104,17 @@ const loungeActivitiesData=[
   }
  },
  {
-  id:'blade_care',
+  id:'sofa_chill',
   pool:'casual',
-  icon:'🗡',
-  name:'Nharak pflegen',
+  icon:'🛋',
+  name:'Einfach nur chillen',
   tag:'Alltag · VaeCasu1–5.png',
-  desc:'Poliert und schärft Nharak abseits des Kampfes. +15 % Ruhe.',
+  desc:'Auf das weiche Sofa sinken, die Augen schließen und absolut nichts tun. +20 % Ruhe.',
   rewardText:'Buff: +30 % Gesamtschaden (10m)',
   cooldownMs:1800000,
-  hygieneGain:15,
+  hygieneGain:20,
   apply:()=>{
-   state.lounge.buff={id:'blade_care',label:'🗡 Geschärfte Schneide (+30% DMG)',dmgMult:1.3,critDmgBonus:0,ocMult:1,essMult:1,compMult:1,until:Date.now()+600000};
+   state.lounge.buff={id:'sofa_chill',label:'🛋 Tiefenentspannt (+30% DMG)',dmgMult:1.3,critDmgBonus:0,ocMult:1,essMult:1,compMult:1,until:Date.now()+600000};
   }
  }
 ];
@@ -12163,7 +12208,7 @@ function renderLoungePage(force=false){
  }else{
   setText('loungeActiveBuffStatus','Kein aktiver Lounge-Segen');
  }
- setText('loungeDailyCountBadge',`${state.lounge.dailyActions||0}x entspannt`);
+ setText('loungeDailyCountBadge',`🎵 Lofi · ${state.lounge.dailyActions||0}x gechillt`);
  const sig=loungeActivitiesData.map(a=>{
   const rem=Math.max(0,Math.ceil(((Number(state.lounge.cooldowns[a.id])||0)-now)/60000));
   return `${a.id}:${rem}`;
