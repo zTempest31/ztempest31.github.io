@@ -2939,17 +2939,29 @@ body.lounge-chill-mode[data-palette]{
 .lounge-stage-frame{
  position:relative;
  width:100%;
- aspect-ratio:4/3;
- max-height:365px;
+ aspect-ratio:4/4.3;
+ max-height:460px;
  border-radius:14px;
  overflow:hidden;
  border:1.5px solid #e09a7c;
  background:radial-gradient(circle at 50% 35%, #4a2634, #1a0f16);
  box-shadow:0 10px 26px rgba(18, 6, 12, 0.65), inset 0 0 18px rgba(255, 195, 145, 0.12);
  cursor:pointer;
+ -webkit-tap-highlight-color:transparent!important;
+ -webkit-touch-callout:none!important;
+ -webkit-user-select:none!important;
+ user-select:none!important;
+ outline:none!important;
+}
+.lounge-stage-frame:focus,.lounge-stage-frame:active,.lounge-stage-frame *{
+ -webkit-tap-highlight-color:transparent!important;
+ -webkit-touch-callout:none!important;
+ -webkit-user-select:none!important;
+ user-select:none!important;
+ outline:none!important;
 }
 @media(min-width:480px){
- .lounge-stage-frame{max-height:415px;}
+ .lounge-stage-frame{max-height:530px;}
 }
 .lounge-stage-img{
  width:100%;
@@ -2957,6 +2969,7 @@ body.lounge-chill-mode[data-palette]{
  object-fit:cover;
  object-position:center top;
  display:block;
+ pointer-events:none;
  transition:opacity .28s ease, transform .35s ease;
 }
 .lounge-category-pill{
@@ -3546,7 +3559,7 @@ body.lounge-chill-mode.cyber-explosion::after{
    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
     <div>
      <strong style="font-size:11px;color:#ffd166">🧪 Lounge-Szenen &amp; Bilder testen</strong>
-     <p class="setting-note" style="margin:2px 0 0">Setzt alle Aktivitäts-Cooldowns zurück, damit du <code>VaeBath1–3</code>, <code>VaeTowel1–3</code>, <code>VaeTea1–3</code> &amp; <code>VaeCasu1–5</code> testen kannst.</p>
+     <p class="setting-note" style="margin:2px 0 0">Setzt alle Aktivitäts-Cooldowns zurück, damit du <code>VaeBath1–5</code>, <code>VaeTowel1–5</code>, <code>VaeTea1–5</code>, <code>VaeCasu1–5</code> &amp; <code>VaeCasuDirt1–3</code> testen kannst.</p>
     </div>
     <button type="button" class="secondary" id="resetLoungeCooldownsBtn" style="width:auto;padding:8px 10px;font-size:10.5px;white-space:nowrap">↻ Cooldowns Reset</button>
    </div>
@@ -10696,7 +10709,7 @@ const changelogHistoryData=[
   version:'0.7.3',
   tag:'Aktueller Patch · Vaeliths Lounge (Lofi & Ruhe), Hygiene & 5 Offline-Bilder',
   changes:[
-   'Vaeliths Zuflucht / Lounge (Eigener 6. Tab): Neuer Entspannungs- & Daily-Bereich mit zufälliger Casual-Ansicht (CASUAL/VaeCasu1.png bis VaeCasu5.png), Hygiene- & Wohlbefindens-Balken sowie 4 Aktivitäten inklusive eigenen Szenen-Bildern: Äther-Dusche (VaeBath1–3.png), Abtrocknen & Mondlicht-Ruhe (VaeTowel1–3.png), Sternenblüten-Tee (VaeTea1–3.png) und „Einfach nur chillen“ (VaeCasu1–5.png).',
+   'Vaeliths Zuflucht / Lounge (Eigener 6. Tab): Neuer Entspannungs- & Daily-Bereich mit zufälliger Casual-Ansicht (CASUAL/VaeCasu1–5.png & VaeCasuDirt1–3.png ab > 30 % Hygiene), Hygiene- & Wohlbefindens-Balken sowie 4 Aktivitäten inklusive jeweils 5 eigenen Szenen-Bildern: Äther-Dusche (VaeBath1–5.png), Abtrocknen & Mondlicht-Ruhe (VaeTowel1–5.png), Sternenblüten-Tee (VaeTea1–5.png) und „Einfach nur chillen“ (VaeCasu1–5.png).',
    'Entspannte Lounge-Atmosphäre (Warmes Farbdesign, größere Bilder & Lofi-Only): Unabhängig vom gewählten Kampf-Farbschema erstrahlt die Lounge in warmen, frohen Abendrot- & Goldtönen mit vergrößerter Bildbühne, während Lofi (OST/ost3.mp3) im Loop läuft und grelle Kampf-Effekte pausieren.',
    'Lounge-Segen & Test-Modus: Jede Aktivität verleiht einen Kampf- oder Ressourcen-Bonus und lässt sich per Würfel-Button (🎲) sowie Cooldown-Reset jederzeit durchtesten.',
    'Erweiterte Offline-Bilder (VaeOff1.png – VaeOff5.png): Der Offline-Bericht wählt nun per Zufallsprinzip aus allen 5 Bildern im Ordner OFFLINE/.'
@@ -12070,20 +12083,31 @@ const loungeArtPools={
   {src:'CASUAL/VaeCasu4.png',file:'VaeCasu4.png',badge:'🛋 Alltag · Casual',caption:'„Leise knistert nur ein schwacher Funke zwischen ihren Fingern, während sie in ihrer Zuflucht entspannt.“'},
   {src:'CASUAL/VaeCasu5.png',file:'VaeCasu5.png',badge:'🛋 Alltag · Casual',caption:'„Zwischen den Zeitaltern gehört dieser stille Rückzugsort ganz allein Vaelith.“'}
  ],
+ casualDirt:[
+  {src:'CASUAL/VaeCasuDirt1.png',file:'VaeCasuDirt1.png',badge:'🌪 Kampfstaub · Casual',caption:'„Nach langen Schlachten haftet noch feiner Sternenstaub und Ruß an Vaeliths Kleidung – Zeit für eine kleine Pause.“'},
+  {src:'CASUAL/VaeCasuDirt2.png',file:'VaeCasuDirt2.png',badge:'🌪 Kampfstaub · Casual',caption:'„Erschöpft, aber zufrieden lässt sie sich aufs Sofa fallen, noch bevor sie den Staub der Arena abgewaschen hat.“'},
+  {src:'CASUAL/VaeCasuDirt3.png',file:'VaeCasuDirt3.png',badge:'🌪 Kampfstaub · Casual',caption:'„Ein kurzer Atemzug zwischen zwei Gewittern – mit Spuren des Kampfes, aber völlig ungestört.“'}
+ ],
  bath:[
   {src:'CASUAL/VaeBath1.png',file:'VaeBath1.png',badge:'🚿 Äther-Dusche · Hygiene',caption:'„Warmes Wasser und leuchtender Ätherdampf spülen den Frost des Grabgletschers und die Asche der Schlacht von ihrer Haut.“'},
   {src:'CASUAL/VaeBath2.png',file:'VaeBath2.png',badge:'🚿 Äther-Dusche · Hygiene',caption:'„Im dichten Nebel der Therme entspannen sich Vaeliths Schultern, während feine Wassertropfen im violetten Licht schimmern.“'},
-  {src:'CASUAL/VaeBath3.png',file:'VaeBath3.png',badge:'🚿 Äther-Dusche · Hygiene',caption:'„Mit geschlossenen Augen genießt sie die wohltuende Wärme – vollkommen frei von Aureons Blicken.“'}
+  {src:'CASUAL/VaeBath3.png',file:'VaeBath3.png',badge:'🚿 Äther-Dusche · Hygiene',caption:'„Mit geschlossenen Augen genießt sie die wohltuende Wärme – vollkommen frei von Aureons Blicken.“'},
+  {src:'CASUAL/VaeBath4.png',file:'VaeBath4.png',badge:'🚿 Äther-Dusche · Hygiene',caption:'„Sanfter Dampf steigt um sie auf, während das warme Licht der Zuflucht jeden Rest von Erschöpfung fortspült.“'},
+  {src:'CASUAL/VaeBath5.png',file:'VaeBath5.png',badge:'🚿 Äther-Dusche · Hygiene',caption:'„Vollkommene Stille unter dem warmen Ätherregen – hier gibt es weder Götter noch Schlachten.“'}
  ],
  towel:[
   {src:'CASUAL/VaeTowel1.png',file:'VaeTowel1.png',badge:'👘 Abtrocknen · Mondlicht',caption:'„Nur in ein weiches Handtuch gehüllt steht Vaelith am mondbeschienenen Fenster und lässt die kühle Nachtluft über ihre Schultern streichen.“'},
   {src:'CASUAL/VaeTowel2.png',file:'VaeTowel2.png',badge:'👘 Abtrocknen · Mondlicht',caption:'„Noch leicht feucht vom Dampfbad streicht sie sich das nasse Haar aus dem Gesicht – ein seltener, ungeschützter Augenblick.“'},
-  {src:'CASUAL/VaeTowel3.png',file:'VaeTowel3.png',badge:'👘 Abtrocknen · Mondlicht',caption:'„Im sanften Schein der Zuflucht legt sie jegliche göttliche Strenge ab und genießt die ruhige Nähe.“'}
+  {src:'CASUAL/VaeTowel3.png',file:'VaeTowel3.png',badge:'👘 Abtrocknen · Mondlicht',caption:'„Im sanften Schein der Zuflucht legt sie jegliche göttliche Strenge ab und genießt die ruhige Nähe.“'},
+  {src:'CASUAL/VaeTowel4.png',file:'VaeTowel4.png',badge:'👘 Abtrocknen · Mondlicht',caption:'„In das warme Handtuch gewickelt genießt Vaelith den ruhigen Abendschein nach dem Bad.“'},
+  {src:'CASUAL/VaeTowel5.png',file:'VaeTowel5.png',badge:'👘 Abtrocknen · Mondlicht',caption:'„Entspannt am Rand des Ruhebetts sitzend lässt sie den Tag in friedlicher Stille ausklingen.“'}
  ],
  tea:[
   {src:'CASUAL/VaeTea1.png',file:'VaeTea1.png',badge:'🍵 Abendtee · Erholung',caption:'„Eine dampfende Schale Sternenblüten-Tee wärmt ihre Hände – fast wie damals nach den langen Nächten mit Lysera und Seraphina.“'},
   {src:'CASUAL/VaeTea2.png',file:'VaeTea2.png',badge:'🍵 Abendtee · Erholung',caption:'„Schluck für Schluck kehrt neue Ruhe in ihren Geist zurück, während draußen die Sterne über dem Abgrund ziehen.“'},
-  {src:'CASUAL/VaeTea3.png',file:'VaeTea3.png',badge:'🍵 Abendtee · Erholung',caption:'„Ein friedlicher Tagesausklang in der Lounge: Vaelith genießt den Duft des Tees und sammelt neue Kraft.“'}
+  {src:'CASUAL/VaeTea3.png',file:'VaeTea3.png',badge:'🍵 Abendtee · Erholung',caption:'„Ein friedlicher Tagesausklang in der Lounge: Vaelith genießt den Duft des Tees und sammelt neue Kraft.“'},
+  {src:'CASUAL/VaeTea4.png',file:'VaeTea4.png',badge:'🍵 Abendtee · Erholung',caption:'„Mit beiden Händen hält sie die warme Teetasse und lächelt leise in die ruhige Abendluft.“'},
+  {src:'CASUAL/VaeTea5.png',file:'VaeTea5.png',badge:'🍵 Abendtee · Erholung',caption:'„Zwischen Lofi-Klängen und dem Duft von Sternenblüten verfliegt jede Anspannung des Tages.“'}
  ]
 };
 const loungeActivitiesData=[
@@ -12092,7 +12116,7 @@ const loungeActivitiesData=[
   pool:'bath',
   icon:'🚿',
   name:'Äther-Dusche',
-  tag:'Hygiene · VaeBath1–3.png',
+  tag:'Hygiene · VaeBath1–5.png',
   desc:'Wäscht Frost, Staub und Blitzasche ab. Steigert Hygiene um +40 %.',
   rewardText:'Buff: +30 % Entladung & +20 % Essenz (10m)',
   cooldownMs:1800000,
@@ -12106,7 +12130,7 @@ const loungeActivitiesData=[
   pool:'towel',
   icon:'👘',
   name:'Abtrocknen & Ruhe',
-  tag:'Intimer Moment · VaeTowel1–3.png',
+  tag:'Intimer Moment · VaeTowel1–5.png',
   desc:'Nur im Handtuch am Mondlicht-Fenster entspannen. +35 % Hygiene.',
   rewardText:'Buff: +50 % Siegel-Kompression & +25 % Krit-DMG (10m)',
   cooldownMs:1800000,
@@ -12120,7 +12144,7 @@ const loungeActivitiesData=[
   pool:'tea',
   icon:'🍵',
   name:'Sternenblüten-Tee',
-  tag:'Daily Ritual · VaeTea1–3.png',
+  tag:'Daily Ritual · VaeTea1–5.png',
   desc:'Genieße heißen Tee in der Lounge. +25 % Wohlbefinden.',
   rewardText:'Sofort: 35 Min. Farm-Beute & +15 % Entladung',
   cooldownMs:1800000,
@@ -12172,16 +12196,25 @@ function applyLoungeArtFallback(imgEl,item){
  imgEl.onerror=null;
  imgEl.src='data:image/svg+xml;utf8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440"><defs><radialGradient id="lbg" cx="50%" cy="35%" r="70%"><stop offset="0%" stop-color="#451f5e"/><stop offset="65%" stop-color="#170d26"/><stop offset="100%" stop-color="#080510"/></radialGradient></defs><rect width="640" height="440" fill="url(#lbg)"/><circle cx="320" cy="175" r="105" fill="none" stroke="#f0a0d8" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="8 6"/><text x="320" y="172" text-anchor="middle" fill="#ffd1dc" font-family="Georgia,serif" font-size="18">${item.badge}</text><text x="320" y="204" text-anchor="middle" fill="#ffffff" font-family="monospace" font-size="15">CASUAL/${item.file}</text><text x="320" y="335" text-anchor="middle" fill="#b4a4c5" font-family="sans-serif" font-size="12">Lege das Bild im Ordner „CASUAL/“ ab</text></svg>`);
 }
+function getEffectiveLoungePool(poolName){
+ if(poolName==='casual'){
+  const h=Number(state.lounge&&state.lounge.hygiene)||0;
+  if(h>30&&Array.isArray(loungeArtPools.casualDirt)){
+   return [...loungeArtPools.casual,...loungeArtPools.casualDirt];
+  }
+ }
+ return loungeArtPools[poolName]||loungeArtPools.casual;
+}
 function setLoungeScene(poolName,forceDifferent=true){
- const pool=loungeArtPools[poolName]||loungeArtPools.casual;
+ const pool=getEffectiveLoungePool(poolName);
  currentLoungePool=poolName;
  let choices=pool.map((_,i)=>i);
- if(forceDifferent&&choices.length>1&&currentLoungeIdx>=0){
+ if(forceDifferent&&choices.length>1&&currentLoungeIdx>=0&&currentLoungeIdx<pool.length){
   choices=choices.filter(i=>i!==currentLoungeIdx);
  }
  const idx=choices[Math.floor(Math.random()*choices.length)]??0;
  currentLoungeIdx=idx;
- const item=pool[idx];
+ const item=pool[idx]||pool[0];
  const img=$('loungeStageImg');
  if(img){
   img.onerror=()=>applyLoungeArtFallback(img,item);
