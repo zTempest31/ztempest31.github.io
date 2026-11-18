@@ -2901,28 +2901,61 @@ button:focus, button:active, .overcharge-sigil-btn:focus, .overcharge-sigil-btn:
 }
 
 /* === V0.7.3: VAELITHS ZUFLUCHT / LOUNGE (CASUAL, HYGIENE & DAILY-MOMENTE) === */
+/* Eigenes, frohes und warmes Farbambiente in der Lounge – unabhängig vom gewählten Kampf-Farbschema */
+body.lounge-chill-mode,
+body.lounge-chill-mode[data-palette]{
+ --bg:#181016;
+ --bg-top:#63363b;
+ --bg-mid:#291820;
+ --panel:#271820;
+ --panel2:#38222d;
+ --line:#734958;
+ --text:#fff8f2;
+ --muted:#e0c3bb;
+ --violet:#ffb37e;
+ --pink:#ffa3c0;
+ --cyan:#ffe29e;
+ --gold:#ffd166;
+ --green:#b8f2d0;
+ --hero-top:#6e3a42;
+ --hero-mid:#38202b;
+ --hero-bot:#1c1118;
+ --hero-border:#9e6274;
+ --btn-bg1:#733b4b;
+ --btn-bg2:#4f2837;
+ --btn-border:#b0687a;
+ --bar-bg1:#e36f7d;
+ --bar-bg2:#ffd166;
+ --tab-bg:#21141ced;
+ --tab-active:#5c3242;
+}
 .lounge-hero-card{
- border:1px solid color-mix(in srgb, var(--pink) 55%, var(--line))!important;
- background:radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--hero-top) 68%, #1d102b) 0%, var(--panel) 78%)!important;
- box-shadow:0 8px 26px rgba(0,0,0,0.6), 0 0 22px color-mix(in srgb, var(--pink) 16%, transparent);
+ border:1px solid #a86475!important;
+ background:radial-gradient(ellipse at 50% 0%, #5c313b 0%, #271820 76%)!important;
+ box-shadow:0 8px 28px rgba(20, 8, 14, 0.55), 0 0 24px rgba(255, 179, 126, 0.16);
+ padding:8px 8px 12px!important;
  overflow:hidden;
 }
 .lounge-stage-frame{
  position:relative;
  width:100%;
- aspect-ratio:16/11;
- max-height:265px;
+ aspect-ratio:4/3;
+ max-height:365px;
  border-radius:14px;
  overflow:hidden;
- border:1px solid color-mix(in srgb, var(--violet) 65%, var(--gold));
- background:radial-gradient(circle at 50% 35%, #2a183f, #090612);
- box-shadow:0 8px 24px rgba(0,0,0,0.7), inset 0 0 18px rgba(0,0,0,0.65);
+ border:1.5px solid #e09a7c;
+ background:radial-gradient(circle at 50% 35%, #4a2634, #1a0f16);
+ box-shadow:0 10px 26px rgba(18, 6, 12, 0.65), inset 0 0 18px rgba(255, 195, 145, 0.12);
+ cursor:pointer;
+}
+@media(min-width:480px){
+ .lounge-stage-frame{max-height:415px;}
 }
 .lounge-stage-img{
  width:100%;
  height:100%;
  object-fit:cover;
- object-position:center;
+ object-position:center top;
  display:block;
  transition:opacity .28s ease, transform .35s ease;
 }
@@ -3034,10 +3067,10 @@ body.lounge-chill-mode #reiatsuCanvas{
  display:none!important;
 }
 body.lounge-chill-mode .reiatsu-screen-vignette{
- opacity:.18!important;
+ opacity:.24!important;
  animation:none!important;
- box-shadow:inset 0 0 65px rgba(6, 4, 14, 0.75)!important;
- background:radial-gradient(ellipse at 50% 42%, transparent 52%, rgba(8, 5, 18, 0.55) 100%)!important;
+ box-shadow:inset 0 0 70px rgba(255, 175, 120, 0.14)!important;
+ background:radial-gradient(ellipse at 50% 35%, rgba(255, 198, 138, 0.08) 0%, transparent 60%, rgba(24, 12, 18, 0.38) 100%)!important;
  backdrop-filter:none!important;
 }
 body.lounge-chill-mode::before{
@@ -3488,7 +3521,7 @@ body.lounge-chill-mode.cyber-explosion::after{
   <div class="sectionhead"><h2>Vaeliths Zuflucht · Lounge</h2><span class="lounge-chill-indicator" id="loungeDailyCountBadge">🎵 Lofi · Ruhige Zuflucht</span></div>
   <div class="card lounge-hero-card">
    <div class="lounge-stage-frame" id="loungeStageFrame">
-    <img class="lounge-stage-img" id="loungeStageImg" src="Casual/VaeCasu1.png" alt="Vaelith in ihrer Zuflucht">
+    <img class="lounge-stage-img" id="loungeStageImg" src="CASUAL/VaeCasu1.png" alt="Vaelith in ihrer Zuflucht">
     <div class="lounge-category-pill" id="loungeCategoryBadge">🛋 Alltag · Casual</div>
     <div class="lounge-controls-top">
      <span id="loungeFileLabel">🖼 VaeCasu1.png</span>
@@ -3674,7 +3707,7 @@ body.lounge-chill-mode.cyber-explosion::after{
      <div id="offlineHistoryList" style="margin-top:4px"></div>
      <div style="margin-top:9px;padding:9px 10px;border-radius:10px;border:1px solid color-mix(in srgb, var(--violet) 45%, var(--line));background:rgba(10,6,20,0.65)">
       <strong style="font-size:10.5px;color:#ffd166;display:block;margin-bottom:3px">🧪 Offline-Ertrag &amp; Vaelith-Bilder testen</strong>
-      <p class="setting-note" style="margin:0 0 8px">Erste 8 Std. sammeln mit <strong>100 %</strong> Offline-Rate, danach läuft die Sammlung mit <strong>20 %</strong> weiter. Zeigt zufällig <code>offline/VaeOff1.png</code> bis <code>VaeOff5.png</code>.</p>
+      <p class="setting-note" style="margin:0 0 8px">Erste 8 Std. sammeln mit <strong>100 %</strong> Offline-Rate, danach läuft die Sammlung mit <strong>20 %</strong> weiter. Zeigt zufällig <code>OFFLINE/VaeOff1.png</code> bis <code>VaeOff5.png</code>.</p>
       <div class="settings-actions">
        <button class="secondary" type="button" id="testOffline4hBtn" style="padding:8px;font-size:11px">⏱ Test: 4 Std. (100 %)</button>
        <button class="secondary" type="button" id="testOffline14hBtn" style="padding:8px;font-size:11px">🌙 Test: 14 Std. (8h + 20 %)</button>
@@ -10663,10 +10696,10 @@ const changelogHistoryData=[
   version:'0.7.3',
   tag:'Aktueller Patch · Vaeliths Lounge (Lofi & Ruhe), Hygiene & 5 Offline-Bilder',
   changes:[
-   'Vaeliths Zuflucht / Lounge (Eigener 6. Tab): Neuer Entspannungs- & Daily-Bereich mit zufälliger Casual-Ansicht (Casual/VaeCasu1.png bis VaeCasu5.png), Hygiene- & Wohlbefindens-Balken sowie 4 Aktivitäten inklusive eigenen Szenen-Bildern: Äther-Dusche (VaeBath1–3.png), Abtrocknen & Mondlicht-Ruhe (VaeTowel1–3.png), Sternenblüten-Tee (VaeTea1–3.png) und „Einfach nur chillen“ (VaeCasu1–5.png).',
-   'Entspannte Lounge-Atmosphäre (Lofi-Only & abgemagerte Effekte): Beim Betreten der Lounge wechselt die Musik automatisch auf Lofi (OST/ost3.mp3) im Loop, während Reiatsu-Flimmern, Bildschirm-Glitches, Erschütterungen und grelle Rand-Effekte für ungestörte Ruhe ausgeblendet werden.',
+   'Vaeliths Zuflucht / Lounge (Eigener 6. Tab): Neuer Entspannungs- & Daily-Bereich mit zufälliger Casual-Ansicht (CASUAL/VaeCasu1.png bis VaeCasu5.png), Hygiene- & Wohlbefindens-Balken sowie 4 Aktivitäten inklusive eigenen Szenen-Bildern: Äther-Dusche (VaeBath1–3.png), Abtrocknen & Mondlicht-Ruhe (VaeTowel1–3.png), Sternenblüten-Tee (VaeTea1–3.png) und „Einfach nur chillen“ (VaeCasu1–5.png).',
+   'Entspannte Lounge-Atmosphäre (Warmes Farbdesign, größere Bilder & Lofi-Only): Unabhängig vom gewählten Kampf-Farbschema erstrahlt die Lounge in warmen, frohen Abendrot- & Goldtönen mit vergrößerter Bildbühne, während Lofi (OST/ost3.mp3) im Loop läuft und grelle Kampf-Effekte pausieren.',
    'Lounge-Segen & Test-Modus: Jede Aktivität verleiht einen Kampf- oder Ressourcen-Bonus und lässt sich per Würfel-Button (🎲) sowie Cooldown-Reset jederzeit durchtesten.',
-   'Erweiterte Offline-Bilder (VaeOff1.png – VaeOff5.png): Der Offline-Bericht wählt nun per Zufallsprinzip aus allen 5 Bildern im Ordner offline/.'
+   'Erweiterte Offline-Bilder (VaeOff1.png – VaeOff5.png): Der Offline-Bericht wählt nun per Zufallsprinzip aus allen 5 Bildern im Ordner OFFLINE/.'
   ]
  },
  {
@@ -10675,7 +10708,7 @@ const changelogHistoryData=[
   changes:[
    'Reiatsu-Unterdrückung („Siegel-Täuschung“): Verbirgt Vaeliths Aura (+45 % Gold & Blitzessenz) und staut komprimierten Druck auf. Bei 100 % Ladung erhält Vaelith +35 % Schaden, ihre Augen leuchten stärker und gelbe Blitze knistern am Knopf; beim Öffnen des Siegels entlädt sich ein Blitz-Ausstoß (+120 % Schaden für bis zu 15 Sek.)!',
    'Aureons Auge & Smart-Farm: Aureons Auge wird im Smart-Farm-Modus komplett ausgeblendet, solange Vorstoß pausiert ist.',
-   'Erweiterter Offline-Ertrag (8 Std. + 20 % Bonuszeit) & Vaelith-Offline-Bilder (.png): Nach den ersten 8 Std. (100 %) sammelt Vaelith mit 20 % weiter. Im Offline-Bericht erscheint zufällig offline/VaeOff1.png, VaeOff2.png oder VaeOff3.png (inkl. Test-Buttons unter Einstellungen → Ruhmeshalle).'
+   'Erweiterter Offline-Ertrag (8 Std. + 20 % Bonuszeit) & Vaelith-Offline-Bilder (.png): Nach den ersten 8 Std. (100 %) sammelt Vaelith mit 20 % weiter. Im Offline-Bericht erscheint zufällig OFFLINE/VaeOff1.png, VaeOff2.png oder VaeOff3.png (inkl. Test-Buttons unter Einstellungen → Ruhmeshalle).'
   ]
  },
  {
@@ -11178,11 +11211,11 @@ function calculateOfflineEarnings(totalElapsedSec){
  };
 }
 const offlineVaeArtworks=[
- {src:'offline/VaeOff1.png',file:'VaeOff1.png',caption:'„Im stillen Schein des Urblitzes schleift Vaelith Nharak für den nächsten Sturm …“'},
- {src:'offline/VaeOff2.png',file:'VaeOff2.png',caption:'„Zwischen zwei Gewittern sammelt die vergessene Göttin die Essenz der Nacht.“'},
- {src:'offline/VaeOff3.png',file:'VaeOff3.png',caption:'„Selbst abseits des Schlachtfelds wächst ihr Donner unaufhaltsam weiter.“'},
- {src:'offline/VaeOff4.png',file:'VaeOff4.png',caption:'„Unter dem violetten Sternenhimmel wacht Vaelith über die Stille vor dem nächsten Einschlag.“'},
- {src:'offline/VaeOff5.png',file:'VaeOff5.png',caption:'„Während die Welt schläft, strömt die verlorene Blitzessenz zurück in ihre Klinge.“'}
+ {src:'OFFLINE/VaeOff1.png',file:'VaeOff1.png',caption:'„Im stillen Schein des Urblitzes schleift Vaelith Nharak für den nächsten Sturm …“'},
+ {src:'OFFLINE/VaeOff2.png',file:'VaeOff2.png',caption:'„Zwischen zwei Gewittern sammelt die vergessene Göttin die Essenz der Nacht.“'},
+ {src:'OFFLINE/VaeOff3.png',file:'VaeOff3.png',caption:'„Selbst abseits des Schlachtfelds wächst ihr Donner unaufhaltsam weiter.“'},
+ {src:'OFFLINE/VaeOff4.png',file:'VaeOff4.png',caption:'„Unter dem violetten Sternenhimmel wacht Vaelith über die Stille vor dem nächsten Einschlag.“'},
+ {src:'OFFLINE/VaeOff5.png',file:'VaeOff5.png',caption:'„Während die Welt schläft, strömt die verlorene Blitzessenz zurück in ihre Klinge.“'}
 ];
 let lastPickedOfflineArtIdx=-1;
 function pickRandomOfflineArtwork(excludeIdx=-1){
@@ -11194,7 +11227,7 @@ function pickRandomOfflineArtwork(excludeIdx=-1){
 function applyOfflineArtFallback(imgEl,fileName){
  if(!imgEl)return;
  imgEl.onerror=null;
- imgEl.src='data:image/svg+xml;utf8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400"><defs><radialGradient id="bg" cx="50%" cy="35%" r="65%"><stop offset="0%" stop-color="#351d5c"/><stop offset="65%" stop-color="#140c24"/><stop offset="100%" stop-color="#07050d"/></radialGradient><linearGradient id="blade" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#9d4edd"/><stop offset="50%" stop-color="#e0aaff"/><stop offset="100%" stop-color="#ffffff"/></linearGradient></defs><rect width="640" height="400" fill="url(#bg)"/><circle cx="320" cy="145" r="95" fill="none" stroke="#c28aff" stroke-opacity="0.28" stroke-width="1.5" stroke-dasharray="10 6"/><line x1="170" y1="265" x2="470" y2="115" stroke="url(#blade)" stroke-width="6" stroke-linecap="round"/><polygon points="462,110 492,104 474,126" fill="#ffffff"/><circle cx="315" cy="192" r="5" fill="#ffd166"/><circle cx="303" cy="204" r="3" fill="#e0aaff"/><circle cx="332" cy="182" r="3.5" fill="#8fe8ff"/><text x="320" y="310" text-anchor="middle" fill="#d9c4ff" font-family="Georgia,serif" font-size="16">Vaelith &amp; Nharak · Platzhalter (${fileName})</text><text x="320" y="332" text-anchor="middle" fill="#9a9bb5" font-family="sans-serif" font-size="12">Lege offline/VaeOff1.png bis VaeOff5.png ab</text></svg>`);
+ imgEl.src='data:image/svg+xml;utf8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400"><defs><radialGradient id="bg" cx="50%" cy="35%" r="65%"><stop offset="0%" stop-color="#351d5c"/><stop offset="65%" stop-color="#140c24"/><stop offset="100%" stop-color="#07050d"/></radialGradient><linearGradient id="blade" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#9d4edd"/><stop offset="50%" stop-color="#e0aaff"/><stop offset="100%" stop-color="#ffffff"/></linearGradient></defs><rect width="640" height="400" fill="url(#bg)"/><circle cx="320" cy="145" r="95" fill="none" stroke="#c28aff" stroke-opacity="0.28" stroke-width="1.5" stroke-dasharray="10 6"/><line x1="170" y1="265" x2="470" y2="115" stroke="url(#blade)" stroke-width="6" stroke-linecap="round"/><polygon points="462,110 492,104 474,126" fill="#ffffff"/><circle cx="315" cy="192" r="5" fill="#ffd166"/><circle cx="303" cy="204" r="3" fill="#e0aaff"/><circle cx="332" cy="182" r="3.5" fill="#8fe8ff"/><text x="320" y="310" text-anchor="middle" fill="#d9c4ff" font-family="Georgia,serif" font-size="16">Vaelith &amp; Nharak · Platzhalter (${fileName})</text><text x="320" y="332" text-anchor="middle" fill="#9a9bb5" font-family="sans-serif" font-size="12">Lege OFFLINE/VaeOff1.png bis VaeOff5.png ab</text></svg>`);
 }
 function openOfflineWelcomeModal(calcOrSec,isTestPreview=false){
  const modal=$('offlineWelcomeModal'),body=$('offlineWelcomeModalBody');
@@ -11208,7 +11241,7 @@ function openOfflineWelcomeModal(calcOrSec,isTestPreview=false){
    <img class="offline-art-img" id="offlineArtImg" src="${art.src}" alt="Vaelith während deiner Abwesenheit (${art.file})">
    <div class="offline-art-topbadge">
     <span id="offlineArtFileLabel">🖼 ${art.file}</span>
-    <button type="button" class="offline-art-shuffle" id="shuffleOfflineArtBtn" title="Zufallsbild aus offline/VaeOff1–3.png neu würfeln">🎲</button>
+    <button type="button" class="offline-art-shuffle" id="shuffleOfflineArtBtn" title="Zufallsbild aus OFFLINE/VaeOff1–3.png neu würfeln">🎲</button>
    </div>
    <div class="offline-art-caption" id="offlineArtCaption">${art.caption}</div>
   </div>
@@ -12031,26 +12064,26 @@ document.addEventListener('pointerdown',()=>{
 // === V0.7.3: VAELITHS ZUFLUCHT / LOUNGE SYSTEM (CASUAL, DUSCHE, HANDTUCH, TEE) ===
 const loungeArtPools={
  casual:[
-  {src:'Casual/VaeCasu1.png',file:'VaeCasu1.png',badge:'🛋 Alltag · Casual',caption:'„Ohne Rüstung und ohne Thronkrieg – endlich ein Moment, in dem Vaelith einfach nur sie selbst sein darf.“'},
-  {src:'Casual/VaeCasu2.png',file:'VaeCasu2.png',badge:'🛋 Alltag · Casual',caption:'„In bequemer Kleidung lehnt sich die Sturmgeborene zurück und lässt den Donner draußen vor dem Fenster.“'},
-  {src:'Casual/VaeCasu3.png',file:'VaeCasu3.png',badge:'🛋 Alltag · Casual',caption:'„Ein ruhiger Blick über die Wolken – selbst eine vergessene Göttin braucht manchmal Pause vom Kampf.“'},
-  {src:'Casual/VaeCasu4.png',file:'VaeCasu4.png',badge:'🛋 Alltag · Casual',caption:'„Leise knistert nur ein schwacher Funke zwischen ihren Fingern, während sie in ihrer Zuflucht entspannt.“'},
-  {src:'Casual/VaeCasu5.png',file:'VaeCasu5.png',badge:'🛋 Alltag · Casual',caption:'„Zwischen den Zeitaltern gehört dieser stille Rückzugsort ganz allein Vaelith.“'}
+  {src:'CASUAL/VaeCasu1.png',file:'VaeCasu1.png',badge:'🛋 Alltag · Casual',caption:'„Ohne Rüstung und ohne Thronkrieg – endlich ein Moment, in dem Vaelith einfach nur sie selbst sein darf.“'},
+  {src:'CASUAL/VaeCasu2.png',file:'VaeCasu2.png',badge:'🛋 Alltag · Casual',caption:'„In bequemer Kleidung lehnt sich die Sturmgeborene zurück und lässt den Donner draußen vor dem Fenster.“'},
+  {src:'CASUAL/VaeCasu3.png',file:'VaeCasu3.png',badge:'🛋 Alltag · Casual',caption:'„Ein ruhiger Blick über die Wolken – selbst eine vergessene Göttin braucht manchmal Pause vom Kampf.“'},
+  {src:'CASUAL/VaeCasu4.png',file:'VaeCasu4.png',badge:'🛋 Alltag · Casual',caption:'„Leise knistert nur ein schwacher Funke zwischen ihren Fingern, während sie in ihrer Zuflucht entspannt.“'},
+  {src:'CASUAL/VaeCasu5.png',file:'VaeCasu5.png',badge:'🛋 Alltag · Casual',caption:'„Zwischen den Zeitaltern gehört dieser stille Rückzugsort ganz allein Vaelith.“'}
  ],
  bath:[
-  {src:'Casual/VaeBath1.png',file:'VaeBath1.png',badge:'🚿 Äther-Dusche · Hygiene',caption:'„Warmes Wasser und leuchtender Ätherdampf spülen den Frost des Grabgletschers und die Asche der Schlacht von ihrer Haut.“'},
-  {src:'Casual/VaeBath2.png',file:'VaeBath2.png',badge:'🚿 Äther-Dusche · Hygiene',caption:'„Im dichten Nebel der Therme entspannen sich Vaeliths Schultern, während feine Wassertropfen im violetten Licht schimmern.“'},
-  {src:'Casual/VaeBath3.png',file:'VaeBath3.png',badge:'🚿 Äther-Dusche · Hygiene',caption:'„Mit geschlossenen Augen genießt sie die wohltuende Wärme – vollkommen frei von Aureons Blicken.“'}
+  {src:'CASUAL/VaeBath1.png',file:'VaeBath1.png',badge:'🚿 Äther-Dusche · Hygiene',caption:'„Warmes Wasser und leuchtender Ätherdampf spülen den Frost des Grabgletschers und die Asche der Schlacht von ihrer Haut.“'},
+  {src:'CASUAL/VaeBath2.png',file:'VaeBath2.png',badge:'🚿 Äther-Dusche · Hygiene',caption:'„Im dichten Nebel der Therme entspannen sich Vaeliths Schultern, während feine Wassertropfen im violetten Licht schimmern.“'},
+  {src:'CASUAL/VaeBath3.png',file:'VaeBath3.png',badge:'🚿 Äther-Dusche · Hygiene',caption:'„Mit geschlossenen Augen genießt sie die wohltuende Wärme – vollkommen frei von Aureons Blicken.“'}
  ],
  towel:[
-  {src:'Casual/VaeTowel1.png',file:'VaeTowel1.png',badge:'👘 Abtrocknen · Mondlicht',caption:'„Nur in ein weiches Handtuch gehüllt steht Vaelith am mondbeschienenen Fenster und lässt die kühle Nachtluft über ihre Schultern streichen.“'},
-  {src:'Casual/VaeTowel2.png',file:'VaeTowel2.png',badge:'👘 Abtrocknen · Mondlicht',caption:'„Noch leicht feucht vom Dampfbad streicht sie sich das nasse Haar aus dem Gesicht – ein seltener, ungeschützter Augenblick.“'},
-  {src:'Casual/VaeTowel3.png',file:'VaeTowel3.png',badge:'👘 Abtrocknen · Mondlicht',caption:'„Im sanften Schein der Zuflucht legt sie jegliche göttliche Strenge ab und genießt die ruhige Nähe.“'}
+  {src:'CASUAL/VaeTowel1.png',file:'VaeTowel1.png',badge:'👘 Abtrocknen · Mondlicht',caption:'„Nur in ein weiches Handtuch gehüllt steht Vaelith am mondbeschienenen Fenster und lässt die kühle Nachtluft über ihre Schultern streichen.“'},
+  {src:'CASUAL/VaeTowel2.png',file:'VaeTowel2.png',badge:'👘 Abtrocknen · Mondlicht',caption:'„Noch leicht feucht vom Dampfbad streicht sie sich das nasse Haar aus dem Gesicht – ein seltener, ungeschützter Augenblick.“'},
+  {src:'CASUAL/VaeTowel3.png',file:'VaeTowel3.png',badge:'👘 Abtrocknen · Mondlicht',caption:'„Im sanften Schein der Zuflucht legt sie jegliche göttliche Strenge ab und genießt die ruhige Nähe.“'}
  ],
  tea:[
-  {src:'Casual/VaeTea1.png',file:'VaeTea1.png',badge:'🍵 Abendtee · Erholung',caption:'„Eine dampfende Schale Sternenblüten-Tee wärmt ihre Hände – fast wie damals nach den langen Nächten mit Lysera und Seraphina.“'},
-  {src:'Casual/VaeTea2.png',file:'VaeTea2.png',badge:'🍵 Abendtee · Erholung',caption:'„Schluck für Schluck kehrt neue Ruhe in ihren Geist zurück, während draußen die Sterne über dem Abgrund ziehen.“'},
-  {src:'Casual/VaeTea3.png',file:'VaeTea3.png',badge:'🍵 Abendtee · Erholung',caption:'„Ein friedlicher Tagesausklang in der Lounge: Vaelith genießt den Duft des Tees und sammelt neue Kraft.“'}
+  {src:'CASUAL/VaeTea1.png',file:'VaeTea1.png',badge:'🍵 Abendtee · Erholung',caption:'„Eine dampfende Schale Sternenblüten-Tee wärmt ihre Hände – fast wie damals nach den langen Nächten mit Lysera und Seraphina.“'},
+  {src:'CASUAL/VaeTea2.png',file:'VaeTea2.png',badge:'🍵 Abendtee · Erholung',caption:'„Schluck für Schluck kehrt neue Ruhe in ihren Geist zurück, während draußen die Sterne über dem Abgrund ziehen.“'},
+  {src:'CASUAL/VaeTea3.png',file:'VaeTea3.png',badge:'🍵 Abendtee · Erholung',caption:'„Ein friedlicher Tagesausklang in der Lounge: Vaelith genießt den Duft des Tees und sammelt neue Kraft.“'}
  ]
 };
 const loungeActivitiesData=[
@@ -12137,7 +12170,7 @@ function ensureLoungeState(){
 function applyLoungeArtFallback(imgEl,item){
  if(!imgEl)return;
  imgEl.onerror=null;
- imgEl.src='data:image/svg+xml;utf8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440"><defs><radialGradient id="lbg" cx="50%" cy="35%" r="70%"><stop offset="0%" stop-color="#451f5e"/><stop offset="65%" stop-color="#170d26"/><stop offset="100%" stop-color="#080510"/></radialGradient></defs><rect width="640" height="440" fill="url(#lbg)"/><circle cx="320" cy="175" r="105" fill="none" stroke="#f0a0d8" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="8 6"/><text x="320" y="172" text-anchor="middle" fill="#ffd1dc" font-family="Georgia,serif" font-size="18">${item.badge}</text><text x="320" y="204" text-anchor="middle" fill="#ffffff" font-family="monospace" font-size="15">Casual/${item.file}</text><text x="320" y="335" text-anchor="middle" fill="#b4a4c5" font-family="sans-serif" font-size="12">Lege das Bild im Ordner „Casual/“ ab</text></svg>`);
+ imgEl.src='data:image/svg+xml;utf8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440"><defs><radialGradient id="lbg" cx="50%" cy="35%" r="70%"><stop offset="0%" stop-color="#451f5e"/><stop offset="65%" stop-color="#170d26"/><stop offset="100%" stop-color="#080510"/></radialGradient></defs><rect width="640" height="440" fill="url(#lbg)"/><circle cx="320" cy="175" r="105" fill="none" stroke="#f0a0d8" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="8 6"/><text x="320" y="172" text-anchor="middle" fill="#ffd1dc" font-family="Georgia,serif" font-size="18">${item.badge}</text><text x="320" y="204" text-anchor="middle" fill="#ffffff" font-family="monospace" font-size="15">CASUAL/${item.file}</text><text x="320" y="335" text-anchor="middle" fill="#b4a4c5" font-family="sans-serif" font-size="12">Lege das Bild im Ordner „CASUAL/“ ab</text></svg>`);
 }
 function setLoungeScene(poolName,forceDifferent=true){
  const pool=loungeArtPools[poolName]||loungeArtPools.casual;
@@ -12248,7 +12281,7 @@ function renderLoungePage(force=false){
 if($('reiatsuSuppressBtn'))$('reiatsuSuppressBtn').onclick=toggleReiatsuSuppression;
 if($('testOffline4hBtn'))$('testOffline4hBtn').onclick=()=>{openOfflineWelcomeModal(calculateOfflineEarnings(4*3600),true);};
 if($('testOffline14hBtn'))$('testOffline14hBtn').onclick=()=>{openOfflineWelcomeModal(calculateOfflineEarnings(14*3600),true);};
-if($('shuffleLoungeSceneBtn'))$('shuffleLoungeSceneBtn').onclick=()=>setLoungeScene(currentLoungePool,true);
+if($('shuffleLoungeSceneBtn'))$('shuffleLoungeSceneBtn').onclick=e=>{e.stopPropagation();setLoungeScene(currentLoungePool,true);};if($('loungeStageFrame'))$('loungeStageFrame').onclick=()=>setLoungeScene(currentLoungePool,true);
 if($('returnToCasualBtn'))$('returnToCasualBtn').onclick=()=>setLoungeScene('casual',true);
 if($('resetLoungeCooldownsBtn'))$('resetLoungeCooldownsBtn').onclick=resetLoungeCooldownsForTest;
 load();setLoungeScene('casual',false);renderLoungePage(true);initOstPlayer();checkAutoDailyLogin();renderOfflineHistory();if(!state.enemyMax)resetEnemy();applyPalette();syncUpgradeValuesUI();syncLowPowerModeUI();syncSoundUI();checkTitleUnlocks();renderTitleOptions();$('paletteSelect').value=state.palette||'raiden';refreshCharacterImage();startOrganicLightning();render();
