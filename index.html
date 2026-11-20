@@ -3537,7 +3537,7 @@ body.lounge-chill-mode.cyber-explosion::after{
 
 <section class="page" id="page-lounge">
  <div class="section">
-  <div class="sectionhead"><h2>Vaeliths Zuflucht · Lounge</h2><span class="lounge-chill-indicator" id="loungeDailyCountBadge">🎵 Lounge &amp; Lofi · Zuflucht</span></div>
+  <div class="sectionhead"><h2>Vaeliths Zuflucht · Lounge</h2></div>
   <div class="card lounge-hero-card">
    <div class="lounge-stage-frame" id="loungeStageFrame">
     <img class="lounge-stage-img" id="loungeStageImg" src="CASUAL/VaeCasu1.png" alt="Vaelith in ihrer Zuflucht">
@@ -3562,7 +3562,7 @@ body.lounge-chill-mode.cyber-explosion::after{
   <div class="lounge-activity-grid" id="loungeActivityGrid"></div>
   <div class="card" style="margin-top:10px;padding:10px 12px">
    <strong style="font-size:11px;color:#ffd166;display:block">🧪 Lounge-Szenen &amp; Hygiene testen</strong>
-   <p class="setting-note" style="margin:2px 0 8px">Setzt Aktivitäts-Cooldowns oder die Hygiene (auf 15 %) zurück.</p>
+   <p class="setting-note" style="margin:2px 0 8px">Setzt Aktivitäts-Cooldowns oder die Hygiene auf 15 % zurück (unter 30 % erscheinen ausschließlich die Kampfstaub-Bilder).</p>
    <div class="settings-actions">
     <button type="button" class="secondary" id="resetLoungeCooldownsBtn" style="padding:8px 9px;font-size:10.5px">↻ Cooldowns Reset</button>
     <button type="button" class="secondary" id="resetLoungeHygieneBtn" style="padding:8px 9px;font-size:10.5px">🧼 Hygiene Reset (15%)</button>
@@ -12259,8 +12259,8 @@ function applyLoungeArtFallback(imgEl,item){
 function getEffectiveLoungePool(poolName){
  if(poolName==='casual'){
   const h=Number(state.lounge&&state.lounge.hygiene)||0;
-  if(h<30&&Array.isArray(loungeArtPools.casualDirt)){
-   return [...loungeArtPools.casual,...loungeArtPools.casualDirt];
+  if(h<30&&Array.isArray(loungeArtPools.casualDirt)&&loungeArtPools.casualDirt.length){
+   return loungeArtPools.casualDirt;
   }
  }
  return loungeArtPools[poolName]||loungeArtPools.casual;
@@ -12344,8 +12344,7 @@ function renderLoungePage(force=false){
  }else{
   setText('loungeActiveBuffStatus','Kein aktiver Lounge-Segen');
  }
- setText('loungeDailyCountBadge',`🎵 Lofi · ${state.lounge.dailyActions||0}x gechillt`);
- const sig=loungeActivitiesData.map(a=>{
+  const sig=loungeActivitiesData.map(a=>{
   const rem=Math.max(0,Math.ceil(((Number(state.lounge.cooldowns[a.id])||0)-now)/60000));
   return `${a.id}:${rem}`;
  }).join('|');
